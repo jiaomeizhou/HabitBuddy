@@ -17,7 +17,9 @@
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-native": "0.73.4",
-    "react-native-svg": "^15.1.0"
+    "react-native-check-box": "^2.1.7",
+    "react-native-svg": "^15.1.0",
+    "expo-checkbox": "~2.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

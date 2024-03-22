@@ -1,52 +1,50 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
-import React from 'react'
-import { useState } from 'react'
+import { View, Text, Button, StyleSheet, FlatList, Pressable } from 'react-native'
+import React, { useState, useEffect} from 'react'
+import Welcome from '../components/Welcome';
+import HabitItem from '../components/HabitItem';
+import { Styles } from '../components/Styles';
+import { FontAwesome6 } from '@expo/vector-icons';
+import Pet from '../components/Pet';
 
-export default function Home() {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+export default function Home({ navigation}) {
+    useEffect(()=>{
+        navigation.setOptions({
+            headerRight: () => (
+                <Pressable onPress={()=>{alert('Navigate to add a habit page')}}>
+                    <FontAwesome6 name="add" size={24} color="black" />
+                </Pressable>
+            ),
+        });
+    }, []);
 
-    const habitsByCategory = {
-        health: ['Exercise', 'Eat Breakfast', 'Drink Water in the morning'],
-        study: ['Read', 'Practice', 'Research'],
-        life: ['Meditate', 'Journal', 'Gratitude'],
-        sport: ['Run', 'Swim', 'Yoga'],
-        work: ['Plan', 'Organize', 'Prioritize'],
-    };
+    // TODO: replace it when we can read data from firebase
+    const [habits, setHabits] = useState([
+        { id: 1, name: 'Habit 1', progress: 0, checked: false },
+        { id: 2, name: 'Habit 2', progress: 10, checked: false },
+        { id: 3, name: 'Habit 3', progress: 80, checked: false },
+    ]);
 
-    const renderHabitButtons = () => {
-        let habits = [];
-        if (selectedCategory) {
-            habits = habitsByCategory[selectedCategory];
-        }
-        else {
-            habits = habitsByCategory.health;
-        }
-        return habits.map((habit, index) => (
-            <Button
-                key={index}
-                title={habit}
-                onPress={() => alert(`${habit} button pressed`)}
-            />
-        ));
+    const toggleCheck = (habitId) => {
+        setHabits((prevHabits) =>
+            prevHabits.map((habit) =>
+                habit.id === habitId ? { ...habit, checked: !habit.checked } : habit
+            )
+        );
     };
 
     return (
-        <View style={styles.container}>
-            <Button
-                title="Create your own habit"
-                onPress={() => alert('Create your own habit button pressed')}
-            />
-            <View style={styles.buttonsContainer}>
-                {Object.keys(habitsByCategory).map((category, index) => (
-                    <Button
-                        key={index}
-                        title={category}
-                        onPress={() => setSelectedCategory(category)}
-                        color={selectedCategory === category ? 'blue' : 'grey'}
+        <View style={Styles.habitList}>
+            <FlatList
+                data={habits}
+                renderItem={({ item }) => {
+                    return <HabitItem
+                        habitObj={item}
+                        onPress={() => alert(`Habit ${item.id} pressed`)}
+                        toggleCheck={() => toggleCheck(item.id)}
                     />
-                ))}
-            </View>
-            <View style={styles.habitButtonsContainer}>{renderHabitButtons()}</View>
+                }}
+            />
+            <Pet />
         </View>
     );
 }
@@ -56,18 +54,5 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    buttonsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: '50%',
-        marginTop: 10,
-    },
-    habitButtonsContainer: {
-        marginTop: 20,
-        width: '80%',
-    },
-    habitButtonSelected: {
-        backgroundColor: 'blue',
     },
 });
