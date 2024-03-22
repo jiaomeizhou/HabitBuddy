@@ -1,32 +1,25 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
 import PressableItem from './PressableItem'
+import { Styles } from './Styles'
+import Checkbox from 'expo-checkbox';
 
-export default function HabitItem({ habitObj, onPress }) {
+export default function HabitItem({ habitObj, onPress, toggleCheck}) {
     function handlePress() {
         onPress(habitObj)
     }
 
     return (
         <PressableItem onPress={handlePress}>
-            <View style={styles.habitItem}>
-                <Text style={styles.habitText}>{habitObj.name}</Text>
-                <Text style={styles.habitText}>{habitObj.progress}</Text>
-                <Text style={styles.habitText}>{habitObj.checked}</Text>
+            <View style={Styles.habitItem}>
+                <Text style={Styles.habitText}>{habitObj.name}</Text>
+                <Text style={Styles.habitText}>{habitObj.progress}</Text>
+                <Checkbox
+                    value={habitObj.checked}
+                    onValueChange={toggleCheck}
+                />
             </View>
         </PressableItem>
     )
 }
 
-const styles = StyleSheet.create({
-    habitItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
-    },
-    habitText: {
-        fontSize: 18,
-    }
-})
