@@ -2,6 +2,8 @@ import { View, Button, StyleSheet, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase-files/firebaseSetup";
 
 
 const Stack = createNativeStackNavigator();
@@ -18,7 +20,7 @@ export default function TopLeftNavIcon() {
             {showMenu && (
                 <View style={styles.menu}>
                     <Button title="Add a habit" onPress={() => alert('Navigate to add a habit page')} />
-                    <Button title="Log out" onPress={() => alert('Log out')} />
+                    <Button title="Log out" onPress={() => signOut(auth)} />
                 </View>
             )}
 
