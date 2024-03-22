@@ -4,21 +4,32 @@ import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 
 export default function Home() {
-    const [checked, setChecked] = useState(false);
-    habitObj = {
-        name: 'Habit 1',
-        progress: 0,
-        checked: checked,
-    }
-    console.log(habitObj);
+    // TODO: replace it when we can read data from firebase
+    const [habits, setHabits] = useState([
+        { id: 1, name: 'Habit 1', progress: 0, checked: false },
+        { id: 2, name: 'Habit 2', progress: 0, checked: false },
+        { id: 3, name: 'Habit 3', progress: 0, checked: false },
+    ]);
 
-    toggleCheck = () => {
-        setChecked(!checked);
-    }
+    const toggleCheck = (habitId) => {
+        setHabits((prevHabits) =>
+            prevHabits.map((habit) =>
+                habit.id === habitId ? { ...habit, checked: !habit.checked } : habit
+            )
+        );
+    };
 
     return (
-        // <Welcome />
-        <HabitItem habitObj={habitObj} onPress={() => alert('Habit item pressed')} toggleCheck={toggleCheck}/>
+        <View style={styles.container}>
+            {habits.map((habit) => (
+                <HabitItem
+                    key={habit.id}
+                    habitObj={habit}
+                    onPress={() => alert(`Habit ${habit.id} pressed`)}
+                    toggleCheck={() => toggleCheck(habit.id)}
+                />
+            ))}
+        </View>
     );
 }
 
