@@ -43,9 +43,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {userLoggedIn ? AppStack : AuthStack}
-        <Stack.Screen name="BottomNavTabs" component={BottomNavTabs} options={
-          {headerShown: false}
-        }/>
+        <Stack.Screen name="BottomNavTabs" component={BottomNavTabs} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -8,9 +8,9 @@ export default function Signup({ navigation }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const loginHandler = () => {
-        navigation.replace("Login");
-    };
+    // const loginHandler = () => {
+    //     navigation.replace("Login");
+    // };
     const signupHandler = async () => {
         if (!email || !password || !confirmPassword) {
             Alert.alert("Please fill in all the fields");
@@ -68,7 +68,7 @@ export default function Signup({ navigation }) {
                 }}
             />
             <Button title="Register" onPress={signupHandler} />
-            <Button title="Already Registered? Login" onPress={loginHandler} />
+            {/* <Button title="Already Registered? Login" onPress={loginHandler} /> */}
         </View>
     );
 }
