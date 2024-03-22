@@ -14,11 +14,13 @@ export default function Home() {
     };
 
     const renderHabitButtons = () => {
-        if (!selectedCategory) {
-            return null;
+        let habits = [];
+        if (selectedCategory) {
+            habits = habitsByCategory[selectedCategory];
         }
-
-        const habits = habitsByCategory[selectedCategory];
+        else {
+            habits = habitsByCategory.health;
+        }
         return habits.map((habit, index) => (
             <Button
                 key={index}
