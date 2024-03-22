@@ -1,10 +1,21 @@
-import { View, Text, Button, StyleSheet, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Button, StyleSheet, FlatList, Pressable } from 'react-native'
+import React, { useState, useEffect} from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
+import { FontAwesome6 } from '@expo/vector-icons';
 
-export default function Home() {
+export default function Home({ navigation}) {
+    useEffect(()=>{
+        navigation.setOptions({
+            headerRight: () => (
+                <Pressable onPress={()=>{alert('Navigate to add a habit page')}}>
+                    <FontAwesome6 name="add" size={24} color="black" />
+                </Pressable>
+            ),
+        });
+    }, []);
+
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState([
         { id: 1, name: 'Habit 1', progress: 0, checked: false },
