@@ -14,10 +14,15 @@ export const Styles = StyleSheet.create({
         backgroundColor: Colors.headerColorPurple,
         padding: 10,
         marginTop: 20,
-        marginHorizontal: 20,
+        marginHorizontal: 10,
         borderRadius: 10,
     },
     habitText: {
         fontSize: 18,
+    },
+    habitList: {
+        flex: 1,
+        width: '80%',
+        alignSelf: 'center',
     }
 })

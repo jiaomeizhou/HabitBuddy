@@ -1,7 +1,8 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
-import React,{useState} from 'react'
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native'
+import React, { useState } from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
+import { Styles } from '../components/Styles';
 
 export default function Home() {
     // TODO: replace it when we can read data from firebase
@@ -20,15 +21,17 @@ export default function Home() {
     };
 
     return (
-        <View style={styles.container}>
-            {habits.map((habit) => (
-                <HabitItem
-                    key={habit.id}
-                    habitObj={habit}
-                    onPress={() => alert(`Habit ${habit.id} pressed`)}
-                    toggleCheck={() => toggleCheck(habit.id)}
-                />
-            ))}
+        <View style={Styles.habitList}>
+            <FlatList
+                data={habits}
+                renderItem={({ item }) => {
+                    return <HabitItem
+                        habitObj={item}
+                        onPress={() => alert(`Habit ${item.id} pressed`)}
+                        toggleCheck={() => toggleCheck(item.id)}
+                    />
+                }}
+            />
         </View>
     );
 }
