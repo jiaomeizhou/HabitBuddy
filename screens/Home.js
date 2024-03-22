@@ -20,8 +20,8 @@ export default function Home({ navigation}) {
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState([
         { id: 1, name: 'Habit 1', progress: 0, checked: false },
-        { id: 2, name: 'Habit 2', progress: 0, checked: false },
-        { id: 3, name: 'Habit 3', progress: 0, checked: false },
+        { id: 2, name: 'Habit 2', progress: 10, checked: false },
+        { id: 3, name: 'Habit 3', progress: 80, checked: false },
     ]);
 
     const toggleCheck = (habitId) => {

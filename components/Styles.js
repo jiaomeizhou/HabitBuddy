@@ -38,11 +38,10 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
     },
     progressBarContainer: {
-        marginBottom: 10,
-        marginTop: 10,
+        marginBottom: 5,
+        marginTop: 5,
     },
     progressLabel: {
-        marginBottom: 5,
         fontSize: 16,
         fontWeight: 'bold',
     },
