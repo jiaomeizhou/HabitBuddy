@@ -33,6 +33,9 @@ export default function BottomTab({ navigation }) {
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="user" size={24} color={color} />
                     ),
+                    headerLeft: () => (
+                        <TopLeftNavIcon />
+                    ),
                 }}
             />
         </Tab.Navigator>
