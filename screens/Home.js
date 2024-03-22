@@ -4,6 +4,7 @@ import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import { FontAwesome6 } from '@expo/vector-icons';
+import Pet from '../components/Pet';
 
 export default function Home({ navigation}) {
     useEffect(()=>{
@@ -43,6 +44,7 @@ export default function Home({ navigation}) {
                     />
                 }}
             />
+            <Pet />
         </View>
     );
 }

@@ -24,5 +24,17 @@ export const Styles = StyleSheet.create({
         flex: 1,
         width: '80%',
         alignSelf: 'center',
-    }
+    },
+    petContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 200,
+    },
+    petImage: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
 })
