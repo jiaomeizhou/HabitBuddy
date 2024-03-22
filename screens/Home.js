@@ -32,7 +32,6 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-            <Text>Home</Text>
             <Button
                 title="Create your own habit"
                 onPress={() => alert('Create your own habit button pressed')}
@@ -55,13 +54,12 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
     buttonsContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: '50%',
         marginTop: 10,
     },
