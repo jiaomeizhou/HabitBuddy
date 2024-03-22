@@ -43,6 +43,7 @@ export default function Home() {
                         key={index}
                         title={category}
                         onPress={() => setSelectedCategory(category)}
+                        color={selectedCategory === category ? 'blue' : 'grey'}
                     />
                 ))}
             </View>
@@ -67,5 +68,8 @@ const styles = StyleSheet.create({
     habitButtonsContainer: {
         marginTop: 20,
         width: '80%',
+    },
+    habitButtonSelected: {
+        backgroundColor: 'blue',
     },
 });
