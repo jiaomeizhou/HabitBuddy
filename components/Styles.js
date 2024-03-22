@@ -37,4 +37,23 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
     },
+    progressBarContainer: {
+        marginBottom: 10,
+        marginTop: 10,
+    },
+    progressLabel: {
+        marginBottom: 5,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    progressBar: {
+        height: 10,
+        backgroundColor: '#e0e0e0',
+        borderRadius: 5,
+    },
+    progress: {
+        height: '100%',
+        backgroundColor: '#4caf50',
+        borderRadius: 5,
+    },
 })
