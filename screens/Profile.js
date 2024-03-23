@@ -61,11 +61,14 @@ export default function Profile({ navigation }) {
         </View>
       ) : (
         <View>
+          {auth.currentUser.photoURL ? (
+            <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />)
+            :
+            (<FontAwesome5 name="user-circle" size={100} color="black" />
+            )}
+          <Text>ID: {auth.currentUser.uid}</Text>
           <Text>Name: {auth.currentUser.displayName}</Text>
           <Text>Email: {auth.currentUser.email}</Text>
-          {auth.currentUser.photoURL && (
-            <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />
-          )}
         </View>
       )}
     </View>
