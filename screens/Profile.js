@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { updateProfile } from "firebase/auth";
+import Stats from '../components/Stats';
 
 export default function Profile({ navigation }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -71,6 +72,8 @@ export default function Profile({ navigation }) {
           <Text>Email: {auth.currentUser.email}</Text>
         </View>
       )}
+      <Stats />
     </View>
+
   );
 }
