@@ -1,19 +1,25 @@
 import { View, Text, Button, StyleSheet, FlatList, Pressable } from 'react-native'
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Pet from '../components/Pet';
 
-export default function Home({ navigation}) {
-    useEffect(()=>{
+export default function Home({ navigation }) {
+    useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Pressable onPress={()=>{alert('Navigate to add a habit page')}}>
+                <Pressable onPress={() => navigation.navigate('AddHabit')}>
                     <FontAwesome6 name="add" size={24} color="black" />
                 </Pressable>
             ),
+            // TODO: just test the edit function, need to be removed
+            headerLeft: () => (
+                <Pressable onPress={() => navigation.navigate('EditHabit')}>
+                    <FontAwesome6 name="edit" size={24} color="black" />
+                </Pressable>
+            )
         });
     }, []);
 
