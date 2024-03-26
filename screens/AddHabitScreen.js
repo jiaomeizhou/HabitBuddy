@@ -1,10 +1,14 @@
-import { Button, StyleSheet, Text, TextInput, Switch, View, ScrollView, Alert } from 'react-native'
+import { StyleSheet, View, ScrollView, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
 import { useNavigation } from '@react-navigation/native';
+import CustomText from '../components/CustomText';
+import CustomTextInput from '../components/CustomTextInput';
+import CustomDropDownPicker from '../components/CustomDropDownPicker';
+import CustomDateTimePicker from '../components/CustomDateTimePicker';
+import CustomSwitch from '../components/CustomSwitch';
+import PressableButton from '../components/PressableButton';
 
 export default function AddHabitScreen({ route }) {
     const navigation = useNavigation();
@@ -132,21 +136,14 @@ export default function AddHabitScreen({ route }) {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.titleText}>
-                {'Type the habit name :'}
-            </Text>
-            <TextInput
-                style={styles.input}
+            <CustomText>{'Type the habit name :'}</CustomText>
+            <CustomTextInput
                 onChangeText={handleHabitNameChange}
                 value={habitName}
             />
 
-            <Text style={styles.titleText}>
-                {'Habit Frequency (How often in 1 week) :'}
-            </Text>
-
-            <DropDownPicker
-                style={styles.dropDownPickerStyle}
+            <CustomText>{'Habit Frequency (How often in 1 week) :'}</CustomText>
+            <CustomDropDownPicker
                 open={open}
                 value={habitFrequency}
                 listMode="SCROLLVIEW"
@@ -157,18 +154,15 @@ export default function AddHabitScreen({ route }) {
                 placeholder="Select the frequency"
             />
 
-            <Text style={styles.titleText}>
-                {'Start Date :'}
-            </Text>
-            <TextInput
-                style={styles.input}
+            <CustomText>{'Start Date :'}</CustomText>
+            <CustomTextInput
                 value={formattedDate}
                 onPressIn={toggleDatePicker}
                 showSoftInputOnFocus={false}
                 onChange={dateHandler}
             />
             {isDatePickerVisible && (
-                <DateTimePicker
+                <CustomDateTimePicker
                     testID="dateTimePicker"
                     value={date}
                     mode="date"
@@ -178,36 +172,25 @@ export default function AddHabitScreen({ route }) {
                 />
             )}
 
-            <Text style={styles.titleText}>
-                {'Spend how many weeks :'}
-            </Text>
-            <TextInput
-                style={styles.input}
+            <CustomText>{'Spend how many weeks :'}</CustomText>
+            <CustomTextInput
                 value={durationWeeks}
                 onChangeText={handleDurationChange}
                 keyboardType="numeric"
             />
-            <Text style={styles.titleText}>
-                {'End Date :'}
-            </Text>
 
-            <Text style={styles.input}>
-                {endDate}
-            </Text>
+            <CustomText>{'End Date :'}</CustomText>
+            <CustomText style={styles.input}>{endDate}</CustomText>
 
-            <View style={styles.reminderContainer}>
-                <Text style={styles.titleText}>
-                    {'Reminder : '}
-                </Text>
-                <Switch
-                    onValueChange={setIsReminderEnabled}
-                    value={isReminderEnabled}
-                />
-            </View>
+            <CustomSwitch
+                label="Reminder : "
+                onValueChange={setIsReminderEnabled}
+                value={isReminderEnabled}
+            />
 
             <View style={styles.buttonsContainer}>
-                <Button title="Save" onPress={saveHandler} />
-                <Button title="Cancel" onPress={cancelHandler} />
+                <PressableButton title="Save" onPress={saveHandler} color='#2196F3' />
+                <PressableButton title="Cancel" onPress={cancelHandler} color='#B0ADAD' />
             </View>
         </ScrollView>
     )
@@ -218,11 +201,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
     },
-    titleText: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        marginVertical: 10,
-    },
     input: {
         width: '100%',
         padding: 8,
@@ -231,16 +209,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderRadius: 5,
         color: 'black',
-    },
-    dropDownPickerStyle: {
-        marginVertical: 2,
-        backgroundColor: 'gainsboro',
-        marginBottom: 12
-    },
-    reminderContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 6,
+        fontWeight: 'normal',
     },
     buttonsContainer: {
         flexDirection: 'row',
