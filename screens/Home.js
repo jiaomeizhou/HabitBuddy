@@ -8,7 +8,7 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { database } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { addCheckIn } from '../firebase-files/firestoreHelper';
+
 
 export default function Home({ navigation }) {
     useEffect(() => {
@@ -24,6 +24,7 @@ export default function Home({ navigation }) {
 
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
+    const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
 
     // get habits data from firebase
@@ -50,43 +51,32 @@ export default function Home({ navigation }) {
                 console.error("Error reading habits: ", error);
             }
         );
+
+        // Get check-ins data from Firebase
+        const unsubscribeCheckIns = onSnapshot(
+            collection(database, 'CheckIns'),
+            (querySnapshot) => {
+                let checkInsData = [];
+                querySnapshot.forEach((doc) => {
+                    checkInsData.push({ id: doc.id, ...doc.data() });
+                });
+                setCheckIns(checkInsData);
+            },
+            (error) => {
+                console.error('Error reading check-ins: ', error);
+            }
+        );
+
         return () => {
             unsubscribe();
+            unsubscribeCheckIns();
         }
     }, []);
+    console.log(checkIns);
 
     function habitItemPressed(habitObj) {
         navigation.navigate('HabitDetail', { habitObj });
     }
-
-    const toggleCheck = (habitId) => {
-
-        const updatedHabits = habits.map((habit) =>
-                habit.id === habitId ? { ...habit, isChecked: !habit.isChecked } : habit
-            )
-        setHabits(updatedHabits);
-
-        // const isChecked = updatedHabits.find((habit) => habit.id === habitId)?.isChecked || false;
-
-        // // Check if the checkbox is checked or unchecked
-        // if (isChecked) {
-        //     // Add check-in data to Firestore
-        //     const checkInData = {
-        //         userId: auth.currentUser.uid,
-        //         habitId: habitId,
-        //         date: new Date(),
-        //         text: null,
-        //         imageUrl: null
-        //     };
-        //     addCheckIn(checkInData);
-        //     console.log('Check-in added', checkInData);
-        // } else {
-        //     // Delete check-in data from Firestore
-        //     deleteCheckIn(checkInData.id);
-        //     console.log('Check-in deleted');
-        // }
-    };
-
 
     return (
         <View style={Styles.habitList}>

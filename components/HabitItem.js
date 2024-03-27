@@ -8,7 +8,7 @@ import { addCheckIn } from '../firebase-files/firestoreHelper';
 import { updateHabit } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 
-export default function HabitItem({ habitObj, onPress, toggleCheck}) {
+export default function HabitItem({ habitObj, onPress}) {
     const [isChecked, setChecked] = useState(false);
 
     // console.log('habitObj', habitObj);
@@ -26,6 +26,22 @@ export default function HabitItem({ habitObj, onPress, toggleCheck}) {
         habitObj = {...habitObj, checkedInToday: isChecked};
         console.log('habitObj is checked? ', habitObj.checkedInToday);
         updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
+        if (isChecked) {
+            const checkInData = {
+                userId: auth.currentUser.uid,
+                habitId: habitObj.id,
+                date: new Date(),
+                text: null,
+                imageUrl: null
+            };
+            addCheckIn(checkInData);
+        }
+        else {
+            
+            // delete check-in data from Firestore
+            // deleteCheckIn(checkInData.id);
+            console.log('Check-in deleted 1');
+        }
     }, [isChecked])
 
 
