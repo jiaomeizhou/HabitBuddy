@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
 
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
-    const [renderWelcome, setRenderWelcome] = useState(true);
+    const [renderWelcome, setRenderWelcome] = useState(false);
 
     const toggleCheck = (habitId) => {
         setHabits((prevHabits) =>
@@ -48,7 +48,7 @@ export default function Home({ navigation }) {
             (querySnapshot) => {
                 if (querySnapshot.empty) {
                     console.log("No habits found.");
-                    setRenderWelcome(false);
+                    setRenderWelcome(true);
                     return;
                 }
                 let habits = [];
@@ -57,6 +57,7 @@ export default function Home({ navigation }) {
                 });
                 console.log("Habits: ", habits);
                 setHabits(habits);
+                setRenderWelcome(false);
             },
             (error) => {
                 console.error("Error reading habits: ", error);
@@ -66,11 +67,12 @@ export default function Home({ navigation }) {
             unsubscribe();
         }
     }, []);
-    console.log("rederWelcome: ", renderWelcome);
+    console.log("habits: ", habits);
+    console.log("renderWelcome: ", renderWelcome);
 
     return (
         <View style={Styles.habitList}>
-            {!renderWelcome ? <Welcome navigation={navigation}/> :
+            {renderWelcome ? <Welcome navigation={navigation}/> :
                 <View>
                     <FlatList
                         data={habits}
