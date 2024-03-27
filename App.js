@@ -8,6 +8,7 @@ import { auth } from "./firebase-files/firebaseSetup";
 import AddHabitScreen from './screens/AddHabitScreen';
 import EditHabitScreen from './screens/EditHabitScreen';
 import HabitDetail from './screens/HabitDetail';
+import Checkin from './screens/Checkin';
 
 
 import Home from './screens/Home';
@@ -59,6 +60,7 @@ export default function App() {
               }}
             />
             <Stack.Screen name="HabitDetail" component={HabitDetail} />
+            <Stack.Screen name="Checkin" component={Checkin} />
           </>
           : AuthStack}
       </Stack.Navigator>
