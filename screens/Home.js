@@ -28,11 +28,8 @@ export default function Home({ navigation }) {
     }, []);
 
     // TODO: replace it when we can read data from firebase
-    const [habits, setHabits] = useState([
-        { id: 1, name: 'Habit 1', progress: 0, checked: false },
-        { id: 2, name: 'Habit 2', progress: 10, checked: false },
-        { id: 3, name: 'Habit 3', progress: 80, checked: false },
-    ]);
+    const [habits, setHabits] = useState(null);
+    const [renderWelcome, setRenderWelcome] = useState(true);
 
     const toggleCheck = (habitId) => {
         setHabits((prevHabits) =>
@@ -51,6 +48,7 @@ export default function Home({ navigation }) {
             (querySnapshot) => {
                 if (querySnapshot.empty) {
                     console.log("No habits found.");
+                    setRenderWelcome(false);
                     return;
                 }
                 let habits = [];
@@ -68,21 +66,25 @@ export default function Home({ navigation }) {
             unsubscribe();
         }
     }, []);
-
+    console.log("rederWelcome: ", renderWelcome);
 
     return (
         <View style={Styles.habitList}>
-            <FlatList
-                data={habits}
-                renderItem={({ item }) => {
-                    return <HabitItem
-                        habitObj={item}
-                        onPress={() => alert(`Habit ${item.id} pressed`)}
-                        toggleCheck={() => toggleCheck(item.id)}
+            {!renderWelcome ? <Welcome /> :
+                <View>
+                    <FlatList
+                        data={habits}
+                        renderItem={({ item }) => {
+                            return <HabitItem
+                                habitObj={item}
+                                onPress={() => alert(`Habit ${item.id} pressed`)}
+                                toggleCheck={() => toggleCheck(item.id)}
+                            />
+                        }}
                     />
-                }}
-            />
-            <Pet />
+                    <Pet />
+                </View>
+            }
         </View>
     );
 }
