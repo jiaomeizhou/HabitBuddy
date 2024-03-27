@@ -4,14 +4,12 @@ import PressableItem from './PressableItem'
 import { Styles } from './Styles'
 import Checkbox from 'expo-checkbox';
 import ProgressBar from './ProgressBar';
-import { addCheckIn } from '../firebase-files/firestoreHelper';
-import { updateHabit } from '../firebase-files/firestoreHelper';
+import { addCheckIn, updateHabit, deleteCheckIn } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 
-export default function HabitItem({ habitObj, onPress}) {
+export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     const [isChecked, setChecked] = useState(false);
-
-    // console.log('habitObj', habitObj);
+    const [todayCheckIn, setTodayCheckIn] = useState(null);
 
     function handlePress() {
         onPress(habitObj)
@@ -21,10 +19,24 @@ export default function HabitItem({ habitObj, onPress}) {
         setChecked(!isChecked);
     }
 
-    // calculate the progress of the habit
     useEffect(() => {
-        habitObj = {...habitObj, checkedInToday: isChecked};
-        console.log('habitObj is checked? ', habitObj.checkedInToday);
+        const todayDate = new Date().getDate();
+        let currentHabitCheckIns = [];
+        if (currentUserCheckIns) {
+            currentHabitCheckIns
+                = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
+        }
+        if (currentHabitCheckIns.length > 0) {
+            const todayCheckIn = currentHabitCheckIns.find((checkIn) => checkIn.date.toDate().getDate() === todayDate);
+            if (todayCheckIn) {
+                setTodayCheckIn(todayCheckIn);
+            }
+        }
+    })
+
+
+    useEffect(() => {
+        habitObj = { ...habitObj, checkedInToday: isChecked };
         updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
         if (isChecked) {
             const checkInData = {
@@ -37,10 +49,10 @@ export default function HabitItem({ habitObj, onPress}) {
             addCheckIn(checkInData);
         }
         else {
-            
             // delete check-in data from Firestore
-            // deleteCheckIn(checkInData.id);
-            console.log('Check-in deleted 1');
+            if (todayCheckIn) {
+                deleteCheckIn(todayCheckIn.id);
+            }
         }
     }, [isChecked])
 

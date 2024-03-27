@@ -25,11 +25,12 @@ export default function Home({ navigation }) {
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
+    const [currentUserCheckIns, setCurrentUserCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
 
     // get habits data from firebase
     useEffect(() => {
-        const unsubscribe = onSnapshot(
+        const unsubscribeHabits = onSnapshot(
             query(
                 collection(database, `Users/${auth.currentUser.uid}/Habits`),
             ),
@@ -61,6 +62,11 @@ export default function Home({ navigation }) {
                     checkInsData.push({ id: doc.id, ...doc.data() });
                 });
                 setCheckIns(checkInsData);
+
+                let currentUserCheckInsData = checkInsData.filter((checkIn) => {
+                    return checkIn.userId === auth.currentUser.uid;
+                });
+                setCurrentUserCheckIns(currentUserCheckInsData);
             },
             (error) => {
                 console.error('Error reading check-ins: ', error);
@@ -68,11 +74,10 @@ export default function Home({ navigation }) {
         );
 
         return () => {
-            unsubscribe();
+            unsubscribeHabits();
             unsubscribeCheckIns();
         }
     }, []);
-    console.log(checkIns);
 
     function habitItemPressed(habitObj) {
         navigation.navigate('HabitDetail', { habitObj });
@@ -88,7 +93,7 @@ export default function Home({ navigation }) {
                             return <HabitItem
                                 habitObj={item}
                                 onPress={habitItemPressed}
-                                toggleCheck={() => toggleCheck(item.id)}
+                                currentUserCheckIns={currentUserCheckIns}
                             />
                         }}
                     />
