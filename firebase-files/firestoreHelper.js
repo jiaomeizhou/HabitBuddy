@@ -39,16 +39,11 @@ export async function addCheckIn(data) {
         console.error("Error adding check-in: ", error);
     }
 }
-export async function getAllDocs(path) {
-    try {
-        const querySnapshot = await getDocs(collection(database, path));
-        const data = [];
-        querySnapshot.forEach((doc) => {
-            data.push(doc.data());
-        });
-        return data;
-    } catch (e) {
-        console.error("Error getting documents: ", e);
-    }
 
+export async function deleteCheckIn(checkInId) {
+    try {
+        await deleteDoc(doc(database, `CheckIns/${checkInId}`));
+    } catch (error) {
+        console.error("Error deleting check-in: ", error);
+    }
 }
