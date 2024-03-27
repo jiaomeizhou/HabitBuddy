@@ -9,7 +9,7 @@ import { auth } from '../firebase-files/firebaseSetup';
 
 export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     const [isChecked, setChecked] = useState(false);
-    const [todayCheckIn, setTodayCheckIn] = useState(null);
+    const [todayCheckIns, setTodayCheckIns] = useState([]);
 
     function handlePress() {
         onPress(habitObj)
@@ -22,17 +22,20 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     useEffect(() => {
         const todayDate = new Date().getDate();
         let currentHabitCheckIns = [];
+        let todayCheckInList = [];
         if (currentUserCheckIns) {
             currentHabitCheckIns
                 = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
         }
         if (currentHabitCheckIns.length > 0) {
-            const todayCheckIn = currentHabitCheckIns.find((checkIn) => checkIn.date.toDate().getDate() === todayDate);
-            if (todayCheckIn) {
-                setTodayCheckIn(todayCheckIn);
-            }
+            currentHabitCheckIns.forEach((checkIn) => {
+                if (checkIn.date.toDate().getDate() === todayDate) {
+                    todayCheckInList.push(checkIn);
+                }
+            });
         }
-    }, [])
+        setTodayCheckIns(todayCheckInList);
+    }, [currentUserCheckIns])
 
 
     useEffect(() => {
@@ -51,8 +54,10 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
         }
         else {
             // delete check-in data from Firestore
-            if (todayCheckIn) {
-                deleteCheckIn(todayCheckIn.id);
+            if (todayCheckIns.length > 0) {
+                todayCheckIns.forEach((checkIn) => {
+                    deleteCheckIn(checkIn.id);
+                });
             }
         }
     }, [isChecked])

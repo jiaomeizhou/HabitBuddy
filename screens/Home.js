@@ -80,7 +80,7 @@ export default function Home({ navigation }) {
     }, []);
 
     function habitItemPressed(habitObj) {
-        navigation.navigate('HabitDetail', { habitObj });
+        navigation.navigate('HabitDetail', { habitObj, currentUserCheckIns});
     }
 
     return (

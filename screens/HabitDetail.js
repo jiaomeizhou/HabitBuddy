@@ -14,13 +14,19 @@ LocaleConfig.defaultLocale = 'en';
 
 export default function HabitDetail({ route, navigation }) {
   const { habitObj } = route.params;
+  const { currentUserCheckIns } = route.params;
   const [checkedDates, setCheckedDates] = useState([]);
 
   useEffect(() => {
     // Simulated checked-in dates for demonstration
-    const checkedInDates = ['2024-03-20', '2024-03-22', '2024-03-25'];
+    const checkedInDates = [];
+    const currentHabitCheckIns = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
+    currentHabitCheckIns.forEach((checkIn) => {
+      checkedInDates.push(checkIn.date.toDate().toISOString().slice(0, 10));
+    });
     setCheckedDates(checkedInDates);
-  }, []);
+  }, [currentUserCheckIns]);
+  console.log('checkedDates', checkedDates);
 
   // Function to handle navigation to Checkin screen
   function handleCheckinButton() {

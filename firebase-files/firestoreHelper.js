@@ -43,6 +43,7 @@ export async function addCheckIn(data) {
 export async function deleteCheckIn(checkInId) {
     try {
         await deleteDoc(doc(database, `CheckIns/${checkInId}`));
+        console.log("Check-in deleted successfully", checkInId);
     } catch (error) {
         console.error("Error deleting check-in: ", error);
     }
