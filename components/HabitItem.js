@@ -13,7 +13,7 @@ export default function HabitItem({ habitObj, onPress, toggleCheck}) {
     return (
         <PressableItem onPress={handlePress}>
             <View style={Styles.habitItem}>
-                <Text style={Styles.habitText}>{habitObj.name}</Text>
+                <Text style={Styles.habitText}>{habitObj.habit}</Text>
                 <ProgressBar progress={habitObj.progress} label={`${habitObj.progress}%          `} />
                 <Checkbox
                     value={habitObj.checked}

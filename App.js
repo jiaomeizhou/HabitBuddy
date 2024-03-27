@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from "./firebase-files/firebaseSetup";
 import AddHabitScreen from './screens/AddHabitScreen';
 import EditHabitScreen from './screens/EditHabitScreen';
+import HabitDetail from './screens/HabitDetail';
 
 
 import Home from './screens/Home';
@@ -57,6 +58,7 @@ export default function App() {
                 headerTitle: "Edit a Habit",
               }}
             />
+            <Stack.Screen name="HabitDetail" component={HabitDetail} />
           </>
           : AuthStack}
       </Stack.Navigator>

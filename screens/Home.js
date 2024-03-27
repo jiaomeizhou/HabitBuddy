@@ -67,8 +67,10 @@ export default function Home({ navigation }) {
             unsubscribe();
         }
     }, []);
-    console.log("habits: ", habits);
-    console.log("renderWelcome: ", renderWelcome);
+
+    function habitItemPressed(habitObj) {
+        navigation.navigate('HabitDetail', { habitObj });
+    }
 
     return (
         <View style={Styles.habitList}>
@@ -79,12 +81,12 @@ export default function Home({ navigation }) {
                         renderItem={({ item }) => {
                             return <HabitItem
                                 habitObj={item}
-                                onPress={() => alert(`Habit ${item.id} pressed`)}
+                                onPress={habitItemPressed}
                                 toggleCheck={() => toggleCheck(item.id)}
                             />
                         }}
                     />
-                    <Pet />
+                    {/* <Pet /> */}
                 </View>
             }
         </View>
