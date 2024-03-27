@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Pressable } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
+import { updateHabit } from '../firebase-files/firestoreHelper';
+import { auth } from '../firebase-files/firebaseSetup';
 
 // Set up the locale configuration for the calendar
 LocaleConfig.locales['en'] = {
@@ -18,7 +20,6 @@ export default function HabitDetail({ route, navigation }) {
   const [checkedDates, setCheckedDates] = useState([]);
 
   useEffect(() => {
-    // Simulated checked-in dates for demonstration
     const checkedInDates = [];
     const currentHabitCheckIns = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
     currentHabitCheckIns.forEach((checkIn) => {
@@ -44,6 +45,22 @@ export default function HabitDetail({ route, navigation }) {
     );
   };
 
+  useEffect(() => {
+    let progress = 0;
+    let checkInCount = 0;
+    try {
+      progress = Math.round((checkedDates.length / habitObj.durationWeeks) * 100);
+      checkInCount = checkedDates.length;
+      console.log("Progress: ", progress);
+      const updatedHabit = { ...habitObj, progress: progress, checkInCount: checkInCount};
+      updateHabit(auth.currentUser.uid, habitObj.id, updatedHabit);
+    }
+    catch (error) {
+      console.log("Error calculating progress: ", error);
+    }
+  }, [currentUserCheckIns])
+
+
   return (
     <View>
       <Text>{habitObj.habit}</Text>
@@ -54,6 +71,7 @@ export default function HabitDetail({ route, navigation }) {
         }, {})}
         renderDay={renderDate}
       />
+      <Text>Progress: {habitObj.progress}%</Text>
       <Button title="Check in" onPress={handleCheckinButton} disabled={habitObj.checkedInToday} />
 
     </View>
