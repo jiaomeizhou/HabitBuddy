@@ -27,9 +27,8 @@ export const Styles = StyleSheet.create({
     },
     petContainer: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 200,
+        marginTop: 60,
     },
     petImage: {
         width: 200,

@@ -75,7 +75,7 @@ export default function Home({ navigation }) {
     return (
         <View style={Styles.habitList}>
             {renderWelcome ? <Welcome navigation={navigation}/> :
-                <View>
+                <View >
                     <FlatList
                         data={habits}
                         renderItem={({ item }) => {
@@ -86,17 +86,10 @@ export default function Home({ navigation }) {
                             />
                         }}
                     />
-                    {/* <Pet /> */}
+                    <Pet />
                 </View>
             }
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
