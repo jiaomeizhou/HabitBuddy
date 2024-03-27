@@ -32,10 +32,11 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
                 setTodayCheckIn(todayCheckIn);
             }
         }
-    })
+    }, [])
 
 
     useEffect(() => {
+        // TODO: chechedInToday should be updated as date changed
         habitObj = { ...habitObj, checkedInToday: isChecked };
         updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
         if (isChecked) {

@@ -1,35 +1,55 @@
-import { View, Text, Button, Pressable} from 'react-native'
-import React, {useEffect} from 'react'
-import { FontAwesome6 } from '@expo/vector-icons'
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button, Pressable } from 'react-native';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
 
-export default function HabitDetail({ route, navigation}) {
+// Set up the locale configuration for the calendar
+LocaleConfig.locales['en'] = {
+  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  monthNamesShort: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+};
+LocaleConfig.defaultLocale = 'en';
 
+export default function HabitDetail({ route, navigation }) {
   const { habitObj } = route.params;
-  console.log("this is habit detail", habitObj)
+  const [checkedDates, setCheckedDates] = useState([]);
 
   useEffect(() => {
-    navigation.setOptions(
-      { 
-        title: habitObj.habit,
-        headerRight: () => (
-          <Pressable onPress={() => navigation.navigate('EditHabit')}>
-              <FontAwesome6 name="edit" size={24} color="black" />
-          </Pressable>
-      )
-      });
-
+    // Simulated checked-in dates for demonstration
+    const checkedInDates = ['2024-03-20', '2024-03-22', '2024-03-25'];
+    setCheckedDates(checkedInDates);
   }, []);
 
-  function handleCheckinButton({habitObj}) {
-    navigation.navigate('Checkin', {habitObj: habitObj})
+  // Function to handle navigation to Checkin screen
+  function handleCheckinButton() {
+    navigation.navigate('Checkin', { habitObj: habitObj });
   }
 
-  
+  // Render function for customizing date cells in the calendar
+  const renderDate = (date) => {
+    const formattedDate = date.dateString;
+    const isDateChecked = checkedDates.includes(formattedDate);
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: isDateChecked ? 'green' : 'black' }}>{formattedDate}</Text>
+      </View>
+    );
+  };
 
   return (
     <View>
       <Text>{habitObj.habit}</Text>
-      <Button title="Check in" onPress={handleCheckinButton} disabled={habitObj.checkedInToday}/>
+      <Calendar
+        markedDates={checkedDates.reduce((acc, date) => {
+          acc[date] = { selected: true, marked: true, selectedColor: 'green' };
+          return acc;
+        }, {})}
+        renderDay={renderDate}
+      />
+      <Button title="Check in" onPress={handleCheckinButton} disabled={habitObj.checkedInToday} />
+
     </View>
-  )
+  );
 }
