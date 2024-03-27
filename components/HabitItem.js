@@ -20,6 +20,13 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     }
 
     useEffect(() => {
+        // Check if today's check-in data exists, if not, clear the check-in state
+        if (todayCheckIns.length === 0) {
+            setChecked(false);
+        }
+    }, [todayCheckIns])
+
+    useEffect(() => {
         const todayDate = new Date().getDate();
         let currentHabitCheckIns = [];
         let todayCheckInList = [];
@@ -39,7 +46,6 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
 
 
     useEffect(() => {
-        // TODO: chechedInToday should be updated as date changed
         habitObj = { ...habitObj, checkedInToday: isChecked };
         updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
         if (isChecked) {
