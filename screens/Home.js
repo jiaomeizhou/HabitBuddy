@@ -5,6 +5,10 @@ import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Pet from '../components/Pet';
+import { auth } from '../firebase-files/firebaseSetup';
+import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
+import { database } from '../firebase-files/firebaseSetup';
+import { getAllDocs } from '../firebase-files/firestoreHelper';
 
 export default function Home({ navigation }) {
     useEffect(() => {
@@ -37,6 +41,34 @@ export default function Home({ navigation }) {
             )
         );
     };
+
+    // get habits data from firebase
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+            query(
+                collection(database, `Users/${auth.currentUser.uid}/Habits`),
+            ),
+            (querySnapshot) => {
+                if (querySnapshot.empty) {
+                    console.log("No habits found.");
+                    return;
+                }
+                let habits = [];
+                querySnapshot.forEach((doc) => {
+                    habits.push({ id: doc.id, ...doc.data() });
+                });
+                console.log("Habits: ", habits);
+                setHabits(habits);
+            },
+            (error) => {
+                console.error("Error reading habits: ", error);
+            }
+        );
+        return () => {
+            unsubscribe();
+        }
+    }, []);
+
 
     return (
         <View style={Styles.habitList}>

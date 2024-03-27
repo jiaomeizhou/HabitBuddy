@@ -9,6 +9,7 @@ import CustomDropDownPicker from '../components/CustomDropDownPicker';
 import CustomDateTimePicker from '../components/CustomDateTimePicker';
 import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
+import { auth } from '../firebase-files/firebaseSetup';
 
 export default function AddHabitScreen({ route }) {
     const navigation = useNavigation();
@@ -123,7 +124,10 @@ export default function AddHabitScreen({ route }) {
             );
         } else {
             // TODO: get the user id from the firebase authentication
-            addHabit(1, newHabit)
+            // Done
+            console.log('this is add habit page, uid: ', auth.currentUser.uid);
+            const userID = auth.currentUser.uid;
+            addHabit(userID, newHabit)
                 .then(() => {
                     navigation.goBack();
                 })
