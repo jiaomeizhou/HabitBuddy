@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
-import { FontAwesome6 } from '@expo/vector-icons';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
 import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { database } from '../firebase-files/firebaseSetup';
-import { getAllDocs } from '../firebase-files/firestoreHelper';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
     useEffect(() => {
@@ -18,12 +17,7 @@ export default function Home({ navigation }) {
                     <FontAwesome6 name="add" size={24} color="black" />
                 </Pressable>
             ),
-            // TODO: just test the edit function, need to be removed
-            headerLeft: () => (
-                <Pressable onPress={() => navigation.navigate('EditHabit')}>
-                    <FontAwesome6 name="edit" size={24} color="black" />
-                </Pressable>
-            )
+    
         });
     }, []);
 
