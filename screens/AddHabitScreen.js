@@ -11,9 +11,14 @@ import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
 import { auth } from '../firebase-files/firebaseSetup';
 
-export default function AddHabitScreen({ route }) {
+export default function AddHabitScreen({ route}) {
+    // TODO: render shortcut name as the default habit name
+    // which is the habit name passed from the Welcome screen
+    const { habitShortcutName } = route.params || {};
+
     const navigation = useNavigation();
-    const [habitName, setHabitName] = useState('');
+    const [habitName, setHabitName] = useState(habitShortcutName || '');
+    console.log("name", habitName)
     const [habitFrequency, setHabitFrequency] = useState('');
     const [durationWeeks, setDurationWeeks] = useState('');
     const [endDate, setEndDate] = useState('');

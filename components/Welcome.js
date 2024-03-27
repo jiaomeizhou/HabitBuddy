@@ -1,7 +1,7 @@
 import { View, Text, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
-export default function Welcome() {
+export default function Welcome({ navigation }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     const habitsByCategory = {
@@ -20,11 +20,12 @@ export default function Welcome() {
         else {
             habits = habitsByCategory.health;
         }
+
         return habits.map((habit, index) => (
             <Button
                 key={index}
                 title={habit}
-                onPress={() => alert(`${habit} button pressed`)}
+                onPress={() => navigation.navigate('AddHabit', { habitShortcutName: habit})}
             />
         ));
     };

@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
 
     return (
         <View style={Styles.habitList}>
-            {!renderWelcome ? <Welcome /> :
+            {!renderWelcome ? <Welcome navigation={navigation}/> :
                 <View>
                     <FlatList
                         data={habits}
