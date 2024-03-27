@@ -2,7 +2,7 @@ import { View, Text, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
 export default function Welcome({ navigation }) {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState("health");
 
     const habitsByCategory = {
         health: ['Exercise', 'Eat Breakfast', 'Drink Water in the morning'],
@@ -34,7 +34,7 @@ export default function Welcome({ navigation }) {
         <View style={styles.container}>
             <Button
                 title="Create your own habit"
-                onPress={() => alert('Create your own habit button pressed')}
+                onPress={() => navigation.navigate('AddHabit')}
             />
             <View style={styles.buttonsContainer}>
                 {Object.keys(habitsByCategory).map((category, index) => (
