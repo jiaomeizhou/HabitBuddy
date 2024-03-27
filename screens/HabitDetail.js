@@ -23,10 +23,13 @@ export default function HabitDetail({ route, navigation}) {
   function handleCheckinButton({habitObj}) {
     navigation.navigate('Checkin', {habitObj: habitObj})
   }
+
+  
+
   return (
     <View>
       <Text>{habitObj.habit}</Text>
-      <Button title="Check in" onPress={handleCheckinButton} />
+      <Button title="Check in" onPress={handleCheckinButton} disabled={habitObj.checkedInToday}/>
     </View>
   )
 }
