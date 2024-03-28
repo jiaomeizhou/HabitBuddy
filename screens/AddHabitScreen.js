@@ -110,6 +110,7 @@ export default function AddHabitScreen({ route }) {
             'isReminderEnabled': isReminderEnabled,
             'progress': 0,
             'checkInCount': 0,
+            'userId': userId,
         };
 
         if (habitData && isEditMode) {
@@ -123,7 +124,7 @@ export default function AddHabitScreen({ route }) {
                             const updatedHabit = { ...habitData, ...newHabit };
                             updateHabit(userId, habitId, updatedHabit)
                                 .then(() => {
-                                    navigation.goBack();
+                                    navigation.navigate('Home');
                                 })
                         }
                     }
