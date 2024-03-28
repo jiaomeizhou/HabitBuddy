@@ -1,5 +1,5 @@
-import { View, Text, TextInput, Button, Image } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { updateProfile } from "firebase/auth";
@@ -29,11 +29,13 @@ export default function Profile({ navigation }) {
     setIsModalVisible(false);
   }
 
-  navigation.setOptions({
-    headerRight: () => (
-      <FontAwesome5 name="user-edit" size={24} color="black" onPress={() => setIsModalVisible(true)} />
-    ),
-  });
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <FontAwesome5 name="user-edit" size={24} color="black" onPress={() => setIsModalVisible(true)} />
+      ),
+    });
+  }, [navigation]); // Add any other dependencies if necessary
 
   return (
     <View style={{ paddingHorizontal: 20 }}>
