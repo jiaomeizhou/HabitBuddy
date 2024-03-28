@@ -6,7 +6,7 @@ import CustomText from './CustomText'
 export default function CustomCheckBox({ text, value, onValueChange }) {
     return (
         <View style={styles.section}>
-            <CustomText style={styles.paragraph}>{text}</CustomText>
+            {text && <CustomText style={styles.paragraph}>{text}</CustomText>}
             <Checkbox style={styles.checkbox} value={value} onValueChange={onValueChange} />
         </View>
     )
