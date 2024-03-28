@@ -15,6 +15,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import Home from './screens/Home';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
+import DiaryDetail from './screens/DiaryDetail';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -73,6 +74,12 @@ export default function App() {
             // })}
             />
             <Stack.Screen name="Checkin" component={Checkin} />
+            <Stack.Screen name='DiaryDetail' component={DiaryDetail}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Diary Detail",
+              }}
+            />
           </>
           : AuthStack}
       </Stack.Navigator>
