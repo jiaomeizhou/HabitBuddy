@@ -1,8 +1,8 @@
 import { View, Text, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
-export default function Welcome() {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+export default function Welcome({ navigation }) {
+    const [selectedCategory, setSelectedCategory] = useState("health");
 
     const habitsByCategory = {
         health: ['Exercise', 'Eat Breakfast', 'Drink Water in the morning'],
@@ -20,11 +20,12 @@ export default function Welcome() {
         else {
             habits = habitsByCategory.health;
         }
+
         return habits.map((habit, index) => (
             <Button
                 key={index}
                 title={habit}
-                onPress={() => alert(`${habit} button pressed`)}
+                onPress={() => navigation.navigate('AddHabit', { habitShortcutName: habit})}
             />
         ));
     };
@@ -33,7 +34,7 @@ export default function Welcome() {
         <View style={styles.container}>
             <Button
                 title="Create your own habit"
-                onPress={() => alert('Create your own habit button pressed')}
+                onPress={() => navigation.navigate('AddHabit')}
             />
             <View style={styles.buttonsContainer}>
                 {Object.keys(habitsByCategory).map((category, index) => (

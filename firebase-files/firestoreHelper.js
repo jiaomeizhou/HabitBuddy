@@ -66,3 +66,16 @@ export async function fetchTodayCheckIn(userId, habitId) {
         throw error;
     }
 }
+export async function getAllDocs(path) {
+    try {
+        const querySnapshot = await getDocs(collection(database, path));
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            data.push(doc.data());
+        });
+        return data;
+    } catch (e) {
+        console.error("Error getting documents: ", e);
+    }
+
+}
