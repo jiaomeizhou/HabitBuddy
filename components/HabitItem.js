@@ -6,6 +6,7 @@ import Checkbox from 'expo-checkbox';
 import ProgressBar from './ProgressBar';
 import { addCheckIn, updateHabit, deleteCheckIn } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import CustomCheckBox from './CustomCheckBox';
 
 export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     // TODO: when the progress of a habit is 100%, show a message to the user
@@ -90,7 +91,7 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
             <View style={Styles.habitItem}>
                 <Text style={Styles.habitText}>{habitObj.habit}</Text>
                 <ProgressBar progress={habitObj.progress} label={`${habitObj.progress}%          `} />
-                <Checkbox
+                <CustomCheckBox
                     value={isChecked}
                     onValueChange={checkInHandler}
                 />

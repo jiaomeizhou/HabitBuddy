@@ -10,6 +10,7 @@ import EditHabitScreen from './screens/EditHabitScreen';
 import HabitDetail from './screens/HabitDetail';
 import Checkin from './screens/Checkin';
 import { FontAwesome6 } from '@expo/vector-icons';
+import TopLeftNavIcon from './components/TopLeftNavIcon';
 
 
 import Home from './screens/Home';
@@ -46,7 +47,9 @@ export default function App() {
             <Stack.Screen
               name="BottomNavTabs"
               component={BottomNavTabs}
-              options={{ headerShown: false }}
+              options={{ 
+                headerShown: false,
+            }}
             />
             <Stack.Screen name="AddHabit" component={AddHabitScreen}
               options={{

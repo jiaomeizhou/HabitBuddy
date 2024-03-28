@@ -85,4 +85,21 @@ export const Styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
     },
+    menu: {
+        position: 'absolute',
+        top: 100,
+        left: 10,
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 5,
+        elevation: 4,
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+    },
 })

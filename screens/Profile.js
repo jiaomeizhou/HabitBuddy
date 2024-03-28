@@ -4,18 +4,15 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { updateProfile } from "firebase/auth";
 import Stats from '../components/Stats';
+import ProfileInput from "../components/ProfileInput";
 
 export default function Profile({ navigation }) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState(auth.currentUser.name || '');
   const [photoURL, setphotoURL] = useState(auth.currentUser.photoURL || '');
 
-  function profileEditHandler() {
-    setIsEditing(true);
-  }
 
-  async function saveProfileHandler() {
-    console.log(auth.currentUser)
+  async function saveProfileHandler(name) {
     try {
       await updateProfile(auth.currentUser, {
         displayName: name,
@@ -25,53 +22,32 @@ export default function Profile({ navigation }) {
     catch (error) {
       console.error(error);
     }
-    setIsEditing(false);
+    setIsModalVisible(false);
   }
 
-  function exitEditHandler() {
-    setIsEditing(false);
-    // Reset name and photoURL to current user's data
-    setName(auth.currentUser.displayName || '');
-    setphotoURL(auth.currentUser.photoURL || '');
+  function dismissModal() {
+    setIsModalVisible(false);
   }
 
   navigation.setOptions({
     headerRight: () => (
-      <FontAwesome5 name="user-edit" size={24} color="black" onPress={profileEditHandler} />
+      <FontAwesome5 name="user-edit" size={24} color="black" onPress={() => setIsModalVisible(true)} />
     ),
   });
 
   return (
     <View style={{ paddingHorizontal: 20 }}>
-      {isEditing ? (
-        <View>
-          <TextInput
-            placeholder="Name"
-            value={name}
-            onChangeText={setName}
-            style={{ marginBottom: 10, borderBottomWidth: 1, paddingVertical: 5 }}
-          />
-          <TextInput
-            placeholder="photoURL"
-            value={photoURL}
-            onChangeText={setphotoURL}
-            style={{ marginBottom: 10, borderBottomWidth: 1, paddingVertical: 5 }}
-          />
-          <Button title="Save" onPress={saveProfileHandler} />
-          <Button title="Cancel" onPress={exitEditHandler} />
-        </View>
-      ) : (
-        <View>
-          {auth.currentUser.photoURL ? (
-            <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />)
-            :
-            (<FontAwesome5 name="user-circle" size={100} color="black" />
-            )}
-          <Text>ID: {auth.currentUser.uid}</Text>
-          <Text>Name: {auth.currentUser.displayName}</Text>
-          <Text>Email: {auth.currentUser.email}</Text>
-        </View>
-      )}
+      <View>
+        {auth.currentUser.photoURL ? (
+          <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />)
+          :
+          (<FontAwesome5 name="user-circle" size={100} color="black" />
+          )}
+        <ProfileInput inputHandler={saveProfileHandler} modalVisible={isModalVisible} dismissModal={dismissModal} />
+        <Text>ID: {auth.currentUser.uid}</Text>
+        <Text>Name: {auth.currentUser.displayName}</Text>
+        <Text>Email: {auth.currentUser.email}</Text>
+      </View>
       <Stats />
     </View>
 
