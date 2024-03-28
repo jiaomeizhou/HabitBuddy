@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
@@ -37,5 +37,32 @@ export async function addCheckIn(data) {
         });
     } catch (error) {
         console.error("Error adding check-in: ", error);
+    }
+}
+
+export async function fetchTodayCheckIn(userId, habitId) {
+    const startDate = new Date();
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 1);
+
+    const checkInsRef = collection(database, "CheckIns");
+    const q = query(checkInsRef,
+        where("userId", "==", userId),
+        where("habitId", "==", habitId),
+        where("createdAt", ">=", startDate),
+        where("createdAt", "<", endDate)
+    );
+
+    try {
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
+            return { id: doc.id, ...doc.data() };
+        }
+        return null;
+    } catch (error) {
+        console.error("Error fetching today's check-in: ", error);
+        throw error;
     }
 }
