@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function CustomText({ style, children }) {
+export default function CustomText({ style, children, ...rest }) {
     return (
         <View>
-            <Text style={[styles.titleText, style]}>{children}</Text>
+            <Text style={[styles.titleText, style]} {...rest}>
+                {children}
+            </Text>
         </View>
     )
 }
