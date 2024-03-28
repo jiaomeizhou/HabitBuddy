@@ -4,6 +4,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
 import { updateHabit } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from '../components/Styles';
 
 // Set up the locale configuration for the calendar
 LocaleConfig.locales['en'] = {
@@ -61,14 +62,14 @@ export default function HabitDetail({ route, navigation }) {
     };  
     calculateProgress();
 
-  }, [checkedDates, habitObj.frequency, habitObj.durationWeeks]);
+  }, [checkedDates, habitObj]);
 
   console.log('habitObj', habitObj);
 
 
   return (
-    <View>
-      <Text>{habitObj.habit}</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.habitText}>{habitObj.habit}</Text>
       <Calendar
         markedDates={checkedDates.reduce((acc, date) => {
           acc[date] = { selected: true, marked: true, selectedColor: 'green' };
@@ -76,9 +77,14 @@ export default function HabitDetail({ route, navigation }) {
         }, {})}
         renderDay={renderDate}
       />
-      <Text>Progress: {habitObj.progress}%</Text>
-      <Button title="Check in" onPress={handleCheckinButton} disabled={habitObj.checkedInToday} />
-
+      <Text style={Styles.progressText}>Progress: {habitObj.progress}%</Text>
+      <Text style={Styles.checkInText}>You have checked in {habitObj.checkInCount} times!</Text>
+      <Button
+        title="Check in"
+        onPress={handleCheckinButton}
+        disabled={habitObj.checkedInToday}
+        style={Styles.button}
+      />
     </View>
   );
 }

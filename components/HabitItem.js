@@ -8,6 +8,7 @@ import { addCheckIn, updateHabit, deleteCheckIn } from '../firebase-files/firest
 import { auth } from '../firebase-files/firebaseSetup';
 
 export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
+    // TODO: when the progress of a habit is 100%, show a message to the user
     const [isChecked, setChecked] = useState(false);
     const [todayCheckIns, setTodayCheckIns] = useState([]);
     const [checkInCount, setCheckInCount] = useState(habitObj.checkInCount);
@@ -34,11 +35,6 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
             setChecked(false);
         }
         else {
-            // console.log('todayCheckIns', todayCheckIns);
-            // const updatedCheckInCount = habitObj.checkInCount + 1;
-            // const updatedProgress = Math.round((updatedCheckInCount / (habitObj.durationWeeks * habitObj.freuency)) * 100);
-            // const updatedHabitObj = {...habitObj, checkInCount: updatedCheckInCount, progress: updatedProgress};
-            // updateHabit(auth.currentUser.uid, habitObj.id, updatedHabitObj);
         }
     }, [])
 

@@ -54,4 +54,35 @@ export const Styles = StyleSheet.create({
         backgroundColor: '#4caf50',
         borderRadius: 5,
     },
+    habitDetailContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    habitText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    progressText: {
+        fontSize: 18,
+        marginTop: 10,
+    },
+    checkInText: {
+        fontSize: 18,
+        marginTop: 10,
+        
+    },
+    button: {
+        marginTop: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: 'green',
+        borderRadius: 5,
+    },
+    buttonText: {
+        fontSize: 18,
+        color: 'white',
+    },
 })
