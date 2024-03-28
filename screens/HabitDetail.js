@@ -21,6 +21,17 @@ export default function HabitDetail({ route, navigation }) {
   const [checkedDates, setCheckedDates] = useState([]);
 
   useEffect(() => {
+    navigation.setOptions({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <Pressable onPress={() => navigation.navigate('EditHabit', { habitObj: habitObj })}>
+          <FontAwesome6 name="edit" size={24} color="black" />
+        </Pressable>
+      ),
+    });
+  })
+
+  useEffect(() => {
     const checkedInDates = [];
     const currentHabitCheckIns = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
     currentHabitCheckIns.forEach((checkIn) => {
@@ -59,7 +70,7 @@ export default function HabitDetail({ route, navigation }) {
       } catch (error) {
         console.log("Error calculating progress: ", error);
       }
-    };  
+    };
     calculateProgress();
 
   }, [checkedDates, habitObj]);
