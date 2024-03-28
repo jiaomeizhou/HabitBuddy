@@ -11,7 +11,7 @@ import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
 import { auth } from '../firebase-files/firebaseSetup';
 
-export default function AddHabitScreen({ route}) {
+export default function AddHabitScreen({ route }) {
     // TODO: render shortcut name as the default habit name
     // which is the habit name passed from the Welcome screen
     const { habitShortcutName } = route.params || {};
@@ -23,6 +23,7 @@ export default function AddHabitScreen({ route}) {
     const [durationWeeks, setDurationWeeks] = useState('');
     const [endDate, setEndDate] = useState('');
     const [isReminderEnabled, setIsReminderEnabled] = useState(false);
+    const userId = auth.currentUser.uid;
 
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState([
@@ -39,15 +40,15 @@ export default function AddHabitScreen({ route}) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const habitData = route.params?.habitData || null;
+    const habitId = habitData?.id || null;
     const isEditMode = route.params?.isEditMode || false;
 
     useEffect(() => {
         if (habitData) {
-            console.log('habitData: ', habitData);
             setHabitName(habitData.habit);
             setHabitFrequency(habitData.frequency);
-            setDate(habitData.startDate);
-            setFormattedDate(habitData.startDate.toDateString());
+            setDate(habitData.startDate.toDate());
+            setFormattedDate(convertTimestampToDate(habitData.startDate));
             setDurationWeeks(habitData.durationWeeks.toString());
             setIsReminderEnabled(habitData.isReminderEnabled);
             setEndDate(habitData.endDate);
@@ -120,8 +121,7 @@ export default function AddHabitScreen({ route}) {
                     {
                         text: "Yes", onPress: () => {
                             const updatedHabit = { ...habitData, ...newHabit };
-                            // updateHabit(userId, habitData.id, updatedHabit);
-                            updateHabit(1, "f02d6b4gt71NVD9kKYuG", updatedHabit)
+                            updateHabit(userId, habitId, updatedHabit)
                                 .then(() => {
                                     navigation.goBack();
                                 })
@@ -130,11 +130,7 @@ export default function AddHabitScreen({ route}) {
                 ]
             );
         } else {
-            // TODO: get the user id from the firebase authentication
-            // Done
-            console.log('this is add habit page, uid: ', auth.currentUser.uid);
-            const userID = auth.currentUser.uid;
-            addHabit(userID, newHabit)
+            addHabit(userId, newHabit)
                 .then(() => {
                     navigation.goBack();
                 })

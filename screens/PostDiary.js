@@ -1,5 +1,5 @@
 import { StyleSheet, View, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomCheckBox from '../components/CustomCheckBox';
 import CustomText from '../components/CustomText';
@@ -7,6 +7,8 @@ import PressableButton from '../components/PressableButton';
 import CustomTextInput from '../components/CustomTextInput';
 import CustomSwitch from '../components/CustomSwitch';
 import { formatDate } from '../helpers/dateHelper';
+import { auth } from '../firebase-files/firebaseSetup';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 export default function PostDiary({ navigation, route }) {
@@ -14,7 +16,16 @@ export default function PostDiary({ navigation, route }) {
     const [diary, setDiary] = useState('');
     const [isPublic, setIsPublic] = useState(true);
     const [taskCompleted, setTaskCompleted] = useState(false);
+    const userId = auth.currentUser.uid;
 
+    useFocusEffect(
+        useCallback(() => {
+            setImageUri(null);
+            setDiary('');
+            setIsPublic(true);
+            setTaskCompleted(false);
+        }, [])
+    );
     function pickImageHandler() {
         // TODO: complete pick image function
     }
@@ -26,8 +37,7 @@ export default function PostDiary({ navigation, route }) {
             return;
         }
 
-        // TODO: get userId and habitId then save them to the database
-        const userId = "user-id-placeholder"; // Use actual user ID
+        // TODO: get userId habitId then save them to the database
         const habitId = "habit-id-placeholder"; // Use actual habit ID
 
         const newEntry = {

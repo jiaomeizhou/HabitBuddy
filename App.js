@@ -16,6 +16,7 @@ import TopLeftNavIcon from './components/TopLeftNavIcon';
 import Home from './screens/Home';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
+import DiaryDetail from './screens/DiaryDetail';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -66,16 +67,22 @@ export default function App() {
             <Stack.Screen
               name="HabitDetail"
               component={HabitDetail}
-              options={({ navigation }) => ({
-                headerBackTitleVisible: false,
-                headerRight: () => (
-                  <Pressable onPress={() => navigation.navigate('EditHabit')}>
-                    <FontAwesome6 name="edit" size={24} color="black" />
-                  </Pressable>
-                ),
-              })}
+            // options={({ navigation }) => ({
+            //   headerBackTitleVisible: false,
+            //   headerRight: () => (
+            //     <Pressable onPress={() => navigation.navigate('EditHabit')}>
+            //       <FontAwesome6 name="edit" size={24} color="black" />
+            //     </Pressable>
+            //   ),
+            // })}
             />
             <Stack.Screen name="Checkin" component={Checkin} />
+            <Stack.Screen name='DiaryDetail' component={DiaryDetail}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Diary Detail",
+              }}
+            />
           </>
           : AuthStack}
       </Stack.Navigator>

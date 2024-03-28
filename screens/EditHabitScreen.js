@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
 import AddHabitScreen from './AddHabitScreen';
 import IconButton from '../components/IconButton';
@@ -6,21 +6,11 @@ import { AntDesign } from '@expo/vector-icons';
 import { deleteHabit } from '../firebase-files/firestoreHelper';
 
 export default function EditHabitScreen({ navigation, route }) {
-    console.log("EditHabitScreen route: ", route);
 
-    // TODO: get habitData from route.params
-    const habitData = {
-        endDate: "Sun Apr 28 2024",
-        frequency: 5,
-        habit: "sleep",
-        isReminderEnabled: true,
-        startDate: new Date(),
-        durationWeeks: 5
-    };
-
-    // const habit = route.params ? route.params.habit : null;
-    // const { id } = habit;
-    // const habitData = route.params.habit;
+    const habit = route.params ? route.params : null;
+    const habitData = habit.habitObj;
+    const habitId = habitData.id;
+    const userId = habitData.userId;
 
     useEffect(() => {
         navigation.setOptions({
@@ -46,8 +36,7 @@ export default function EditHabitScreen({ navigation, route }) {
                 {
                     text: "Yes",
                     onPress: () => {
-                        // deleteHabit(userId, habitId);
-                        deleteHabit(1, "oNIGxoLGP04gWVCFUoNm")
+                        deleteHabit(userId, habitId);
                         navigation.goBack();
                     },
                 },
