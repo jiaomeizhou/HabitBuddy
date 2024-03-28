@@ -3,3 +3,14 @@ export const convertTimestampToDate = (timestampObject) => {
     const dateObject = new Date(milliseconds);
     return dateObject.toDateString();
 };
+
+export const formatDate = (date) => {
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    }).format(date);
+
+    return formattedDate;
+}
