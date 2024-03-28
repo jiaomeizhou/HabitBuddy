@@ -10,12 +10,21 @@ import { auth } from '../firebase-files/firebaseSetup';
 export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
     const [isChecked, setChecked] = useState(false);
     const [todayCheckIns, setTodayCheckIns] = useState([]);
+    const [checkInCount, setCheckInCount] = useState(habitObj.checkInCount);
+
+    useEffect(() => {
+        if (isChecked) {
+            setCheckInCount((prevCount) => prevCount + 1);
+        } else {
+            setCheckInCount((prevCount) => prevCount - 1);
+        }
+    }, [isChecked]);
 
     function handlePress() {
         onPress(habitObj)
     }
 
-    async function checkInHandler() {
+    function checkInHandler() {
         setChecked(!isChecked);
     }
 
@@ -24,7 +33,14 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
         if (todayCheckIns.length === 0) {
             setChecked(false);
         }
-    }, [todayCheckIns])
+        else {
+            // console.log('todayCheckIns', todayCheckIns);
+            // const updatedCheckInCount = habitObj.checkInCount + 1;
+            // const updatedProgress = Math.round((updatedCheckInCount / (habitObj.durationWeeks * habitObj.freuency)) * 100);
+            // const updatedHabitObj = {...habitObj, checkInCount: updatedCheckInCount, progress: updatedProgress};
+            // updateHabit(auth.currentUser.uid, habitObj.id, updatedHabitObj);
+        }
+    }, [])
 
     useEffect(() => {
         const todayDate = new Date().getDate();
@@ -46,28 +62,32 @@ export default function HabitItem({ habitObj, onPress, currentUserCheckIns }) {
 
 
     useEffect(() => {
-        habitObj = { ...habitObj, checkedInToday: isChecked };
-        updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
-        if (isChecked) {
-            const checkInData = {
-                userId: auth.currentUser.uid,
-                habitId: habitObj.id,
-                date: new Date(),
-                text: null,
-                imageUrl: null
-            };
-            addCheckIn(checkInData);
-        }
-        else {
-            // delete check-in data from Firestore
-            if (todayCheckIns.length > 0) {
-                todayCheckIns.forEach((checkIn) => {
-                    deleteCheckIn(checkIn.id);
-                });
-            }
-        }
-    }, [isChecked])
+        const handleCheckIn = async () => {
+            await new Promise((resolve) => setTimeout(resolve, 0));
 
+            habitObj = { ...habitObj, checkedInToday: isChecked };
+            await updateHabit(auth.currentUser.uid, habitObj.id, habitObj);
+            if (isChecked) {
+                const checkInData = {
+                    userId: auth.currentUser.uid,
+                    habitId: habitObj.id,
+                    date: new Date(),
+                    text: null,
+                    imageUrl: null
+                };
+                addCheckIn(checkInData);
+            }
+            else {
+                // delete check-in data from Firestore
+                if (todayCheckIns.length > 0) {
+                    todayCheckIns.forEach((checkIn) => {
+                        deleteCheckIn(checkIn.id);
+                    });
+                }
+            }
+        };
+        handleCheckIn();
+    }, [isChecked])
 
     return (
         <PressableItem onPress={handlePress}>

@@ -46,19 +46,24 @@ export default function HabitDetail({ route, navigation }) {
   };
 
   useEffect(() => {
-    let progress = 0;
-    let checkInCount = 0;
-    try {
-      progress = Math.round((checkedDates.length / habitObj.durationWeeks) * 100);
-      checkInCount = checkedDates.length;
-      console.log("Progress: ", progress);
-      const updatedHabit = { ...habitObj, progress: progress, checkInCount: checkInCount};
-      updateHabit(auth.currentUser.uid, habitObj.id, updatedHabit);
-    }
-    catch (error) {
-      console.log("Error calculating progress: ", error);
-    }
-  }, [currentUserCheckIns])
+    const calculateProgress = async () => {
+      try {
+        // Wait for checkedDates to update
+        // await new Promise((resolve) => setTimeout(resolve, 0));
+        const checkInCount = checkedDates.length;
+        const newProgress = Math.round((checkInCount / (habitObj.frequency * habitObj.durationWeeks)) * 100);
+        console.log("Progress: ", newProgress, checkInCount, habitObj.frequency * habitObj.durationWeeks);
+        const updatedHabit = { ...habitObj, progress: newProgress, checkInCount: checkInCount };
+        await updateHabit(auth.currentUser.uid, habitObj.id, updatedHabit);
+      } catch (error) {
+        console.log("Error calculating progress: ", error);
+      }
+    };  
+    calculateProgress();
+
+  }, [checkedDates, habitObj.frequency, habitObj.durationWeeks]);
+
+  console.log('habitObj', habitObj);
 
 
   return (
