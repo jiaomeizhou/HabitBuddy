@@ -71,3 +71,13 @@ export async function getCheckInsByUserId(userId) {
     });
     return checkIns;
 }
+
+export async function getHabitsByUserId(userId) {
+    const habits = [];
+    const q = query(collection(database, `Users/${userId}/Habits`));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        habits.push({ id: doc.id, ...doc.data() });
+    });
+    return habits;
+}
