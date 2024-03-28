@@ -20,7 +20,7 @@ export default function PressableButton({ title, onPress, color, disabled = fals
 
 const styles = StyleSheet.create({
     button: {
-        width: '30%',
+        width: '40%',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
