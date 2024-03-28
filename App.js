@@ -63,14 +63,14 @@ export default function App() {
             <Stack.Screen
               name="HabitDetail"
               component={HabitDetail}
-              options={({ navigation }) => ({
-                headerBackTitleVisible: false,
-                headerRight: () => (
-                  <Pressable onPress={() => navigation.navigate('EditHabit')}>
-                    <FontAwesome6 name="edit" size={24} color="black" />
-                  </Pressable>
-                ),
-              })}
+            // options={({ navigation }) => ({
+            //   headerBackTitleVisible: false,
+            //   headerRight: () => (
+            //     <Pressable onPress={() => navigation.navigate('EditHabit')}>
+            //       <FontAwesome6 name="edit" size={24} color="black" />
+            //     </Pressable>
+            //   ),
+            // })}
             />
             <Stack.Screen name="Checkin" component={Checkin} />
           </>
