@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
@@ -39,16 +39,22 @@ export async function addCheckIn(data) {
         console.error("Error adding check-in: ", error);
     }
 }
-export async function getAllDocs(path) {
-    try {
-        const querySnapshot = await getDocs(collection(database, path));
-        const data = [];
-        querySnapshot.forEach((doc) => {
-            data.push(doc.data());
-        });
-        return data;
-    } catch (e) {
-        console.error("Error getting documents: ", e);
-    }
 
+export async function deleteCheckIn(checkInId) {
+    try {
+        await deleteDoc(doc(database, `CheckIns/${checkInId}`));
+        console.log("Check-in deleted successfully", checkInId);
+    } catch (error) {
+        console.error("Error deleting check-in: ", error);
+    }
+}
+
+export async function getCheckInsByUserId(userId) {
+    const checkIns = [];
+    const q = query(collection(database, "CheckIns"), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        checkIns.push({ id: doc.id, ...doc.data() });
+    });
+    return checkIns;
 }
