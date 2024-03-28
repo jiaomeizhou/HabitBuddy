@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import BottomNavTabs from './components/BottomNavTabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,6 +8,8 @@ import { auth } from "./firebase-files/firebaseSetup";
 import AddHabitScreen from './screens/AddHabitScreen';
 import EditHabitScreen from './screens/EditHabitScreen';
 import HabitDetail from './screens/HabitDetail';
+import Checkin from './screens/Checkin';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 
 import Home from './screens/Home';
@@ -58,7 +60,19 @@ export default function App() {
                 headerTitle: "Edit a Habit",
               }}
             />
-            <Stack.Screen name="HabitDetail" component={HabitDetail} />
+            <Stack.Screen
+              name="HabitDetail"
+              component={HabitDetail}
+              options={({ navigation }) => ({
+                headerBackTitleVisible: false,
+                headerRight: () => (
+                  <Pressable onPress={() => navigation.navigate('EditHabit')}>
+                    <FontAwesome6 name="edit" size={24} color="black" />
+                  </Pressable>
+                ),
+              })}
+            />
+            <Stack.Screen name="Checkin" component={Checkin} />
           </>
           : AuthStack}
       </Stack.Navigator>

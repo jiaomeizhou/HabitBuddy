@@ -107,6 +107,8 @@ export default function AddHabitScreen({ route}) {
             'endDate': endDate,
             'durationWeeks': parseInt(durationWeeks),
             'isReminderEnabled': isReminderEnabled,
+            'progress': 0,
+            'checkInCount': 0,
         };
 
         if (habitData && isEditMode) {

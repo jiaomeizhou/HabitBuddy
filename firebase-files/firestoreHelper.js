@@ -40,32 +40,6 @@ export async function addCheckIn(data) {
     }
 }
 
-export async function fetchTodayCheckIn(userId, habitId) {
-    const startDate = new Date();
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 1);
-
-    const checkInsRef = collection(database, "CheckIns");
-    const q = query(checkInsRef,
-        where("userId", "==", userId),
-        where("habitId", "==", habitId),
-        where("createdAt", ">=", startDate),
-        where("createdAt", "<", endDate)
-    );
-
-    try {
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-            const doc = querySnapshot.docs[0];
-            return { id: doc.id, ...doc.data() };
-        }
-        return null;
-    } catch (error) {
-        console.error("Error fetching today's check-in: ", error);
-        throw error;
-    }
-}
 export async function getAllDocs(path) {
     try {
         const querySnapshot = await getDocs(collection(database, path));
@@ -77,5 +51,23 @@ export async function getAllDocs(path) {
     } catch (e) {
         console.error("Error getting documents: ", e);
     }
+}
 
+export async function deleteCheckIn(checkInId) {
+    try {
+        await deleteDoc(doc(database, `CheckIns/${checkInId}`));
+        console.log("Check-in deleted successfully", checkInId);
+    } catch (error) {
+        console.error("Error deleting check-in: ", error);
+    }
+}
+
+export async function getCheckInsByUserId(userId) {
+    const checkIns = [];
+    const q = query(collection(database, "CheckIns"), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        checkIns.push({ id: doc.id, ...doc.data() });
+    });
+    return checkIns;
 }

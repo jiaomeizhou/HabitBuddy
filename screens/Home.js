@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
-import { FontAwesome6 } from '@expo/vector-icons';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
 import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { database } from '../firebase-files/firebaseSetup';
-import { getAllDocs } from '../firebase-files/firestoreHelper';
+import { FontAwesome6 } from '@expo/vector-icons';
+
 
 export default function Home({ navigation }) {
     useEffect(() => {
@@ -18,30 +18,19 @@ export default function Home({ navigation }) {
                     <FontAwesome6 name="add" size={24} color="black" />
                 </Pressable>
             ),
-            // TODO: just test the edit function, need to be removed
-            headerLeft: () => (
-                <Pressable onPress={() => navigation.navigate('EditHabit')}>
-                    <FontAwesome6 name="edit" size={24} color="black" />
-                </Pressable>
-            )
+
         });
     }, []);
 
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
+    const [checkIns, setCheckIns] = useState(null);
+    const [currentUserCheckIns, setCurrentUserCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
-
-    const toggleCheck = (habitId) => {
-        setHabits((prevHabits) =>
-            prevHabits.map((habit) =>
-                habit.id === habitId ? { ...habit, checked: !habit.checked } : habit
-            )
-        );
-    };
 
     // get habits data from firebase
     useEffect(() => {
-        const unsubscribe = onSnapshot(
+        const unsubscribeHabits = onSnapshot(
             query(
                 collection(database, `Users/${auth.currentUser.uid}/Habits`),
             ),
@@ -63,18 +52,40 @@ export default function Home({ navigation }) {
                 console.error("Error reading habits: ", error);
             }
         );
+
+        // Get check-ins data from Firebase
+        const unsubscribeCheckIns = onSnapshot(
+            collection(database, 'CheckIns'),
+            (querySnapshot) => {
+                let checkInsData = [];
+                querySnapshot.forEach((doc) => {
+                    checkInsData.push({ id: doc.id, ...doc.data() });
+                });
+                setCheckIns(checkInsData);
+
+                let currentUserCheckInsData = checkInsData.filter((checkIn) => {
+                    return checkIn.userId === auth.currentUser.uid;
+                });
+                setCurrentUserCheckIns(currentUserCheckInsData);
+            },
+            (error) => {
+                console.error('Error reading check-ins: ', error);
+            }
+        );
+
         return () => {
-            unsubscribe();
+            unsubscribeHabits();
+            unsubscribeCheckIns();
         }
     }, []);
 
     function habitItemPressed(habitObj) {
-        navigation.navigate('HabitDetail', { habitObj });
+        navigation.navigate('HabitDetail', { habitObj, currentUserCheckIns});
     }
 
     return (
         <View style={Styles.habitList}>
-            {renderWelcome ? <Welcome navigation={navigation}/> :
+            {renderWelcome ? <Welcome navigation={navigation} /> :
                 <View >
                     <FlatList
                         data={habits}
@@ -82,7 +93,7 @@ export default function Home({ navigation }) {
                             return <HabitItem
                                 habitObj={item}
                                 onPress={habitItemPressed}
-                                toggleCheck={() => toggleCheck(item.id)}
+                                currentUserCheckIns={currentUserCheckIns}
                             />
                         }}
                     />
