@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs} from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
