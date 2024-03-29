@@ -40,15 +40,18 @@ export default function Home({ navigation }) {
             setHabits(habitsData);
         });
 
-        if (!habits || habits.length === 0) {
-            setRenderWelcome(true);
-        }
-
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();
         };
     }, []);
+
+    // check if the user has any habits
+    useEffect(() => {
+        if (habits) {
+            setRenderWelcome(habits.length === 0);
+        }
+    }, [habits]);
 
     return (
         <View style={Styles.habitList}>
