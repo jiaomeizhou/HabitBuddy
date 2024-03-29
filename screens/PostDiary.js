@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert } from 'react-native'
+import { StyleSheet, View, Alert, Image } from 'react-native'
 import React, { useState, useCallback } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomCheckBox from '../components/CustomCheckBox';
@@ -17,6 +17,10 @@ export default function PostDiary({ navigation, route }) {
     const [isPublic, setIsPublic] = useState(true);
     const [taskCompleted, setTaskCompleted] = useState(false);
     const userId = auth.currentUser.uid;
+    const habit = route.params ? route.params : null;
+    const habitData = habit.habitObj;
+    const habitId = habitData.id;
+    const date = new Date();
 
     useFocusEffect(
         useCallback(() => {
@@ -37,9 +41,6 @@ export default function PostDiary({ navigation, route }) {
             return;
         }
 
-        // TODO: get userId habitId then save them to the database
-        const habitId = "habit-id-placeholder"; // Use actual habit ID
-
         const newEntry = {
             diary,
             imageUri,
@@ -47,6 +48,7 @@ export default function PostDiary({ navigation, route }) {
             taskCompleted,
             userId,
             habitId,
+            date: date,
         };
 
         addCheckIn(newEntry)
@@ -65,7 +67,7 @@ export default function PostDiary({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <CustomText style={styles.date}>{formatDate(new Date())}</CustomText>
+            <CustomText style={styles.date}>{formatDate(date)}</CustomText>
             <PressableButton title="Upload Image" onPress={pickImageHandler} color='#2196F3' />
             {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
             <CustomTextInput
