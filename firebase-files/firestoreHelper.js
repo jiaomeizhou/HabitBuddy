@@ -83,3 +83,16 @@ export function subscribeHabitsByUserId(userId, callback) {
         callback(habits);
     });
 }
+
+export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
+    const q = query(collection(database, "CheckIns"), 
+                    where("userId", "==", userId),
+                    where("habitId", "==", habitId));
+    return onSnapshot(q, (snapshot) => {
+        const checkIns = [];
+        snapshot.forEach((doc) => {
+            checkIns.push({ id: doc.id, ...doc.data() });
+        });
+        callback(checkIns);
+    });
+}
