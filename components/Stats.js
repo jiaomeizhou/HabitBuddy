@@ -1,30 +1,33 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { getCheckInsByUserId, getHabitsByUserId } from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 
 export default function Stats() {
-    const [checkIns, setCheckIns] = useState(null);
-    const [habits, setHabits] = useState(0);
-
-    async function getStats() {
-        // Get the current user's check-ins
-        const userId = auth.currentUser.uid;
-        const checkIns = await getCheckInsByUserId(userId);
-        const habitNumber = await getHabitsByUserId(userId);
-        setCheckIns(checkIns);
-        setHabits(habitNumber);
-    }
+    const [checkIns, setCheckIns] = useState([]);
+    const [habits, setHabits] = useState([]);
 
     useEffect(() => {
-        getStats();
-    }, [checkIns, habits]);
+        const userId = auth.currentUser.uid;
 
-    // TODO: mark and check the completed habits and current habits
+        const unsubscribeCheckIns = subscribeCheckInsByUserId(userId, (checkInsData) => {
+            setCheckIns(checkInsData);
+        });
+
+        const unsubscribeHabits = subscribeHabitsByUserId(userId, (habitsData) => {
+            setHabits(habitsData);
+        });
+
+        return () => {
+            unsubscribeCheckIns();
+            unsubscribeHabits();
+        };
+    }, []);
+
     return (
-        <View >
-            <Text>Total Habits: {habits ? habits.length : 0}</Text>
-            <Text>Check-in: {checkIns ? checkIns.length : 0}</Text>
+        <View>
+            <Text>Total Habits: {habits.length}</Text>
+            <Text>Check-in: {checkIns.length}</Text>
         </View>
     );
 };

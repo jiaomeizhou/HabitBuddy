@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs} from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
@@ -62,22 +62,37 @@ export async function deleteCheckIn(checkInId) {
     }
 }
 
-export async function getCheckInsByUserId(userId) {
-    const checkIns = [];
+export function subscribeCheckInsByUserId(userId, callback) {
     const q = query(collection(database, "CheckIns"), where("userId", "==", userId));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        checkIns.push({ id: doc.id, ...doc.data() });
+    return onSnapshot(q, (snapshot) => {
+        const checkIns = [];
+        snapshot.forEach((doc) => {
+            checkIns.push({ id: doc.id, ...doc.data() });
+        });
+        callback(checkIns);
     });
-    return checkIns;
 }
 
-export async function getHabitsByUserId(userId) {
-    const habits = [];
+export function subscribeHabitsByUserId(userId, callback) {
     const q = query(collection(database, `Users/${userId}/Habits`));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        habits.push({ id: doc.id, ...doc.data() });
+    return onSnapshot(q, (snapshot) => {
+        const habits = [];
+        snapshot.forEach((doc) => {
+            habits.push({ id: doc.id, ...doc.data() });
+        });
+        callback(habits);
     });
-    return habits;
+}
+
+export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
+    const q = query(collection(database, "CheckIns"), 
+                    where("userId", "==", userId),
+                    where("habitId", "==", habitId));
+    return onSnapshot(q, (snapshot) => {
+        const checkIns = [];
+        snapshot.forEach((doc) => {
+            checkIns.push({ id: doc.id, ...doc.data() });
+        });
+        callback(checkIns);
+    });
 }

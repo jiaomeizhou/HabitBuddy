@@ -8,6 +8,7 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { database } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
 
 
 export default function Home({ navigation }) {
@@ -25,63 +26,25 @@ export default function Home({ navigation }) {
     // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
-    const [currentUserCheckIns, setCurrentUserCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
 
-    // get habits data from firebase
+    // get habits and checkin data from firebase
     useEffect(() => {
-        const unsubscribeHabits = onSnapshot(
-            query(
-                collection(database, `Users/${auth.currentUser.uid}/Habits`),
-            ),
-            (querySnapshot) => {
-                if (querySnapshot.empty) {
-                    console.log("No habits found.");
-                    setRenderWelcome(true);
-                    return;
-                }
-                let habits = [];
-                querySnapshot.forEach((doc) => {
-                    habits.push({ id: doc.id, ...doc.data() });
-                });
-                console.log("Habits: ", habits);
-                setHabits(habits);
-                setRenderWelcome(false);
-            },
-            (error) => {
-                console.error("Error reading habits: ", error);
-            }
-        );
+        const userId = auth.currentUser.uid;
 
-        // Get check-ins data from Firebase
-        const unsubscribeCheckIns = onSnapshot(
-            collection(database, 'CheckIns'),
-            (querySnapshot) => {
-                let checkInsData = [];
-                querySnapshot.forEach((doc) => {
-                    checkInsData.push({ id: doc.id, ...doc.data() });
-                });
-                setCheckIns(checkInsData);
+        const unsubscribeCheckIns = subscribeCheckInsByUserId(userId, (checkInsData) => {
+            setCheckIns(checkInsData);
+        });
 
-                let currentUserCheckInsData = checkInsData.filter((checkIn) => {
-                    return checkIn.userId === auth.currentUser.uid;
-                });
-                setCurrentUserCheckIns(currentUserCheckInsData);
-            },
-            (error) => {
-                console.error('Error reading check-ins: ', error);
-            }
-        );
+        const unsubscribeHabits = subscribeHabitsByUserId(userId, (habitsData) => {
+            setHabits(habitsData);
+        });
 
         return () => {
-            unsubscribeHabits();
             unsubscribeCheckIns();
-        }
+            unsubscribeHabits();
+        };
     }, []);
-
-    function habitItemPressed(habitObj) {
-        navigation.navigate('HabitDetail', { habitObj, currentUserCheckIns});
-    }
 
     return (
         <View style={Styles.habitList}>
@@ -92,8 +55,7 @@ export default function Home({ navigation }) {
                         renderItem={({ item }) => {
                             return <HabitItem
                                 habitObj={item}
-                                onPress={habitItemPressed}
-                                currentUserCheckIns={currentUserCheckIns}
+                                navigation={navigation}
                             />
                         }}
                     />
