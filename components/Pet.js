@@ -15,7 +15,7 @@ export default function Pet() {
     return (
         <View style={Styles.petContainer}>
             <Image source={require('../assets/pet.jpg')} style={Styles.petImage} />
-            <ProgressBar progress={user.pet.progrss} label={`${user.pet.name} is a ${user.pet.status}`}/>
+            {/* <ProgressBar progress={user.pet.progrss} label={`${user.pet.name} is a ${user.pet.status}`}/> */}
         </View>
     )
 }

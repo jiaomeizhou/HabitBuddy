@@ -54,7 +54,7 @@ export default function PostDiary({ navigation, route }) {
         addCheckIn(newEntry)
             .then(() => {
                 Alert.alert("Success", "Diary saved successfully!");
-                navigation.goBack();
+                navigation.navigate('Home');
             })
             .catch((error) => {
                 console.error("Error saving diary: ", error);
