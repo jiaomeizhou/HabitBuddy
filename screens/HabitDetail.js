@@ -3,6 +3,7 @@ import { View, Text, Button, Pressable } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
 import { Styles } from '../components/Styles';
+import moment from 'moment';
 
 // Set up the locale configuration for the calendar
 LocaleConfig.locales['en'] = {
@@ -29,13 +30,18 @@ export default function HabitDetail({ route, navigation }) {
     });
   })
 
+  // Convert date to local time zone string
+  const convertToLocalDateString = (date) => {
+    return moment(date).format('YYYY-MM-DD'); // Use moment to format date in local time zone
+  };
+
   // disable the check-in button if the user has already checked in today
   // get checkedDates from habitCheckIns
   useEffect(() => {
     if (habitCheckIns) {
       setCheckedInToday(todayCheckInsData.length > 0);
       const checkedDates = habitCheckIns.map((checkIn) => {
-        return checkIn.date.toDate().toISOString().split('T')[0];
+        return convertToLocalDateString(checkIn.date.toDate());
       });
       setCheckedDates(checkedDates);
     }
