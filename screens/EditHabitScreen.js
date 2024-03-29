@@ -37,7 +37,7 @@ export default function EditHabitScreen({ navigation, route }) {
                     text: "Yes",
                     onPress: () => {
                         deleteHabit(userId, habitId);
-                        navigation.goBack();
+                        navigation.navigate('Home');
                     },
                 },
             ]
