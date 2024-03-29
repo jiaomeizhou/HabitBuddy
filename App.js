@@ -17,6 +17,7 @@ import Home from './screens/Home';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import DiaryDetail from './screens/DiaryDetail';
+import PostDiary from './screens/PostDiary';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -48,9 +49,9 @@ export default function App() {
             <Stack.Screen
               name="BottomNavTabs"
               component={BottomNavTabs}
-              options={{ 
+              options={{
                 headerShown: false,
-            }}
+              }}
             />
             <Stack.Screen name="AddHabit" component={AddHabitScreen}
               options={{
@@ -67,6 +68,13 @@ export default function App() {
             <Stack.Screen
               name="HabitDetail"
               component={HabitDetail}
+            />
+            <Stack.Screen
+              name='PostDiary' component={PostDiary}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Post Diary",
+              }}
             />
             <Stack.Screen name='DiaryDetail' component={DiaryDetail}
               options={{
