@@ -5,23 +5,23 @@ import { database } from '../firebase-files/firebaseSetup';
 import { useNavigation } from '@react-navigation/native';
 import PressableItem from '../components/PressableItem'
 import CustomText from '../components/CustomText';
+import { onSnapshot } from 'firebase/firestore';
 
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        const fetchPublicDiaries = async () => {
-            const q = query(collection(database, "CheckIns"), where("isPublic", "==", true));
-            const querySnapshot = await getDocs(q);
+        const q = query(collection(database, "CheckIns"), where("isPublic", "==", true));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const fetchedDiaries = [];
             querySnapshot.forEach((doc) => {
                 fetchedDiaries.push({ id: doc.id, ...doc.data() });
             });
             setDiaries(fetchedDiaries);
-        };
-
-        fetchPublicDiaries();
+        });
+        return () => unsubscribe();
     }, []);
 
     const handlePressDiary = (diary) => {
@@ -37,7 +37,9 @@ export default function Diary() {
                     <PressableItem onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
                         {item.imageUri && <Image source={{ uri: item.imageUri }} style={styles.image} />}
                         <CustomText style={styles.diaryText} numberOfLines={2} >{item.diary}</CustomText>
-                        <CustomText style={styles.dateText}>{new Date(item.createdAt.seconds * 1000).toLocaleDateString()}</CustomText>
+                        <CustomText style={styles.dateText}>
+                            {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
+                        </CustomText>
                     </PressableItem>
 
                 )}
