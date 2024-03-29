@@ -8,15 +8,15 @@ import { addCheckIn, updateHabit, deleteCheckIn, subscribeCheckInsByUserIdAndHab
 import { auth } from '../firebase-files/firebaseSetup';
 import CustomCheckBox from './CustomCheckBox';
 
-export default function HabitItem({ habitObj, onPress, checkIns }) {
+export default function HabitItem({ habitObj, navigation }) {
     // TODO: when the progress of a habit is 100%, show a message to the user
     const [isChecked, setChecked] = useState(false);
-    const [todayCheckIns, setTodayCheckIns] = useState([]);
     const [habitCheckIns, setHabitCheckIns] = useState([]);
     const [progress, setProgress] = useState(0);
+    const [todayCheckInsData, setTodayCheckInsData] = useState([]);
 
     function calculateProgress() {
-        setProgress(habitCheckIns.length/(habitObj.frequency*habitObj.durationWeeks) * 100);
+        setProgress(habitCheckIns.length / (habitObj.frequency * habitObj.durationWeeks) * 100);
     }
 
     // get check-in data of current habit item from firebase
@@ -38,6 +38,7 @@ export default function HabitItem({ habitObj, onPress, checkIns }) {
             return checkIn.date.toDate().getDate() === new Date().getDate();
         });
         setChecked(todayCheckInsData.length > 0);
+        setTodayCheckInsData(todayCheckInsData);
         calculateProgress();
     }, [habitCheckIns]);
 
@@ -55,10 +56,6 @@ export default function HabitItem({ habitObj, onPress, checkIns }) {
             };
             await addCheckIn(checkInData);
         } else {
-            const todayCheckInsData = habitCheckIns.filter(checkIn => {
-                return checkIn.date.toDate().getDate() === new Date().getDate();
-            });
-
             todayCheckInsData.forEach(checkIn => {
                 deleteCheckIn(checkIn.id);
             });
@@ -66,7 +63,7 @@ export default function HabitItem({ habitObj, onPress, checkIns }) {
     }
 
     function handlePress() {
-        onPress(habitObj)
+        navigation.navigate('HabitDetail', { habitObj, progress, habitCheckIns, todayCheckInsData });
     }
 
     return (
@@ -77,6 +74,9 @@ export default function HabitItem({ habitObj, onPress, checkIns }) {
                 <CustomCheckBox
                     value={isChecked}
                     onValueChange={handleCheckInChange}
+                    progress={progress}
+                    habitCheckIns={habitCheckIns}
+                    todayCheckInsData={todayCheckInsData}
                 />
             </View>
         </PressableItem>

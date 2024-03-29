@@ -46,10 +46,6 @@ export default function Home({ navigation }) {
         };
     }, []);
 
-    function habitItemPressed(habitObj) {
-        navigation.navigate('HabitDetail', { habitObj });
-    }
-
     return (
         <View style={Styles.habitList}>
             {renderWelcome ? <Welcome navigation={navigation} /> :
@@ -59,8 +55,7 @@ export default function Home({ navigation }) {
                         renderItem={({ item }) => {
                             return <HabitItem
                                 habitObj={item}
-                                onPress={habitItemPressed}
-                                checkIns={checkIns}
+                                navigation={navigation}
                             />
                         }}
                     />

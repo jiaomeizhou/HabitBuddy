@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Pressable } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
-import { updateHabit } from '../firebase-files/firestoreHelper';
-import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from '../components/Styles';
 
 // Set up the locale configuration for the calendar
@@ -16,8 +14,8 @@ LocaleConfig.locales['en'] = {
 LocaleConfig.defaultLocale = 'en';
 
 export default function HabitDetail({ route, navigation }) {
-  const { habitObj } = route.params;
-  const { currentUserCheckIns } = route.params;
+  const { habitObj, progress, habitCheckIns, todayCheckInsData } = route.params;
+  const [checkedInToday, setCheckedInToday] = useState(false);
   const [checkedDates, setCheckedDates] = useState([]);
 
   useEffect(() => {
@@ -31,15 +29,17 @@ export default function HabitDetail({ route, navigation }) {
     });
   })
 
+  // disable the check-in button if the user has already checked in today
+  // get checkedDates from habitCheckIns
   useEffect(() => {
-    const checkedInDates = [];
-    const currentHabitCheckIns = currentUserCheckIns.filter((checkIn) => checkIn.habitId === habitObj.id);
-    currentHabitCheckIns.forEach((checkIn) => {
-      checkedInDates.push(checkIn.date.toDate().toISOString().slice(0, 10));
-    });
-    setCheckedDates(checkedInDates);
-  }, [currentUserCheckIns]);
-  console.log('checkedDates', checkedDates);
+    if (habitCheckIns) {
+      setCheckedInToday(todayCheckInsData.length > 0);
+      const checkedDates = habitCheckIns.map((checkIn) => {
+        return checkIn.date.toDate().toISOString().split('T')[0];
+      });
+      setCheckedDates(checkedDates);
+    }
+  }, []);
 
   // Function to handle navigation to Checkin screen
   function handleCheckinButton() {
@@ -57,26 +57,6 @@ export default function HabitDetail({ route, navigation }) {
     );
   };
 
-  useEffect(() => {
-    const calculateProgress = async () => {
-      try {
-        // Wait for checkedDates to update
-        // await new Promise((resolve) => setTimeout(resolve, 0));
-        const checkInCount = checkedDates.length;
-        const newProgress = Math.round((checkInCount / (habitObj.frequency * habitObj.durationWeeks)) * 100);
-        console.log("Progress: ", newProgress, checkInCount, habitObj.frequency * habitObj.durationWeeks);
-        const updatedHabit = { ...habitObj, progress: newProgress, checkInCount: checkInCount };
-        await updateHabit(auth.currentUser.uid, habitObj.id, updatedHabit);
-      } catch (error) {
-        console.log("Error calculating progress: ", error);
-      }
-    };
-    calculateProgress();
-
-  }, [checkedDates, habitObj]);
-
-  console.log('habitObj', habitObj);
-
 
   return (
     <View style={Styles.container}>
@@ -88,12 +68,12 @@ export default function HabitDetail({ route, navigation }) {
         }, {})}
         renderDay={renderDate}
       />
-      <Text style={Styles.progressText}>Progress: {habitObj.progress}%</Text>
-      <Text style={Styles.checkInText}>You have checked in {habitObj.checkInCount} times!</Text>
+      <Text style={Styles.progressText}>Progress: {progress}%</Text>
+      <Text style={Styles.checkInText}>You have checked in {habitCheckIns.length} times!</Text>
       <Button
         title="Check in"
         onPress={handleCheckinButton}
-        disabled={habitObj.checkedInToday}
+        disabled={checkedInToday}
         style={Styles.button}
       />
     </View>
