@@ -1,17 +1,22 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import Diary from '../screens/Diary';
 import TopLeftNavIcon from './TopLeftNavIcon';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTab({ navigation }) {
-
+export default function BottomNavTabs({ navigation }) {
     return (
-        <Tab.Navigator >
+        <Tab.Navigator
+            screenOptions={{
+                headerLeft: () => (
+                    <TopLeftNavIcon navigation={navigation} />
+                ),
+            }}
+        >
             <Tab.Screen
                 name="Home"
                 component={Home}
@@ -20,11 +25,19 @@ export default function BottomTab({ navigation }) {
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="home" size={24} color={color} />
                     ),
-                    headerLeft: () => (
-                        <TopLeftNavIcon />
+                }}
+            />
+            <Tab.Screen
+                name="Diary"
+                component={Diary}
+                options={{
+                    tabBarLabel: 'Diary',
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="book-open" size={24} color={color} />
                     ),
                 }}
             />
+            {/* TODO: Add community Map screen  */}
             <Tab.Screen
                 name="Profile"
                 component={Profile}
@@ -32,9 +45,6 @@ export default function BottomTab({ navigation }) {
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="user" size={24} color={color} />
-                    ),
-                    headerLeft: () => (
-                        <TopLeftNavIcon />
                     ),
                 }}
             />

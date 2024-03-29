@@ -27,9 +27,8 @@ export const Styles = StyleSheet.create({
     },
     petContainer: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 200,
+        marginTop: 60,
     },
     petImage: {
         width: 200,
@@ -54,5 +53,53 @@ export const Styles = StyleSheet.create({
         height: '100%',
         backgroundColor: '#4caf50',
         borderRadius: 5,
+    },
+    habitDetailContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    habitText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    progressText: {
+        fontSize: 18,
+        marginTop: 10,
+    },
+    checkInText: {
+        fontSize: 18,
+        marginTop: 10,
+        
+    },
+    button: {
+        marginTop: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: 'green',
+        borderRadius: 5,
+    },
+    buttonText: {
+        fontSize: 18,
+        color: 'white',
+    },
+    menu: {
+        position: 'absolute',
+        top: 100,
+        left: 10,
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 5,
+        elevation: 4,
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
     },
 })

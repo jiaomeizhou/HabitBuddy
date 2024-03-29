@@ -4,10 +4,16 @@ import { Styles } from './Styles'
 import * as Colors from './Color'
 
 // This component is a pressable item, provide a feedback when pressed
-export default function PressableItem({ onPress, children }) {
+export default function PressableItem({ onPress, children, style }) {
     const androidRipple = Platform.OS === 'android' ? { color: Colors.primaryWhiteColor } : {};
     return (
-        <Pressable onPress={onPress} android_ripple={androidRipple} style={({ pressed }) => [pressed && Styles.pressedView]}>
+        <Pressable
+            onPress={onPress}
+            android_ripple={androidRipple}
+            style={({ pressed }) => [
+                pressed && Styles.pressedView,
+                style
+            ]}>
             {children}
         </Pressable>)
 }
