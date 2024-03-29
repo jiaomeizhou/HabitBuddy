@@ -16,7 +16,7 @@ export default function HabitItem({ habitObj, navigation }) {
     const [todayCheckInsData, setTodayCheckInsData] = useState([]);
 
     function calculateProgress() {
-        setProgress(habitCheckIns.length / (habitObj.frequency * habitObj.durationWeeks) * 100);
+        setProgress(Math.round(habitCheckIns.length / (habitObj.frequency * habitObj.durationWeeks) * 100));
     }
 
     // get check-in data of current habit item from firebase
