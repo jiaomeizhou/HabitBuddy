@@ -12,20 +12,34 @@ Our application utilizes Firestore as a NoSQL database and includes the followin
 
 ## Team Members and Contributions
 
-1. Jiaomei Zhou (Jamie)
-2. Weiyi Gao
+1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Signup, Login
+2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries
 
 ## Development log
 
-### Jamie (updated on 03/27/2024)
+### Jamie 
 
 #### Completed
 
+##### 03/22/2024
+
 1. Firebase setup
 2. Signup/Login/logout
-3. Home screen v1 and v2: read data from DB, allow navigation
+3. Home screen v1 and v2: habit list, progress bar, checkin box, pet
 4. Profile screen: display user profile, allow edit
 5. Navigation: Bottom tabs, allow navigate from signup/login to home
+
+##### 03/27/2024
+1. Read checkin and habits data from DB, allow navigation
+2. Read user profile from database
+3. Allow user checkin by clicking on the checkin box
+4. Allow user write and delete checkin data to database
+
+##### 03/28/2024
+1. Fix checkin bug
+2. Update the data, listen to real time update from database
+3. Calculate habit progress and display the progress bar
+4. Display the real time stats on profile screen
 
 ### Weiyi
 
@@ -86,41 +100,40 @@ During the 1st iteration of our project, we focused on laying the groundwork for
 
 The app is now in a functional state with a clear structure and the ability to manage user data and habits. While the UI is still in development, the core functionalities related to user management, habit tracking, and daily check-ins are operational.
 
-![Screenshot of Home Welcome Screen](assets/IterationProgress/Home.png)
 
 *The Home welcome screen displaying default habits that users can adopt into their daily routine.*
 
-![Screenshot of Home Screen](assets/IterationProgress/Home2.png)
+
+<img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
+
 
 *The Home screen showcasing a list of user habits.*
 
-![Screenshot of Habit Detail Screen](assets/IterationProgress/HabitDetail.png)
+
+<img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
+
 
 *The Habit Detail Screen providing detailed information about a specific user habit.*
 
-![Screenshot of Add Habit Screen](assets/IterationProgress/AddHabit.png)
+
+<img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
 
 *The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders.*
 
-![Screenshot of Post Diary Screen](assets/IterationProgress/PostDiary.png)
+
+<img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
 
 *The Post Diary Screen enables users to record their daily activities and reflections related to their habits.*
 
-![Screenshot of Post Diary List Screen](assets/IterationProgress/DiaryList.png)
+
+<img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
 
 *The Diary List Screen displays a comprehensive list of diary entries.*
 
 
-![Screenshot of Profile Screen](assets/IterationProgress/Profile.png)
+<img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
 
 *The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details.*
 
 
-#### TODO
-
-1. Read data from firebase: pet, checkin
-2. Display data on stats board
-3. UI and style
-4. Update the avatar by uploading an image
-5. Add more professional Authentication options
-6. Habit detail screen
+<img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
