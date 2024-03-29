@@ -46,6 +46,13 @@ export default function Home({ navigation }) {
         };
     }, []);
 
+    // check if the user has any habits
+    useEffect(() => {
+        if (habits) {
+            setRenderWelcome(habits.length === 0);
+        }
+    }, [habits]);
+
     return (
         <View style={Styles.habitList}>
             {renderWelcome ? <Welcome navigation={navigation} /> :

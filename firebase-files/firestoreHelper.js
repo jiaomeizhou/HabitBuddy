@@ -63,7 +63,7 @@ export async function deleteCheckIn(checkInId) {
 }
 
 export function subscribeCheckInsByUserId(userId, callback) {
-    const q = query(collection(database, "CheckIns"), where("userId", "==", userId));
+    const q = query(collection(database, "CheckIns"), where("userId", "==", userId), where('taskCompleted', '==', true));
     return onSnapshot(q, (snapshot) => {
         const checkIns = [];
         snapshot.forEach((doc) => {
@@ -84,10 +84,12 @@ export function subscribeHabitsByUserId(userId, callback) {
     });
 }
 
+// Get check-ins by userId and habitId, only return the check-ins that have taskCompleted = true
 export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
     const q = query(collection(database, "CheckIns"), 
                     where("userId", "==", userId),
-                    where("habitId", "==", habitId));
+                    where("habitId", "==", habitId),
+                    where('taskCompleted', '==', true));
     return onSnapshot(q, (snapshot) => {
         const checkIns = [];
         snapshot.forEach((doc) => {
