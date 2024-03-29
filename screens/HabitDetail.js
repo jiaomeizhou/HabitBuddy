@@ -43,7 +43,7 @@ export default function HabitDetail({ route, navigation }) {
 
   // Function to handle navigation to Checkin screen
   function handleCheckinButton() {
-    navigation.navigate('Checkin', { habitObj: habitObj });
+    navigation.navigate('Post Diary', { habitObj: habitObj });
   }
 
   // Render function for customizing date cells in the calendar
