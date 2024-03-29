@@ -34,12 +34,16 @@ export default function HabitItem({ habitObj, navigation }) {
 
     // check if the habit is checked in today
     useEffect(() => {
-        const todayCheckInsData = habitCheckIns.filter(checkIn => {
-            return checkIn.date.toDate().getDate() === new Date().getDate();
-        });
-        setChecked(todayCheckInsData.length > 0);
-        setTodayCheckInsData(todayCheckInsData);
-        calculateProgress();
+        try {
+            const todayCheckInsData = habitCheckIns.filter(checkIn => {
+                return checkIn.date.toDate().getDate() === new Date().getDate();
+            });
+            setChecked(todayCheckInsData.length > 0);
+            setTodayCheckInsData(todayCheckInsData);
+            calculateProgress();
+        } catch (error) {
+            console.error("Error getting today's check-ins: ", error);
+        }
     }, [habitCheckIns]);
 
     // handle check-in box change
@@ -52,7 +56,8 @@ export default function HabitItem({ habitObj, navigation }) {
                 habitId: habitObj.id,
                 date: new Date(),
                 text: null,
-                imageUrl: null
+                imageUri: null,
+                taskCompleted: true,
             };
             await addCheckIn(checkInData);
         } else {

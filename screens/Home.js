@@ -40,6 +40,10 @@ export default function Home({ navigation }) {
             setHabits(habitsData);
         });
 
+        if (!habits || habits.length === 0) {
+            setRenderWelcome(true);
+        }
+
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();
