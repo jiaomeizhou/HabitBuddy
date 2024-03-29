@@ -53,7 +53,11 @@ export default function AddHabitScreen({ route }) {
             setIsReminderEnabled(habitData.isReminderEnabled);
             setEndDate(habitData.endDate);
         } else {
-            setHabitName('');
+            if (habitName) {
+                setHabitName(habitName);
+            } else {
+                setHabitName('');
+            }
             setHabitFrequency('');
             setDate(new Date());
             setFormattedDate('');
