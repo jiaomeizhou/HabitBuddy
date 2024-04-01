@@ -10,6 +10,19 @@ Our application utilizes Firestore as a NoSQL database and includes the followin
 2. **Habits**: Contains details of the habits tracked by users, such as habit name, frequency, and progress.
 3. **CheckIns**: Used for tracking daily check-ins for habits, storing dates, whether the habit was completed and users' diary entries, allowing them to reflect on their daily activities and habit progress.
 
+### Firebase Rule
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+      allow create: if request.auth != null;
+    }
+  }
+}
+```
+
 ## Team Members and Contributions
 
 1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Signup, Login
