@@ -5,8 +5,6 @@ import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
-import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
-import { database } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
 
@@ -27,6 +25,8 @@ export default function Home({ navigation }) {
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
+    const [petURL, setPetURL] = useState("../assets/PetStatus/sad_dog.PNG");
+    const [userProgress, setUserProgress] = useState(0);
 
     // get habits and checkin data from firebase
     useEffect(() => {
@@ -53,6 +53,24 @@ export default function Home({ navigation }) {
         }
     }, [habits]);
 
+    // update user progress when habits change
+    useEffect(() => {
+        // get the progress of all habits
+        function updateDogProgress() {
+            let userProgress = 0;
+            if (habits) {
+                const totalHabits = habits.length;
+                let totalProgress = 0;
+                habits.forEach(habit => {
+                    totalProgress += habit.progress;
+                });
+                const currentUserProgress = Math.round(totalProgress / totalHabits);
+                setUserProgress(currentUserProgress);
+            }
+        }
+        updateDogProgress();
+    }, [habits]);
+
     return (
         <View style={Styles.habitList}>
             {renderWelcome ? <Welcome navigation={navigation} /> :
@@ -66,7 +84,7 @@ export default function Home({ navigation }) {
                             />
                         }}
                     />
-                    <Pet />
+                    <Pet userProgress={userProgress}/>
                 </View>
             }
         </View>

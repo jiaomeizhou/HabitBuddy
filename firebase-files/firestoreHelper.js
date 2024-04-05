@@ -1,5 +1,6 @@
 import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import { database } from "./firebaseSetup";
+import { updateProfile } from "firebase/auth";
 
 export async function addHabit(userId, data) {
     try {
@@ -97,4 +98,14 @@ export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
         });
         callback(checkIns);
     });
+}
+
+// update user
+export async function updateUser(currentUser, data) {
+    try {
+        await currentUser.updateProfile(data);
+        
+    } catch (error) {
+        console.error("Error updating user: ", error);
+    }
 }

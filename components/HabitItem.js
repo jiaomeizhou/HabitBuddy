@@ -76,7 +76,7 @@ export default function HabitItem({ habitObj, navigation }) {
         }
         // Update habit's progress after check-in change
         updateHabitProgress();
-        console.log("update habit progress", habitObj, progress)
+        // console.log("update habit progress", habitObj, progress)
     }, [progress]);
 
     return (
