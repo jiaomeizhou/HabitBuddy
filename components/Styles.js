@@ -35,6 +35,14 @@ export const Styles = StyleSheet.create({
         height: 200,
         alignSelf: 'center',
         justifyContent: 'center',
+        borderRadius: 100,
+        overflow: 'hidden',
+        marginBottom: 20,
+    },
+    statusText: {
+        padding: 20,
+        fontSize: 14,
+        textAlign: 'center',
     },
     progressBarContainer: {
         marginBottom: 5,

@@ -25,7 +25,6 @@ export default function Home({ navigation }) {
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
-    const [petURL, setPetURL] = useState("../assets/PetStatus/sad_dog.PNG");
     const [userProgress, setUserProgress] = useState(0);
 
     // get habits and checkin data from firebase
