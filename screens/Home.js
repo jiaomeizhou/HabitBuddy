@@ -21,7 +21,6 @@ export default function Home({ navigation }) {
         });
     }, []);
 
-    // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);

@@ -43,6 +43,7 @@ export const Styles = StyleSheet.create({
         padding: 20,
         fontSize: 14,
         textAlign: 'center',
+        fontWeight: 'bold',
     },
     progressBarContainer: {
         marginBottom: 5,
