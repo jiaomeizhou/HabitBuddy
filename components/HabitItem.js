@@ -2,7 +2,6 @@ import { Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PressableItem from './PressableItem'
 import { Styles } from './Styles'
-import Checkbox from 'expo-checkbox';
 import ProgressBar from './ProgressBar';
 import { addCheckIn, updateHabit, deleteCheckIn, subscribeCheckInsByUserIdAndHabitId } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
@@ -70,6 +69,15 @@ export default function HabitItem({ habitObj, navigation }) {
     function handlePress() {
         navigation.navigate('HabitDetail', { habitObj, progress, habitCheckIns, todayCheckInsData });
     }
+
+    useEffect(() => {
+        async function updateHabitProgress() {
+            await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress });
+        }
+        // Update habit's progress after check-in change
+        updateHabitProgress();
+        console.log("update habit progress", habitObj, progress)
+    }, [progress]);
 
     return (
         <PressableItem onPress={handlePress}>
