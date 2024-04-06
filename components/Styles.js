@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import * as Colors from './Color'
+import * as Colors from "./Colors";
 
 export const Styles = StyleSheet.create({
     pressedView: {
@@ -111,4 +111,39 @@ export const Styles = StyleSheet.create({
         right: 0,
         backgroundColor: 'rgba(0, 0, 0, 0)',
     },
+    container: {
+        flex: 1,
+        backgroundColor: Colors.white,
+        justifyContent: "center",
+    },
+    input: {
+        borderColor: Colors.englishViolet,
+        borderWidth: 2,
+        width: "80%",
+        height: 50,
+        margin: 10,
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: "center",
+        backgroundColor: Colors.white,
+
+    },
+    label: {
+        width: "80%",
+        alignSelf: "center",
+        fontWeight: "bold",
+        color: Colors.englishViolet,
+    },
+    pressableButton: {
+        alignSelf: "center",
+        width: "80%",
+        height: 50,
+        borderRadius: 10,
+        margin: 20,
+    },
+    forgotPasswordButton: {
+        position: 'absolute',
+        bottom: 30,
+        alignSelf: 'center',
+    }
 })

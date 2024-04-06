@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, Button, Alert } from "react-native";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
+import { Styles } from "../components/Styles";
+import PressableButton from "../components/PressableButton";
+import * as Colors from "../components/Colors";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -29,6 +32,9 @@ export default function Login({ navigation }) {
       else if (error.code === "auth/invalid-credential") {
         Alert.alert("Error", "Invalid email or password");
       }
+      else if (error.code === "auth/invalid-email") {
+        Alert.alert("Error", "Invalid email address");
+      }
     }
   };
 
@@ -49,19 +55,19 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Email</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.label}>Email</Text>
       <TextInput
         placeholder="Email"
-        style={styles.input}
+        style={Styles.input}
         value={email}
         onChangeText={(changedText) => {
           setEmail(changedText);
         }}
       />
-      <Text style={styles.label}>Password</Text>
+      <Text style={Styles.label}>Password</Text>
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         secureTextEntry={true}
         placeholder="Password"
         value={password}
@@ -69,28 +75,11 @@ export default function Login({ navigation }) {
           setPassword(changedText);
         }}
       />
-      <Button title="Login" onPress={loginHandler} />
-      <Button title="New User? Create An Account" onPress={signupHandler} />
-      <Button title="Forgot Password?" onPress={forgotPasswordHandler} />
+      <PressableButton title="Login" onPress={loginHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
+      <PressableButton title="New User? Create An Account" onPress={signupHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+      <View style={Styles.forgotPasswordButton}>
+        <PressableButton title="Forgot Password?" onPress={forgotPasswordHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.pink} />
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center",
-  },
-  input: {
-    borderColor: "#552055",
-    borderWidth: 2,
-    width: "90%",
-    margin: 5,
-    padding: 5,
-  },
-  label: {
-    marginLeft: 10,
-  },
-});
