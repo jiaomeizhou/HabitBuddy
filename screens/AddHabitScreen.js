@@ -21,7 +21,7 @@ export default function AddHabitScreen({ route }) {
     console.log("name", habitName)
     const [habitFrequency, setHabitFrequency] = useState('');
     const [durationWeeks, setDurationWeeks] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [endDate, setEndDate] = useState(null);
     const [isReminderEnabled, setIsReminderEnabled] = useState(false);
     const userId = auth.currentUser.uid;
 
@@ -37,6 +37,7 @@ export default function AddHabitScreen({ route }) {
     ]);
     const [date, setDate] = useState(new Date());
     const [formattedDate, setFormattedDate] = useState('');
+    const [formattedEndDate, setFormattedEndDate] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const habitData = route.params?.habitData || null;
@@ -62,7 +63,7 @@ export default function AddHabitScreen({ route }) {
             setDate(new Date());
             setFormattedDate('');
             setDurationWeeks('');
-            setEndDate('');
+            setEndDate(null);
             setIsReminderEnabled(false);
         }
     }, [habitData, isEditMode]);
@@ -96,7 +97,9 @@ export default function AddHabitScreen({ route }) {
     function calculateEndDate(weeks) {
         const result = new Date(date);
         result.setDate(result.getDate() + weeks * 7);
-        setEndDate(result.toDateString());
+        setEndDate(result);
+        setFormattedEndDate(result.toDateString());
+
     }
 
     function saveHandler() {
@@ -192,7 +195,7 @@ export default function AddHabitScreen({ route }) {
             />
 
             <CustomText>{'End Date :'}</CustomText>
-            <CustomText style={styles.input}>{endDate}</CustomText>
+            <CustomText style={styles.input}>{formattedEndDate}</CustomText>
 
             <CustomSwitch
                 label="Reminder : "
