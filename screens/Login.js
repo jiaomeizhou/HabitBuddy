@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
 
 export default function Login({ navigation }) {
@@ -11,23 +11,39 @@ export default function Login({ navigation }) {
   };
   const loginHandler = async () => {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("userCredential: ", userCredential);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("userCredential: ", userCredential);
     }
     catch (error) {
-        if (!email || !password ) {
-            Alert.alert("Please fill in all the fields");
-            return;
-        }
-        console.log("error", error);
-        if (error.code === "auth/email-already-in-use") {
-            Alert.alert("Error", "Email already in use");
-        }
-        else if (error.code === "auth/weak-password") {
-            Alert.alert("Error", "Weak password");
-        }
+      if (!email || !password) {
+        Alert.alert("Please fill in all the fields");
+        return;
+      }
+      console.log("error", error);
+      if (error.code === "auth/email-already-in-use") {
+        Alert.alert("Error", "Email already in use");
+      }
+      else if (error.code === "auth/weak-password") {
+        Alert.alert("Error", "Weak password");
+      }
     }
   };
+
+  // If user forgot password, send a password reset email
+  function forgotPasswordHandler() {
+    try {
+      if (!email) {
+        Alert.alert("Please enter your email address");
+        return;
+      }
+      // TODO: if the email address is not in the db, it will throw an error
+      sendPasswordResetEmail(auth, email);
+      Alert.alert("Password reset email sent to your email address");
+    }
+    catch (error) {
+      console.log("error", error);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -52,6 +68,7 @@ export default function Login({ navigation }) {
       />
       <Button title="Login" onPress={loginHandler} />
       <Button title="New User? Create An Account" onPress={signupHandler} />
+      <Button title="Forgot Password?" onPress={forgotPasswordHandler} />
     </View>
   );
 }
