@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { View, Text, TextInput, Button, Alert } from "react-native";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
+import { addUserToDB } from "../firebase-files/firestoreHelper";
+import { Styles } from "../components/Styles";
+import * as Colors from "../components/Colors";
+import PressableButton from "../components/PressableButton";
 
 export default function Signup({ navigation }) {
     const [email, setEmail] = useState("");
@@ -21,7 +25,9 @@ export default function Signup({ navigation }) {
             return;
         }
         try {
-            createUserWithEmailAndPassword(auth, email, password)
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await addUserToDB(userCredential.user.uid, { email: email });
+            await sendEmailVerification(userCredential.user);
         }
         catch (error) {
             console.log("error", error);
@@ -37,57 +43,41 @@ export default function Signup({ navigation }) {
 
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Email</Text>
+        <View style={Styles.container}>
+            <Text style={Styles.label}>Email</Text>
             <TextInput
-                style={styles.input}
+                style={Styles.input}
                 placeholder="Email"
                 value={email}
                 onChangeText={(changedText) => {
                     setEmail(changedText);
                 }}
+                autoCapitalize="none"
             />
-            <Text style={styles.label}>Password</Text>
+            <Text style={Styles.label}>Password</Text>
             <TextInput
-                style={styles.input}
+                style={Styles.input}
                 secureTextEntry={true}
                 placeholder="Password"
                 value={password}
                 onChangeText={(changedText) => {
                     setPassword(changedText);
                 }}
+                autoCapitalize="none"
             />
-            <Text style={styles.label}>Confirm Password</Text>
+            <Text style={Styles.label}>Confirm Password</Text>
             <TextInput
-                style={styles.input}
+                style={Styles.input}
                 secureTextEntry={true}
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChangeText={(changedText) => {
                     setConfirmPassword(changedText);
                 }}
+                autoCapitalize="none"
             />
-            <Button title="Register" onPress={signupHandler} />
-            <Button title="Already Registered? Login" onPress={loginHandler} />
+            <PressableButton title="SIGN UP" onPress={signupHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white}/>
+            <PressableButton title="Already Have a Account? Sign In" onPress={loginHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen}/>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        // alignItems: "stretch",
-        justifyContent: "center",
-    },
-    input: {
-        borderColor: "#552055",
-        borderWidth: 2,
-        width: "90%",
-        margin: 5,
-        padding: 5,
-    },
-    label: {
-        marginLeft: 10,
-    },
-});
