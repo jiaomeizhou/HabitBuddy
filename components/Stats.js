@@ -1,11 +1,13 @@
 import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeCompletedHabitsByUserId, subscribeFailedHabitsByUserId } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 
 export default function Stats() {
     const [checkIns, setCheckIns] = useState([]);
     const [habits, setHabits] = useState([]);
+    const [completedHabits, setCompletedHabits] = useState([]);
+    const [failedHabits, setFailedHabits] = useState([]);
 
     useEffect(() => {
         const userId = auth.currentUser.uid;
@@ -18,9 +20,19 @@ export default function Stats() {
             setHabits(habitsData);
         });
 
+        const unsubscribeCompletedHabits = subscribeCompletedHabitsByUserId(userId, (completedHabitsData) => {
+            setCompletedHabits(completedHabitsData);
+        });
+
+        const unsubscribeFailedHabits = subscribeFailedHabitsByUserId(userId, (failedHabitsData) => {
+            setFailedHabits(failedHabitsData);
+        });
+
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();
+            unsubscribeCompletedHabits();
+            unsubscribeFailedHabits();
         };
     }, []);
 
@@ -28,6 +40,8 @@ export default function Stats() {
         <View>
             <Text>Total Habits: {habits.length}</Text>
             <Text>Check-in: {checkIns.length}</Text>
+            <Text>Completed Habits: {completedHabits.length}</Text>
+            <Text>Failed Habits: {failedHabits.length}</Text>
         </View>
     );
 };

@@ -142,6 +142,35 @@ export function subscribeDueHabitsByUserId(userId, callback) {
             habits.push({ id: doc.id, ...doc.data() });
         });
         callback(habits);
-        console.log("Due habits: ", habits);
+    });
+}
+
+// subscribe completed habits by userId
+export function subscribeCompletedHabitsByUserId(userId, callback) {
+    const q = query(
+        collection(database, `Users/${userId}/Habits`),
+        where('status', '==', 'completed'),
+    );
+    return onSnapshot(q, (snapshot) => {
+        const habits = [];
+        snapshot.forEach((doc) => {
+            habits.push({ id: doc.id, ...doc.data() });
+        });
+        callback(habits);
+    });
+}
+
+// subscribe failed habits by userId
+export function subscribeFailedHabitsByUserId(userId, callback) {
+    const q = query(
+        collection(database, `Users/${userId}/Habits`),
+        where('status', '==', 'failed'),
+    );
+    return onSnapshot(q, (snapshot) => {
+        const habits = [];
+        snapshot.forEach((doc) => {
+            habits.push({ id: doc.id, ...doc.data() });
+        });
+        callback(habits);
     });
 }
