@@ -38,7 +38,7 @@ export default function Stats() {
 
     return (
         <View>
-            <Text>Total Habits: {habits.length}</Text>
+            <Text>Current Habits: {habits.length}</Text>
             <Text>Check-in: {checkIns.length}</Text>
             <Text>Completed Habits: {completedHabits.length}</Text>
             <Text>Failed Habits: {failedHabits.length}</Text>

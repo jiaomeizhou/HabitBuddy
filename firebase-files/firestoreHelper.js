@@ -104,16 +104,6 @@ export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
     });
 }
 
-// update user
-export async function updateUser(currentUser, data) {
-    try {
-        await currentUser.updateProfile(data);
-
-    } catch (error) {
-        console.error("Error updating user: ", error);
-    }
-}
-
 // add user
 export async function addUserToDB(userId, data) {
     try {
@@ -173,4 +163,13 @@ export function subscribeFailedHabitsByUserId(userId, callback) {
         });
         callback(habits);
     });
+}
+
+// update user data
+export async function updateUserData(userId, data) {
+    try {
+        await setDoc(doc(database, `Users/${userId}`), data, { merge: true });
+    } catch (error) {
+        console.error("Error updating user pet status: ", error);
+    }
 }
