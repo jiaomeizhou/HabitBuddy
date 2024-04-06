@@ -103,7 +103,7 @@ export default function AddHabitScreen({ route }) {
     }
 
     function saveHandler() {
-        if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks < 0) {
+        if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks <= 0) {
             Alert.alert('Invalid Input', 'Please check the input fields and try again');
             return;
         }
