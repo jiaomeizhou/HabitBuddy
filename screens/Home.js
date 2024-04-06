@@ -6,7 +6,8 @@ import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId} from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId } from '../firebase-files/firestoreHelper';
+import { Alert } from 'react-native';
 
 
 export default function Home({ navigation }) {
@@ -57,6 +58,18 @@ export default function Home({ navigation }) {
         }
     }, [habits]);
 
+    // check if there is any due habits
+    useEffect(() => {
+        if (dueHabits && dueHabits.length > 0) {
+            let alertMessage = `You failed ${dueHabits.length} habits today!\n\n`;
+            dueHabits.forEach((habit) => {
+                alertMessage += `Name: ${habit.habit}\nStart Date: ${new Date(habit.startDate.toMillis()).toDateString()}\nProgress: ${habit.progress}%\n\n`;
+            });
+
+            Alert.alert('Failed Habits', alertMessage, [{ text: 'OK' }]);
+        }
+    })
+
     // update user progress when habits change
     useEffect(() => {
         // get the progress of all habits
@@ -88,7 +101,7 @@ export default function Home({ navigation }) {
                             />
                         }}
                     />
-                    <Pet userProgress={userProgress}/>
+                    <Pet userProgress={userProgress} />
                 </View>
             }
         </View>
