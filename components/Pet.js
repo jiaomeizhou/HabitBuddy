@@ -44,7 +44,7 @@ export default function Pet({ userProgress }) {
             await updateUserData(auth.currentUser.uid, { petStatus: petStatus });
         }
         updateUserPetStatus();
-    }, []);
+    }, [userProgress]);
 
     return (
         <View style={Styles.petContainer}>
