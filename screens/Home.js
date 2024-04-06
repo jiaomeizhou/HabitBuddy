@@ -58,16 +58,17 @@ export default function Home({ navigation }) {
         }
     }, [habits]);
 
-    // check if there is any due habits
-    // useEffect(() => {
-    //     if (dueHabits && dueHabits.length > 0) {
-    //         let alertMessage = `You failed ${dueHabits.length} habits today!\n\n`;
-    //         dueHabits.forEach((habit) => {
-    //             alertMessage += `Name: ${habit.habit}\nStart Date: ${new Date(habit.startDate.toMillis()).toDateString()}\nProgress: ${habit.progress}%\n\n`;
-    //         });
-    //         Alert.alert('Failed Habits', alertMessage, [{ text: 'OK' }]);
-    //     }
-    // })
+    // check if there is any failed habits today, only show once
+    // TODO: test this feature tomorrow
+    useEffect(() => {
+        if (dueHabits && dueHabits.length > 0) {
+            let alertMessage = `You failed ${dueHabits.length} habits today!\n\n`;
+            dueHabits.forEach((habit) => {
+                alertMessage += `Name: ${habit.habit}\nStart Date: ${new Date(habit.startDate.toMillis()).toDateString()}\nProgress: ${habit.progress}%\n\n`;
+            });
+            Alert.alert('Failed Habits', alertMessage, [{ text: 'OK' }]);
+        }
+    }, []);
 
     // update user progress when habits change
     useEffect(() => {

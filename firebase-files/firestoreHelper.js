@@ -133,7 +133,8 @@ export function subscribeDueHabitsByUserId(userId, callback) {
     const q = query(
         collection(database, `Users/${userId}/Habits`),
         where('endDate', '>=', startOfToday),
-        where('endDate', '<=', endOfToday)
+        where('endDate', '<=', endOfToday),
+        where('progress', '<', 100),
     );
     return onSnapshot(q, (snapshot) => {
         const habits = [];
