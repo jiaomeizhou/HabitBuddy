@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PressableItem from './PressableItem'
 import { Styles } from './Styles'
@@ -72,11 +72,14 @@ export default function HabitItem({ habitObj, navigation }) {
 
     useEffect(() => {
         async function updateHabitProgress() {
-            await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress });
+            await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length});
         }
         // Update habit's progress after check-in change
         updateHabitProgress();
         // console.log("update habit progress", habitObj, progress)
+        if (progress === 100) {
+            Alert.alert("Congratulations!", `You have completed this habit ${habitObj.habit}!`);
+        }
     }, [progress]);
 
     return (
