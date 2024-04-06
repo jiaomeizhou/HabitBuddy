@@ -64,6 +64,7 @@ export default function Login({ navigation }) {
         onChangeText={(changedText) => {
           setEmail(changedText);
         }}
+        autoCapitalize="none"
       />
       <Text style={Styles.label}>Password</Text>
       <TextInput
@@ -74,6 +75,7 @@ export default function Login({ navigation }) {
         onChangeText={(changedText) => {
           setPassword(changedText);
         }}
+        autoCapitalize="none"
       />
       <PressableButton title="Login" onPress={loginHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
       <PressableButton title="New User? Create An Account" onPress={signupHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
