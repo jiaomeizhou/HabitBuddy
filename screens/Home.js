@@ -6,7 +6,7 @@ import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId} from '../firebase-files/firestoreHelper';
 
 
 export default function Home({ navigation }) {
@@ -25,6 +25,7 @@ export default function Home({ navigation }) {
     const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
     const [userProgress, setUserProgress] = useState(0);
+    const [dueHabits, setDueHabits] = useState([]);
 
     // get habits and checkin data from firebase
     useEffect(() => {
@@ -38,9 +39,14 @@ export default function Home({ navigation }) {
             setHabits(habitsData);
         });
 
+        const unsubscribeDueHabits = subscribeDueHabitsByUserId(userId, (habitsData) => {
+            setDueHabits(habitsData);
+        });
+
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();
+            unsubscribeDueHabits();
         };
     }, []);
 

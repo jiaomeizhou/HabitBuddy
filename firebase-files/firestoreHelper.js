@@ -86,7 +86,6 @@ export function subscribeHabitsByUserId(userId, callback) {
             habits.push({ id: doc.id, ...doc.data() });
         });
         callback(habits);
-        console.log("Habits: ", habits);
     });
 }
 
@@ -122,4 +121,26 @@ export async function addUserToDB(userId, data) {
     } catch (error) {
         console.error("Error adding user: ", error);
     }
+}
+
+//subscribe due habits by userId
+export function subscribeDueHabitsByUserId(userId, callback) {
+    // Get the start and end of today's date (midnight and one second before midnight)
+    const today = new Date();
+    const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+
+    const q = query(
+        collection(database, `Users/${userId}/Habits`),
+        where('endDate', '>=', startOfToday),
+        where('endDate', '<=', endOfToday)
+    );
+    return onSnapshot(q, (snapshot) => {
+        const habits = [];
+        snapshot.forEach((doc) => {
+            habits.push({ id: doc.id, ...doc.data() });
+        });
+        callback(habits);
+        console.log("Due habits: ", habits);
+    });
 }
