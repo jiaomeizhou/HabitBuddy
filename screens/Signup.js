@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
+import { addUserToDB } from "../firebase-files/firestoreHelper";
 
 export default function Signup({ navigation }) {
     const [email, setEmail] = useState("");
@@ -21,7 +22,9 @@ export default function Signup({ navigation }) {
             return;
         }
         try {
-            createUserWithEmailAndPassword(auth, email, password)
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await addUserToDB(userCredential.user.uid, { email: email });
+            await sendEmailVerification(userCredential.user);
         }
         catch (error) {
             console.log("error", error);

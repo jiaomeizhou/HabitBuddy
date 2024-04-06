@@ -1,6 +1,5 @@
 import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import { database } from "./firebaseSetup";
-import { updateProfile } from "firebase/auth";
 
 export async function addHabit(userId, data) {
     try {
@@ -107,5 +106,14 @@ export async function updateUser(currentUser, data) {
         
     } catch (error) {
         console.error("Error updating user: ", error);
+    }
+}
+
+// add user
+export async function addUserToDB(userId, data) {
+    try {
+        await setDoc(doc(database, `Users/${userId}`), data);
+    } catch (error) {
+        console.error("Error adding user: ", error);
     }
 }
