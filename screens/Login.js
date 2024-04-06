@@ -26,6 +26,9 @@ export default function Login({ navigation }) {
       else if (error.code === "auth/weak-password") {
         Alert.alert("Error", "Weak password");
       }
+      else if (error.code === "auth/invalid-credential") {
+        Alert.alert("Error", "Invalid email or password");
+      }
     }
   };
 
