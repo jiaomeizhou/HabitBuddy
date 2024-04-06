@@ -71,15 +71,19 @@ export default function HabitItem({ habitObj, navigation }) {
     }
 
     useEffect(() => {
+        if (progress === 100) {
+            Alert.alert("Congratulations!", `You have completed this habit ${habitObj.habit}!`);
+        }
         async function updateHabitProgress() {
-            await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length});
+            if (progress === 100) {
+                await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length, status: 'completed' });
+            } else {
+                await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length });
+            }
         }
         // Update habit's progress after check-in change
         updateHabitProgress();
         // console.log("update habit progress", habitObj, progress)
-        if (progress === 100) {
-            Alert.alert("Congratulations!", `You have completed this habit ${habitObj.habit}!`);
-        }
     }, [progress]);
 
     return (
