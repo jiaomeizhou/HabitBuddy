@@ -38,22 +38,21 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={Styles.container}>
-      <View >
-        {auth.currentUser && auth.currentUser.photoURL ? (
-          <Image source={{ uri: auth.currentUser.photoURL }} style={Styles.image} />)
-          :
-          (<FontAwesome5 name="user-circle" size={100} color="black" />
-          )}
-        <Text>ID: {auth.currentUser.uid}</Text>
-        <Text>Name: {auth.currentUser.displayName}</Text>
-        <Text>Email: {auth.currentUser.email}</Text>
-        <Text>Pet name: {userProfile?.petName || ''}</Text>
-        <Text>Pet status: {userProfile?.petStatus || ''}</Text>
-        <Text>Total Progress: {userProfile?.totalProgress || ''}%</Text>
-      </View>
-      <View style={Styles.statsCard}>
-        <Stats />
-      </View>
+      {auth.currentUser && auth.currentUser.photoURL ? (
+        <Image source={{ uri: auth.currentUser.photoURL }} style={Styles.image} />)
+        :
+        (<FontAwesome5 name="user-circle" size={100} color="black" />
+        )}
+      {auth.currentUser &&
+        <View>
+          <Text style={Styles.nameText}>{auth.currentUser.displayName}</Text>
+          <Text style={Styles.profileText}>{auth.currentUser.email}</Text>
+          <Text style={Styles.profileText}>Pet name: {userProfile?.petName || ''}</Text>
+          <Text style={Styles.profileText}>Pet status: {userProfile?.petStatus || ''}</Text>
+          {/* <Text style={Styles.profileText}>Total Progress: {userProfile?.totalProgress || ''}%</Text> */}
+        </View>
+      }
+      <Stats />
     </View>
 
   );
