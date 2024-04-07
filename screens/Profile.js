@@ -4,6 +4,8 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Stats from '../components/Stats';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
+import { Styles } from '../components/Styles';
+import * as Colors from '../components/Colors';
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -35,10 +37,10 @@ export default function Profile({ navigation }) {
   };
 
   return (
-    <View style={{ paddingHorizontal: 20 }}>
-      <View>
+    <View style={Styles.container}>
+      <View >
         {auth.currentUser && auth.currentUser.photoURL ? (
-          <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />)
+          <Image source={{ uri: auth.currentUser.photoURL }} style={Styles.image} />)
           :
           (<FontAwesome5 name="user-circle" size={100} color="black" />
           )}
@@ -49,7 +51,9 @@ export default function Profile({ navigation }) {
         <Text>Pet status: {userProfile?.petStatus || ''}</Text>
         <Text>Total Progress: {userProfile?.totalProgress || ''}%</Text>
       </View>
-      <Stats />
+      <View style={Styles.statsCard}>
+        <Stats />
+      </View>
     </View>
 
   );

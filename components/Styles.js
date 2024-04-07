@@ -81,7 +81,7 @@ export const Styles = StyleSheet.create({
     checkInText: {
         fontSize: 18,
         marginTop: 10,
-        
+
     },
     button: {
         marginTop: 20,
@@ -146,5 +146,19 @@ export const Styles = StyleSheet.create({
         bottom: 30,
         alignSelf: 'center',
         width: '80%',
+    },
+    statsCard: {
+        backgroundColor: Colors.fernGreen,
+        borderRadius: 10,
+        padding: 20,
+        marginBottom: 20,
+        width: '80%',
+        height: 'auto',
+        alignSelf: 'center',
+    },
+    statsText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.white,
     },
 })
