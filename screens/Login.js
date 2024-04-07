@@ -77,7 +77,7 @@ export default function Login({ navigation }) {
         }}
         autoCapitalize="none"
       />
-      <PressableButton title="Login" onPress={loginHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
+      <PressableButton title="Log in" onPress={loginHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
       <PressableButton title="New User? Create An Account" onPress={signupHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
       <View style={Styles.forgotPasswordButton}>
         <PressableButton title="Forgot Password?" onPress={forgotPasswordHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.pink} />

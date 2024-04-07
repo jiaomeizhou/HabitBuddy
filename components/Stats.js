@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeCompletedHabitsByUserId, subscribeFailedHabitsByUserId } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from './Styles';
 
 export default function Stats() {
     const [checkIns, setCheckIns] = useState([]);
@@ -38,10 +39,10 @@ export default function Stats() {
 
     return (
         <View>
-            <Text>Total Habits: {habits.length}</Text>
-            <Text>Check-in: {checkIns.length}</Text>
-            <Text>Completed Habits: {completedHabits.length}</Text>
-            <Text>Failed Habits: {failedHabits.length}</Text>
+            <Text style={Styles.statsText}>Current Habits: {habits.length}</Text>
+            <Text style={Styles.statsText}>Check-in: {checkIns.length}</Text>
+            <Text style={Styles.statsText}>Completed Habits: {completedHabits.length}</Text>
+            <Text style={Styles.statsText}>Failed Habits: {failedHabits.length}</Text>
         </View>
     );
 };

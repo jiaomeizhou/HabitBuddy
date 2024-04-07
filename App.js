@@ -8,12 +8,7 @@ import { auth } from "./firebase-files/firebaseSetup";
 import AddHabitScreen from './screens/AddHabitScreen';
 import EditHabitScreen from './screens/EditHabitScreen';
 import HabitDetail from './screens/HabitDetail';
-import Checkin from './screens/Checkin';
-import { FontAwesome6 } from '@expo/vector-icons';
-import TopLeftNavIcon from './components/TopLeftNavIcon';
-
-
-import Home from './screens/Home';
+import EditProfile from './screens/EditProfile';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import DiaryDetail from './screens/DiaryDetail';
@@ -88,6 +83,12 @@ export default function App() {
               options={{
                 headerBackTitleVisible: false,
                 headerTitle: "Diary Detail",
+              }}
+            />
+            <Stack.Screen name='EditProfile' component={EditProfile}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Edit Profile",
               }}
             />
           </>

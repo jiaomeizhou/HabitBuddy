@@ -30,7 +30,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 60,
     },
-    petImage: {
+    image: {
         width: 200,
         height: 200,
         alignSelf: 'center',
@@ -81,7 +81,7 @@ export const Styles = StyleSheet.create({
     checkInText: {
         fontSize: 18,
         marginTop: 10,
-        
+
     },
     button: {
         marginTop: 20,
@@ -139,11 +139,26 @@ export const Styles = StyleSheet.create({
         width: "80%",
         height: 50,
         borderRadius: 10,
-        margin: 20,
+        margin: 10,
     },
     forgotPasswordButton: {
         position: 'absolute',
         bottom: 30,
         alignSelf: 'center',
-    }
+        width: '80%',
+    },
+    statsCard: {
+        backgroundColor: Colors.fernGreen,
+        borderRadius: 10,
+        padding: 20,
+        marginBottom: 20,
+        width: '80%',
+        height: 'auto',
+        alignSelf: 'center',
+    },
+    statsText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.white,
+    },
 })

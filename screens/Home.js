@@ -6,7 +6,7 @@ import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit} from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit, updateUserData } from '../firebase-files/firestoreHelper';
 import { Alert } from 'react-native';
 
 
@@ -79,8 +79,7 @@ export default function Home({ navigation }) {
     // update user progress when habits change
     useEffect(() => {
         // get the progress of all habits
-        function updateDogProgress() {
-            let userProgress = 0;
+        function updatePetProgress() {
             if (habits) {
                 const totalHabits = habits.length;
                 let totalProgress = 0;
@@ -91,8 +90,16 @@ export default function Home({ navigation }) {
                 setUserProgress(currentUserProgress);
             }
         }
-        updateDogProgress();
+        updatePetProgress();
     }, [habits]);
+
+    // update user progress to firebase
+    useEffect(() => {
+        async function updateUserProgress() {
+            await updateUserData(auth.currentUser.uid, { totalProgress: userProgress });
+        }
+        updateUserProgress();
+    }, [userProgress]);
 
     return (
         <View style={Styles.habitList}>

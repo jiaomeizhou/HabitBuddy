@@ -77,7 +77,7 @@ export default function Signup({ navigation }) {
                 autoCapitalize="none"
             />
             <PressableButton title="SIGN UP" onPress={signupHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white}/>
-            <PressableButton title="Already Have a Account? Sign In" onPress={loginHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen}/>
+            <PressableButton title="Already Have a Account? Log In" onPress={loginHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen}/>
         </View>
     );
 }

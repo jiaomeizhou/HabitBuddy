@@ -8,21 +8,35 @@ import {
     View,
 } from "react-native";
 import React, { useState } from "react";
+import { Styles } from "./Styles";
 
-export default function ProfileInput({ inputHandler, modalVisible, dismissModal }) {
-    const [name, setName] = useState("");
+export default function ProfileInput({ userInitialName, petInitialName, inputHandler, modalVisible, dismissModal }) {
+    const [userName, setUserName] = useState(userInitialName);
+    const [petName, setPetName] = useState(petInitialName);
+    console.log("userNameinitial: ", userInitialName, petInitialName);
+    console.log("userName: ", userName, petName);
 
-    // callback handler
-    function changeTextHandler(changedText) {
-        setName(changedText);
+    
+    // callback handler for user name input
+    function changeUserNameHandler(changedText) {
+        setUserName(changedText);
     }
 
+    // callback handler for pet name input
+    function changePetNameHandler(changedText) {
+        setPetName(changedText);
+    }
+
+    // callback handler for confirm button
     function confirmHandler() {
-        inputHandler(name);
-        setName("");
+        inputHandler(userName, petName);
+        setUserName("");
+        setPetName("");
     }
+
+    // callback handler for cancel button
     function cancelHandler() {
-        setName("");
+        setUserName("");
         // hide the modal
         dismissModal();
     }
@@ -33,9 +47,15 @@ export default function ProfileInput({ inputHandler, modalVisible, dismissModal 
                 <View style={styles.modalView}>
                     <TextInput
                         placeholder="Name"
-                        style={styles.input}
-                        value={name}
-                        onChangeText={changeTextHandler}
+                        style={Styles.input}
+                        value={userName}
+                        onChangeText={changeUserNameHandler}
+                    />
+                    <TextInput
+                        placeholder="Pet Name"
+                        style={Styles.input}
+                        value={petName}
+                        onChangeText={changePetNameHandler}
                     />
                     <View style={styles.buttonsContainer}>
                         <View style={styles.buttonView}>
@@ -45,7 +65,6 @@ export default function ProfileInput({ inputHandler, modalVisible, dismissModal 
                             <Button
                                 title="Confirm"
                                 onPress={confirmHandler}
-                                disabled={!name}
                             />
                         </View>
                     </View>
