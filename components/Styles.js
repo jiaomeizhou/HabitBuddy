@@ -86,7 +86,6 @@ export const Styles = StyleSheet.create({
     checkInText: {
         fontSize: 18,
         marginTop: 10,
-
     },
     button: {
         marginTop: 20,
@@ -223,5 +222,26 @@ export const Styles = StyleSheet.create({
     },
     iconButton: {
         margin: 5,
+    },
+    habitDetailContainer: {
+        flex: 1,
+        width: '90%',
+        alignSelf: 'center',
+        marginVertical: 50,
+    },
+    habitDetailText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.feldGrau,
+        alignSelf: 'center',
+        margin: 5,
+    },
+    calendar: {
+        borderWidth: 1,
+        borderColor: Colors.battleshipGrey,
+        borderRadius: 10,
+        width: '100%',
+        alignSelf: 'center',
+        marginVertical: 10,
     },
 })
