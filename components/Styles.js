@@ -145,5 +145,6 @@ export const Styles = StyleSheet.create({
         position: 'absolute',
         bottom: 30,
         alignSelf: 'center',
+        width: '80%',
     },
 })

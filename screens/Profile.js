@@ -37,7 +37,7 @@ export default function Profile({ navigation }) {
   return (
     <View style={{ paddingHorizontal: 20 }}>
       <View>
-        {auth.currentUser.photoURL ? (
+        {auth.currentUser && auth.currentUser.photoURL ? (
           <Image source={{ uri: auth.currentUser.photoURL }} style={{ width: 100, height: 100, marginTop: 10 }} />)
           :
           (<FontAwesome5 name="user-circle" size={100} color="black" />

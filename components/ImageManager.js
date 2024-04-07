@@ -65,10 +65,8 @@ export default function ImageManager({ receiveImageURI, initialImage }) {
             {imageURI &&
                 <Image source={{ uri: imageURI }} style={Styles.image} />
             }
-            <View style={Styles.buttonContainer}>
-                <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-                <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-            </View>
+            <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+            <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
         </View>
     )
 }
