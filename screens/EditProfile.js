@@ -4,6 +4,9 @@ import { updateUserData } from '../firebase-files/firestoreHelper';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../firebase-files/firebaseSetup';
 import ImageManager from '../components/ImageManager';
+import { Styles } from '../components/Styles';
+import PressableButton from '../components/PressableButton';
+import * as Colors from '../components/Colors';
 
 export default function EditProfileScreen({ navigation, route }) {
     const userData = route.params.userProfile ?? {};
@@ -22,6 +25,7 @@ export default function EditProfileScreen({ navigation, route }) {
             await updateUserData(auth.currentUser.uid, {
                 userName: userName,
                 petName: petName,
+                avatarUrl: avatarUrl,
             });
             // Redirect to profile screen after saving
             navigation.goBack();
@@ -39,19 +43,21 @@ export default function EditProfileScreen({ navigation, route }) {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ImageManager title="Update avatar" receiveImageURI={handleAvatarUpload} initialImage={avatarUrl} />
             <TextInput
                 placeholder="Username"
                 value={userName}
                 onChangeText={setUserName}
+                style={Styles.input}
             />
             <TextInput
                 placeholder="Pet Name"
                 value={petName}
                 onChangeText={setPetName}
+                style={Styles.input}
             />
-            <ImageManager title="Update avatar" receiveImageURI={handleAvatarUpload} />
-            {avatarUrl && <Image source={{ uri: avatarUrl }} style={{ width: 100, height: 100 }} />}
-            <Button title="Save" onPress={saveProfile} />
+            <PressableButton title="Save" onPress={saveProfile} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
+            <PressableButton title="Cancel" onPress={() => navigation.goBack()} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
         </View>
     );
 }

@@ -1,11 +1,14 @@
 import { View, Text, Button, Image } from 'react-native'
 import React from 'react'
 import * as ImagePicker from 'expo-image-picker'
+import PressableButton from './PressableButton'
+import * as Colors from './Colors'
+import { Styles } from './Styles'
 
 
-export default function ImageManager({ title, receiveImageURI }) {
+export default function ImageManager({ receiveImageURI, initialImage }) {
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
-    const [imageURI, setImageURI] = React.useState(null);
+    const [imageURI, setImageURI] = React.useState(initialImage || null);
 
     async function verifyPemission() {
         if (status !== 'granted') {
@@ -17,6 +20,7 @@ export default function ImageManager({ title, receiveImageURI }) {
         }
     }
 
+    // take image by camera
     const takeImageHandler = async () => {
         try {
             const havePermission = verifyPemission();
@@ -38,12 +42,33 @@ export default function ImageManager({ title, receiveImageURI }) {
             console.log(error)
         }
     }
+
+    // upload image from gallery
+    const pickImageFromGallery = async () => {
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                quality: 1,
+            });
+            if (!result.canceled) {
+                receiveImageURI(result.assets[0].uri);
+                setImageURI(result.assets[0].uri);
+            }
+        } catch (error) {
+            console.log('Error picking image from gallery:', error);
+        }
+    };
+
     return (
         <View>
-            <Button title={title} onPress={takeImageHandler} />
             {imageURI &&
-                <Image source={{ uri: imageURI }} style={{ width: 200, height: 200 }} />
+                <Image source={{ uri: imageURI }} style={Styles.image} />
             }
+            <View style={Styles.buttonContainer}>
+                <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+            </View>
         </View>
     )
 }

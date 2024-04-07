@@ -30,7 +30,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 60,
     },
-    petImage: {
+    image: {
         width: 200,
         height: 200,
         alignSelf: 'center',
@@ -139,11 +139,11 @@ export const Styles = StyleSheet.create({
         width: "80%",
         height: 50,
         borderRadius: 10,
-        margin: 20,
+        margin: 10,
     },
     forgotPasswordButton: {
         position: 'absolute',
         bottom: 30,
         alignSelf: 'center',
-    }
+    },
 })

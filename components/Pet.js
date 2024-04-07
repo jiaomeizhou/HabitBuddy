@@ -48,7 +48,7 @@ export default function Pet({ userProgress }) {
 
     return (
         <View style={Styles.petContainer}>
-            <Image source={getImageSource(petStatus)} style={Styles.petImage} />
+            <Image source={getImageSource(petStatus)} style={Styles.image} />
             <Text style={Styles.statusText}>
                 {getPetStatusText(petStatus)}
             </Text>
