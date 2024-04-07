@@ -23,6 +23,7 @@ export default function Profile({ navigation }) {
 
   useEffect(() => {
     async function getUserProfileData() {
+      if (!auth.currentUser) return;
       const profileData = await getUserProfileFromDB(auth.currentUser.uid);
       setUserProfile(profileData);
     }

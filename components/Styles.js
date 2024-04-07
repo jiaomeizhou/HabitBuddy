@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import * as Colors from "./Colors";
+import { Platform } from 'react-native';
 
 export const Styles = StyleSheet.create({
     pressedView: {
@@ -99,10 +100,10 @@ export const Styles = StyleSheet.create({
     },
     menu: {
         position: 'absolute',
-        top: 100,
+        // if the platform is iOS, the top value should be 100, otherwise 50
+        top: Platform.OS === 'ios' ? 100 : 50,
         left: 10,
         backgroundColor: Colors.white,
-        padding: 10,
         borderRadius: 5,
         elevation: 2,
     },
@@ -117,6 +118,8 @@ export const Styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
+        justifyContent: 'center',
+
     },
     welcomeContainer: {
         flex: 1,
@@ -127,7 +130,7 @@ export const Styles = StyleSheet.create({
     input: {
         borderColor: Colors.feldGrau,
         borderWidth: 2,
-        width: "80%",
+        width: "85%",
         height: 50,
         margin: 10,
         padding: 10,
@@ -144,7 +147,7 @@ export const Styles = StyleSheet.create({
     },
     pressableButton: {
         alignSelf: "center",
-        width: "80%",
+        width: "85%",
         height: 50,
         borderRadius: 10,
         margin: 10,
@@ -220,7 +223,7 @@ export const Styles = StyleSheet.create({
     },
     buttonsContainer: {
         flexDirection: 'row',
-        width: '40%',
+        width: '45%',
         marginBottom: 10,
         padding: 5,
     },
@@ -231,6 +234,7 @@ export const Styles = StyleSheet.create({
     },
     iconButton: {
         margin: 5,
+        padding: 10,
     },
     habitDetailContainer: {
         flex: 1,
