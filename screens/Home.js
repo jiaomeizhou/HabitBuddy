@@ -16,7 +16,7 @@ export default function Home({ navigation }) {
         navigation.setOptions({
             headerRight: () => (
                 <Pressable onPress={() => navigation.navigate('AddHabit')}>
-                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} />
+                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} style={Styles.iconButton}/>
                 </Pressable>
             ),
 

@@ -34,7 +34,7 @@ export default function TopLeftNavIcon({ navigation }) {
     return (
         <View>
             <Pressable onPress={() => setShowMenu(!showMenu)} >
-                <Entypo name="menu" size={24} color={Colors.feldGrau} />
+                <Entypo name="menu" size={24} color={Colors.feldGrau} style={Styles.iconButton}/>
             </Pressable>
             <Modal
                 visible={showMenu}

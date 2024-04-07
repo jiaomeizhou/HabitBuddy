@@ -37,8 +37,9 @@ export default function Welcome({ navigation }) {
     };
 
     return (
-        <View style={Styles.container}>
-            <Text style={Styles.label}>Welcome to Habit Buddy!</Text>
+        <View style={Styles.welcomeContainer}>
+            <Text style={Styles.nameText}>Welcome to Habit Buddy!</Text>
+            <Text style={Styles.statusText}>Click on a habit to get started</Text>
             <View style={Styles.shortcutContainer}>
                 <View style={Styles.buttonsContainer}>
                     {Object.keys(habitsByCategory).map((category, index) => (

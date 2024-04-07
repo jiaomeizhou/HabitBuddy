@@ -119,6 +119,10 @@ export const Styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
+    },
+    welcomeContainer: {
+        flex: 1,
+        backgroundColor: Colors.white,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -216,5 +220,8 @@ export const Styles = StyleSheet.create({
         width: '80%',
         alignSelf: 'center',
         marginVertical: 10,
+    },
+    iconButton: {
+        margin: 5,
     },
 })

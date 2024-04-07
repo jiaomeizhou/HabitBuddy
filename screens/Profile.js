@@ -13,7 +13,7 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <FontAwesome5 name="user-edit" size={24} color="black" onPress={onPressEdit} />
+        <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} onPress={onPressEdit} style={Styles.iconButton}/>
       ),
     });
   }, [navigation]);
