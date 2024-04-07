@@ -158,8 +158,18 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         width: '80%',
     },
-    statsCard: {
+    statsCardPink: {
         backgroundColor: Colors.pink,
+        borderRadius: 10,
+        padding: 10,
+        margin: 5,
+        width: 150,
+        minHeight: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    statsCardGrey: {
+        backgroundColor: Colors.battleshipGrey,
         borderRadius: 10,
         padding: 10,
         margin: 5,
@@ -193,7 +203,7 @@ export const Styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center',
-        color: Colors.silver,
+        color: Colors.feldGrau,
     },
     habitButtonsContainer: {
         width: '80%',

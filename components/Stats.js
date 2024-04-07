@@ -40,21 +40,21 @@ export default function Stats() {
     return (
         <View style={Styles.statsContainer}>
             <View style={Styles.statsContainer}>
-                <View style={Styles.statsCard}>
+                <View style={Styles.statsCardPink}>
                     <Text style={Styles.statsLable}>Current Habits</Text>
                     <Text style={Styles.statsText}>{habits.length}</Text>
                 </View>
-                <View style={Styles.statsCard}>
+                <View style={Styles.statsCardGrey}>
                     <Text style={Styles.statsLable}>Check-ins</Text>
                     <Text style={Styles.statsText}>{checkIns.length}</Text>
                 </View>
             </View>
             <View style={Styles.statsContainer}>
-                <View style={Styles.statsCard}>
+                <View style={Styles.statsCardGrey}>
                     <Text style={Styles.statsLable}>Completed Habits</Text>
                     <Text style={Styles.statsText}>{completedHabits.length}</Text>
                 </View>
-                <View style={Styles.statsCard}>
+                <View style={Styles.statsCardPink}>
                     <Text style={Styles.statsLable}>Failed Habits</Text>
                     <Text style={Styles.statsText}>{failedHabits.length}</Text>
                 </View>
