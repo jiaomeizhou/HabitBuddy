@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDoc, onSnapshot } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
@@ -40,14 +40,15 @@ export async function addCheckIn(data) {
     }
 }
 
-export async function getAllDocs(path) {
+export async function getUserProfileFromDB(uid) {
     try {
-        const querySnapshot = await getDocs(collection(database, path));
-        const data = [];
-        querySnapshot.forEach((doc) => {
-            data.push(doc.data());
-        });
-        return data;
+        const docRef = doc(database, `Users/${uid}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            console.log("No such document!");
+        }
     } catch (e) {
         console.error("Error getting documents: ", e);
     }

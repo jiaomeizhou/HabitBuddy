@@ -5,11 +5,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { updateProfile } from "firebase/auth";
 import Stats from '../components/Stats';
 import ProfileInput from "../components/ProfileInput";
+import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 
 export default function Profile({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState(auth.currentUser.name || '');
   const [photoURL, setphotoURL] = useState(auth.currentUser.photoURL || '');
+  const [userProfile, setUserProfile] = useState(null);
 
 
   async function saveProfileHandler(name) {
@@ -37,6 +39,14 @@ export default function Profile({ navigation }) {
     });
   }, [navigation]); // Add any other dependencies if necessary
 
+  useEffect(()=>{
+    async function getUserProfile(){
+        const userProfile = await getUserProfileFromDB(auth.currentUser.uid);
+        setUserProfile(userProfile);
+    }
+    getUserProfile();
+  }, [])
+
   return (
     <View style={{ paddingHorizontal: 20 }}>
       <View>
@@ -49,6 +59,9 @@ export default function Profile({ navigation }) {
         <Text>ID: {auth.currentUser.uid}</Text>
         <Text>Name: {auth.currentUser.displayName}</Text>
         <Text>Email: {auth.currentUser.email}</Text>
+        <Text>Pet name: {userProfile.petName ? userProfile.petName : ''}</Text>
+        <Text>Pet status: {userProfile.petStatus}</Text>
+        <Text>Total Progress: {userProfile.totalProgress}%</Text>
       </View>
       <Stats />
     </View>
