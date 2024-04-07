@@ -1,5 +1,6 @@
 import { View, Text, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
+import * as Colors from './Colors';
 
 export default function Welcome({ navigation }) {
     const [selectedCategory, setSelectedCategory] = useState("health");
@@ -68,6 +69,6 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     habitButtonSelected: {
-        backgroundColor: 'blue',
+        backgroundColor: Colors.feldGrau,
     },
 });

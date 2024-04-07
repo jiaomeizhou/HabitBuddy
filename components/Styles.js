@@ -8,19 +8,23 @@ export const Styles = StyleSheet.create({
     habitItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 'auto',
+        width: '80%',
         borderWidth: 2,
-        borderColor: Colors.primaryPurpleColor,
-        backgroundColor: Colors.headerColorPurple,
         padding: 10,
         marginTop: 20,
         marginHorizontal: 10,
         borderRadius: 10,
+        alignSelf: 'center',
+        borderColor: Colors.feldGrau,
+        backgroundColor: Colors.white,
     },
     habitText: {
         fontSize: 18,
+        color: Colors.feldGrau,
+        fontWeight: 'bold',
+        alignSelf: 'center',
     },
-    habitList: {
+    habitListContainer: {
         flex: 1,
         width: '80%',
         alignSelf: 'center',
@@ -40,27 +44,33 @@ export const Styles = StyleSheet.create({
         marginBottom: 20,
     },
     statusText: {
-        padding: 20,
-        fontSize: 14,
+        fontSize: 16,
         textAlign: 'center',
         fontWeight: 'bold',
+        color: Colors.pink,
     },
     progressBarContainer: {
         marginBottom: 5,
         marginTop: 5,
+        width: '30%',
+        alignSelf: 'center',
     },
     progressLabel: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
+        alignSelf: 'center',
+        color: Colors.feldGrau,
     },
     progressBar: {
         height: 10,
-        backgroundColor: '#e0e0e0',
+        backgroundColor: Colors.white,
+        borderColor: Colors.battleshipGrey,
+        borderWidth: 1,
         borderRadius: 5,
     },
     progress: {
         height: '100%',
-        backgroundColor: '#4caf50',
+        backgroundColor: Colors.fernGreen,
         borderRadius: 5,
     },
     habitDetailContainer: {
@@ -68,11 +78,6 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-    },
-    habitText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
     },
     progressText: {
         fontSize: 18,
@@ -114,10 +119,9 @@ export const Styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        justifyContent: "center",
     },
     input: {
-        borderColor: Colors.englishViolet,
+        borderColor: Colors.feldGrau,
         borderWidth: 2,
         width: "80%",
         height: 50,
@@ -132,7 +136,7 @@ export const Styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center",
         fontWeight: "bold",
-        color: Colors.englishViolet,
+        color: Colors.feldGrau,
     },
     pressableButton: {
         alignSelf: "center",
@@ -176,12 +180,12 @@ export const Styles = StyleSheet.create({
         fontWeight: 'bold',
         margin: 5,
         alignSelf: 'center',
-        color: Colors.englishViolet,
+        color: Colors.feldGrau,
       },
       profileText: {
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center',
-        color: Colors.lightEnglishViolet,
+        color: Colors.silver,
       },
 })

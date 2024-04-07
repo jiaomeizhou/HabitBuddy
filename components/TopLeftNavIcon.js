@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
 import { Styles } from './Styles';
+import * as Colors from './Colors';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +34,7 @@ export default function TopLeftNavIcon({ navigation }) {
     return (
         <View>
             <Pressable onPress={() => setShowMenu(!showMenu)} >
-                <Entypo name="menu" size={24} color="black" />
+                <Entypo name="menu" size={24} color={Colors.feldGrau} />
             </Pressable>
             <Modal
                 visible={showMenu}

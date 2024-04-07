@@ -90,7 +90,7 @@ export default function HabitItem({ habitObj, navigation }) {
         <PressableItem onPress={handlePress}>
             <View style={Styles.habitItem}>
                 <Text style={Styles.habitText}>{habitObj.habit}</Text>
-                <ProgressBar progress={progress} label={`${progress}%          `} />
+                <ProgressBar progress={progress} label={`${progress}%`} />
                 <CustomCheckBox
                     value={isChecked}
                     onValueChange={handleCheckInChange}

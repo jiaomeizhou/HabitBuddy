@@ -28,11 +28,11 @@ export default function Pet({ userProgress }) {
     function getPetStatusText(status) {
         switch (status) {
             case 'happy':
-                return 'Keep it up! Dobby is so happy!';
+                return "Keep it up! I'm so happy!";
             case 'normal':
-                return 'Dobby needs a little love. Keep checking in!';
+                return 'I needs a little love. Keep checking in!';
             case 'sad':
-                return 'Dobby is sad. Keep checking in!';
+                return "I'm sad. Keep checking in!";
             default:
                 return '';
         }
@@ -47,12 +47,12 @@ export default function Pet({ userProgress }) {
     }, [userProgress]);
 
     return (
-        <View style={Styles.petContainer}>
+        <View >
             <Image source={getImageSource(petStatus)} style={Styles.image} />
             <Text style={Styles.statusText}>
                 {getPetStatusText(petStatus)}
             </Text>
-            <ProgressBar progress={userProgress} label={`Dobby is a ${petStatus} Dog`} />
+            <ProgressBar progress={userProgress} />
         </View>
     );
 }

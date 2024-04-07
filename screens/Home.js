@@ -8,6 +8,7 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit, updateUserData } from '../firebase-files/firestoreHelper';
 import { Alert } from 'react-native';
+import * as Colors from '../components/Colors';
 
 
 export default function Home({ navigation }) {
@@ -15,7 +16,7 @@ export default function Home({ navigation }) {
         navigation.setOptions({
             headerRight: () => (
                 <Pressable onPress={() => navigation.navigate('AddHabit')}>
-                    <FontAwesome6 name="add" size={24} color="black" />
+                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} />
                 </Pressable>
             ),
 
@@ -102,7 +103,7 @@ export default function Home({ navigation }) {
     }, [userProgress]);
 
     return (
-        <View style={Styles.habitList}>
+        <View style={Styles.container}>
             {renderWelcome ? <Welcome navigation={navigation} /> :
                 <View >
                     <FlatList
@@ -115,6 +116,7 @@ export default function Home({ navigation }) {
                         }}
                     />
                     <Pet userProgress={userProgress} />
+                    
                 </View>
             }
         </View>
