@@ -1,9 +1,10 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import React, { useEffect } from 'react';
 import { Styles } from './Styles';
 import ProgressBar from './ProgressBar';
 import { auth } from '../firebase-files/firebaseSetup';
 import { updateUserData } from '../firebase-files/firestoreHelper';
+import PressableItem from './PressableItem';
 
 export default function Pet({ userProgress }) {
     // TODO: consider if it's necessary to store the pet in the database
@@ -28,11 +29,11 @@ export default function Pet({ userProgress }) {
     function getPetStatusText(status) {
         switch (status) {
             case 'happy':
-                return 'Keep it up! Dobby is so happy!';
+                return "Keep it up! I'm so happy!";
             case 'normal':
-                return 'Dobby needs a little love. Keep checking in!';
+                return 'I needs a little love. Keep checking in!';
             case 'sad':
-                return 'Dobby is sad. Keep checking in!';
+                return "I'm sad. Keep checking in!";
             default:
                 return '';
         }
@@ -46,14 +47,18 @@ export default function Pet({ userProgress }) {
         updateUserPetStatus();
     }, [userProgress]);
 
+    function handlePressPet() {
+        Alert.alert('Pet', getPetStatusText(petStatus));
+    }
+
     return (
-        <View style={Styles.petContainer}>
+        <PressableItem onPress={handlePressPet}>
             <Image source={getImageSource(petStatus)} style={Styles.image} />
-            <Text style={Styles.statusText}>
+            {/* <Text style={Styles.statusText}>
                 {getPetStatusText(petStatus)}
-            </Text>
-            <ProgressBar progress={userProgress} label={`Dobby is a ${petStatus} Dog`} />
-        </View>
+            </Text> */}
+            <ProgressBar progress={userProgress} />
+        </PressableItem>
     );
 }
 

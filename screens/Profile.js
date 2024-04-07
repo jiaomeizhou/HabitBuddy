@@ -6,6 +6,7 @@ import Stats from '../components/Stats';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
+import IconButton from '../components/IconButton';
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -13,13 +14,16 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <FontAwesome5 name="user-edit" size={24} color="black" onPress={onPressEdit} />
+        <IconButton onPress={onPressEdit}>
+          <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} style={Styles.iconButton} />
+        </IconButton>
       ),
     });
   }, [navigation]);
 
   useEffect(() => {
     async function getUserProfileData() {
+      if (!auth.currentUser) return;
       const profileData = await getUserProfileFromDB(auth.currentUser.uid);
       setUserProfile(profileData);
     }
@@ -38,22 +42,21 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={Styles.container}>
-      <View >
-        {auth.currentUser && auth.currentUser.photoURL ? (
-          <Image source={{ uri: auth.currentUser.photoURL }} style={Styles.image} />)
-          :
-          (<FontAwesome5 name="user-circle" size={100} color="black" />
-          )}
-        <Text>ID: {auth.currentUser.uid}</Text>
-        <Text>Name: {auth.currentUser.displayName}</Text>
-        <Text>Email: {auth.currentUser.email}</Text>
-        <Text>Pet name: {userProfile?.petName || ''}</Text>
-        <Text>Pet status: {userProfile?.petStatus || ''}</Text>
-        <Text>Total Progress: {userProfile?.totalProgress || ''}%</Text>
-      </View>
-      <View style={Styles.statsCard}>
-        <Stats />
-      </View>
+      {auth.currentUser && userProfile && userProfile.avatarUrl ? (
+        <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
+        :
+        (<FontAwesome5 name="user-circle" size={100} color={Colors.silver} />
+        )}
+      {auth.currentUser &&
+        <View>
+          <Text style={Styles.nameText}>{auth.currentUser.displayName}</Text>
+          <Text style={Styles.profileText}>{auth.currentUser.email}</Text>
+          <Text style={Styles.profileText}>Pet name: {userProfile?.petName || ''}</Text>
+          <Text style={Styles.profileText}>Pet status: {userProfile?.petStatus || ''}</Text>
+          {/* <Text style={Styles.profileText}>Total Progress: {userProfile?.totalProgress || ''}%</Text> */}
+        </View>
+      }
+      <Stats />
     </View>
 
   );

@@ -5,6 +5,7 @@ import Profile from '../screens/Profile';
 import { FontAwesome, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Diary from '../screens/Diary';
 import TopLeftNavIcon from './TopLeftNavIcon';
+import * as Colors from './Colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,6 +16,10 @@ export default function BottomNavTabs({ navigation }) {
                 headerLeft: () => (
                     <TopLeftNavIcon navigation={navigation} />
                 ),
+                tabBarActiveTintColor: Colors.chestnut,
+                tabBarInactiveTintColor: Colors.battleshipGrey,
+                tabBarStyle: { backgroundColor: Colors.white, borderTopColor: Colors.silver},
+                headerStyle: { backgroundColor: Colors.white, borderBottomColor: Colors.silver},
             }}
         >
             <Tab.Screen

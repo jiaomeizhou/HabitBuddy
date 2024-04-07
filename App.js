@@ -71,6 +71,10 @@ export default function App() {
             <Stack.Screen
               name="HabitDetail"
               component={HabitDetail}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Habit Detail",
+              }}
             />
             <Stack.Screen
               name='PostDiary' component={PostDiary}
