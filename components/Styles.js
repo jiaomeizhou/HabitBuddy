@@ -102,10 +102,10 @@ export const Styles = StyleSheet.create({
         position: 'absolute',
         top: 100,
         left: 10,
-        backgroundColor: '#fff',
+        backgroundColor: Colors.white,
         padding: 10,
         borderRadius: 5,
-        elevation: 4,
+        elevation: 2,
     },
     overlay: {
         position: 'absolute',
