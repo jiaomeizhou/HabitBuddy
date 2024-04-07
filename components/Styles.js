@@ -119,6 +119,8 @@ export const Styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     input: {
         borderColor: Colors.feldGrau,
@@ -144,6 +146,8 @@ export const Styles = StyleSheet.create({
         height: 50,
         borderRadius: 10,
         margin: 10,
+        borderColor: Colors.feldGrau,
+        borderWidth: 1,
     },
     forgotPasswordButton: {
         position: 'absolute',
@@ -160,32 +164,57 @@ export const Styles = StyleSheet.create({
         minHeight: 100,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      statsContainer: {
+    },
+    statsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         flexWrap: 'wrap',
-      },
-      statsText: {
+    },
+    statsText: {
         fontSize: 24,
         fontWeight: 'bold',
         color: Colors.white,
-      },
-      statsLable: {
+    },
+    statsLable: {
         fontSize: 15,
         color: Colors.white,
-      },
-      nameText: {
+    },
+    nameText: {
         fontSize: 24,
         fontWeight: 'bold',
         margin: 5,
         alignSelf: 'center',
         color: Colors.feldGrau,
-      },
-      profileText: {
+    },
+    profileText: {
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center',
         color: Colors.silver,
-      },
+    },
+    habitButtonsContainer: {
+        width: '80%',
+    },
+    categoryButton: {
+        marginHorizontal: 2,
+        marginBottom: 10,
+    },
+    shortcutContainer: {
+        borderColor: Colors.feldGrau,
+        borderWidth: 2,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        width: '40%',
+        marginBottom: 10,
+        padding: 5,
+    },
+    shortcutButton: {
+        width: '80%',
+        alignSelf: 'center',
+        marginVertical: 10,
+    },
 })
