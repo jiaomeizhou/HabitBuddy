@@ -37,13 +37,12 @@ export default function EditProfileScreen({ navigation, route }) {
     // Function to handle avatar upload
     function handleAvatarUpload(uri) {
         setAvatarUrl(uri);
-        console.log("receive avatar uri", uri);
     }
 
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ImageManager title="Update avatar" receiveImageURI={handleAvatarUpload} initialImage={avatarUrl} />
+            <ImageManager receiveImageURI={handleAvatarUpload} initialImage={avatarUrl} />
             <TextInput
                 placeholder="Username"
                 value={userName}

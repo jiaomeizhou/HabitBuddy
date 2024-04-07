@@ -9,6 +9,7 @@ import CustomSwitch from '../components/CustomSwitch';
 import { formatDate } from '../helpers/dateHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 import { useFocusEffect } from '@react-navigation/native';
+import ImageManager from '../components/ImageManager';
 
 
 export default function PostDiary({ navigation, route }) {
@@ -30,8 +31,9 @@ export default function PostDiary({ navigation, route }) {
             setTaskCompleted(false);
         }, [])
     );
-    function pickImageHandler() {
-        // TODO: complete pick image function
+    function pickImageHandler(uri) {
+        setImageUri(uri);
+        console.log("receive Image URI: ", uri);
     }
 
     function saveDiary() {
@@ -68,8 +70,7 @@ export default function PostDiary({ navigation, route }) {
     return (
         <View style={styles.container}>
             <CustomText style={styles.date}>{formatDate(date)}</CustomText>
-            <PressableButton title="Upload Image" onPress={pickImageHandler} color='#2196F3' />
-            {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+            <ImageManager receiveImageURI={pickImageHandler} />
             <CustomTextInput
                 placeholder="Share your diary..."
                 value={diary}
@@ -77,7 +78,6 @@ export default function PostDiary({ navigation, route }) {
                 style={styles.textInput}
                 multiline
             />
-
             <CustomSwitch
                 label="Public : "
                 onValueChange={setIsPublic}
