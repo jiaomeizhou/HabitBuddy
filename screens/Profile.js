@@ -44,7 +44,7 @@ export default function Profile({ navigation }) {
       {auth.currentUser && userProfile && userProfile.avatarUrl ? (
         <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
         :
-        (<FontAwesome5 name="user-circle" size={100} color="black" />
+        (<FontAwesome5 name="user-circle" size={100} color={Colors.silver} />
         )}
       {auth.currentUser &&
         <View>

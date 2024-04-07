@@ -41,7 +41,6 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 100,
         overflow: 'hidden',
-        marginBottom: 20,
     },
     statusText: {
         fontSize: 16,
@@ -159,7 +158,7 @@ export const Styles = StyleSheet.create({
         width: '80%',
     },
     statsCardPink: {
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.battleshipGrey,
         borderRadius: 10,
         padding: 10,
         margin: 5,
@@ -169,7 +168,7 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
     },
     statsCardGrey: {
-        backgroundColor: Colors.battleshipGrey,
+        backgroundColor: Colors.fernGreen,
         borderRadius: 10,
         padding: 10,
         margin: 5,

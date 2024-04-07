@@ -1,9 +1,10 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import React, { useEffect } from 'react';
 import { Styles } from './Styles';
 import ProgressBar from './ProgressBar';
 import { auth } from '../firebase-files/firebaseSetup';
 import { updateUserData } from '../firebase-files/firestoreHelper';
+import PressableItem from './PressableItem';
 
 export default function Pet({ userProgress }) {
     // TODO: consider if it's necessary to store the pet in the database
@@ -46,14 +47,18 @@ export default function Pet({ userProgress }) {
         updateUserPetStatus();
     }, [userProgress]);
 
+    function handlePressPet() {
+        Alert.alert('Pet', getPetStatusText(petStatus));
+    }
+
     return (
-        <View >
+        <PressableItem onPress={handlePressPet}>
             <Image source={getImageSource(petStatus)} style={Styles.image} />
-            <Text style={Styles.statusText}>
+            {/* <Text style={Styles.statusText}>
                 {getPetStatusText(petStatus)}
-            </Text>
+            </Text> */}
             <ProgressBar progress={userProgress} />
-        </View>
+        </PressableItem>
     );
 }
 
