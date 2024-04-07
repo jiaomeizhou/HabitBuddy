@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, Image } from 'react-native';
 import { updateUserData } from '../firebase-files/firestoreHelper';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../firebase-files/firebaseSetup';
+import ImageManager from '../components/ImageManager';
 
 export default function EditProfileScreen({ navigation, route }) {
     const userData = route.params.userProfile ?? {};
@@ -29,10 +30,12 @@ export default function EditProfileScreen({ navigation, route }) {
         }
     };
 
-    // Function to handle avatar upload or selection
-    const handleAvatarUpload = () => {
-        // Implement avatar upload logic (e.g., using react-native-image-picker)
-    };
+    // Function to handle avatar upload
+    function handleAvatarUpload(uri) {
+        setAvatarUrl(uri);
+        console.log("receive avatar uri", uri);
+    }
+
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -46,7 +49,7 @@ export default function EditProfileScreen({ navigation, route }) {
                 value={petName}
                 onChangeText={setPetName}
             />
-            <Button title="Upload Avatar" onPress={handleAvatarUpload} />
+            <ImageManager title="Update avatar" receiveImageURI={handleAvatarUpload} />
             {avatarUrl && <Image source={{ uri: avatarUrl }} style={{ width: 100, height: 100 }} />}
             <Button title="Save" onPress={saveProfile} />
         </View>

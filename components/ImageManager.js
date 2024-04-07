@@ -3,7 +3,7 @@ import React from 'react'
 import * as ImagePicker from 'expo-image-picker'
 
 
-export default function ImageManager({ receiveImageURI }) {
+export default function ImageManager({ title, receiveImageURI }) {
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
     const [imageURI, setImageURI] = React.useState(null);
 
@@ -37,11 +37,10 @@ export default function ImageManager({ receiveImageURI }) {
         catch (error) {
             console.log(error)
         }
-
     }
     return (
         <View>
-            <Button title="Take an image" onPress={takeImageHandler} />
+            <Button title={title} onPress={takeImageHandler} />
             {imageURI &&
                 <Image source={{ uri: imageURI }} style={{ width: 200, height: 200 }} />
             }
