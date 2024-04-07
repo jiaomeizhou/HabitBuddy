@@ -18,8 +18,8 @@ export default function BottomNavTabs({ navigation }) {
                 ),
                 tabBarActiveTintColor: Colors.chestnut,
                 tabBarInactiveTintColor: Colors.battleshipGrey,
-                tabBarStyle: { backgroundColor: Colors.white, borderTopColor: Colors.chestnut},
-                headerStyle: { backgroundColor: Colors.white, borderBottomColor: Colors.chestnut},
+                tabBarStyle: { backgroundColor: Colors.white, borderTopColor: Colors.silver},
+                headerStyle: { backgroundColor: Colors.white, borderBottomColor: Colors.silver},
             }}
         >
             <Tab.Screen

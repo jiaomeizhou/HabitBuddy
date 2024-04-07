@@ -244,4 +244,7 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         marginVertical: 10,
     },
+    pressed: {
+        opacity: 0.5,
+    },
 })

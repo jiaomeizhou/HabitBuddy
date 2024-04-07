@@ -6,6 +6,7 @@ import Stats from '../components/Stats';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
+import IconButton from '../components/IconButton';
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -13,7 +14,9 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} onPress={onPressEdit} style={Styles.iconButton}/>
+        <IconButton onPress={onPressEdit}>
+          <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} style={Styles.iconButton} />
+        </IconButton>
       ),
     });
   }, [navigation]);

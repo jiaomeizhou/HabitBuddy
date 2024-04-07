@@ -9,17 +9,17 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit, updateUserData } from '../firebase-files/firestoreHelper';
 import { Alert } from 'react-native';
 import * as Colors from '../components/Colors';
+import IconButton from '../components/IconButton';
 
 
 export default function Home({ navigation }) {
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Pressable onPress={() => navigation.navigate('AddHabit')}>
-                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} style={Styles.iconButton}/>
-                </Pressable>
+                <IconButton onPress={() => navigation.navigate('AddHabit')} >
+                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} style={Styles.iconButton} />
+                </IconButton>
             ),
-
         });
     }, []);
 

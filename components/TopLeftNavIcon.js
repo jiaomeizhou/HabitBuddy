@@ -7,6 +7,7 @@ import { auth } from "../firebase-files/firebaseSetup";
 import { Styles } from './Styles';
 import * as Colors from './Colors';
 import PressableButton from './PressableButton';
+import IconButton from './IconButton';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,9 +35,9 @@ export default function TopLeftNavIcon({ navigation }) {
 
     return (
         <View>
-            <Pressable onPress={() => setShowMenu(!showMenu)} >
+            <IconButton onPress={() => setShowMenu(!showMenu)}  >
                 <Entypo name="menu" size={24} color={Colors.feldGrau} style={Styles.iconButton} />
-            </Pressable>
+            </IconButton>
             <Modal
                 visible={showMenu}
                 animationType="fade"
