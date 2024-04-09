@@ -174,3 +174,25 @@ export async function updateUserData(userId, data) {
         console.error("Error updating user pet status: ", error);
     }
 }
+
+export function fetchUserCheckInTrack(userId, callback) {
+    const q = query(collection(database, "CheckIns"),
+        where("userId", "==", userId),
+        where("isPublic", "==", true),
+    );
+
+    return onSnapshot(q, (querySnapshot) => {
+        const fetchedLocations = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.location && data.diary) {
+                fetchedLocations.push({
+                    ...data.location,
+                    diary: data.diary,
+                    id: doc.id,
+                });
+            }
+        });
+        callback(fetchedLocations);
+    });
+}
