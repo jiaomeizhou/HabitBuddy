@@ -6,6 +6,7 @@ import { FontAwesome, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vect
 import Diary from '../screens/Diary';
 import TopLeftNavIcon from './TopLeftNavIcon';
 import * as Colors from './Colors';
+import TrackMap from '../screens/TrackMap';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +43,16 @@ export default function BottomNavTabs({ navigation }) {
                     ),
                 }}
             />
-            {/* TODO: Add community Map screen  */}
+            <Tab.Screen
+                name="Track"
+                component={TrackMap}
+                options={{
+                    tabBarLabel: 'My Track',
+                    tabBarIcon: ({ color }) => (
+                        <SimpleLineIcons name="map" size={24} color={color} />
+                    ),
+                }}
+            />
             <Tab.Screen
                 name="Profile"
                 component={Profile}

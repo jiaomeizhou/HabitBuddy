@@ -13,6 +13,7 @@ import Signup from './screens/Signup';
 import Login from './screens/Login';
 import DiaryDetail from './screens/DiaryDetail';
 import PostDiary from './screens/PostDiary';
+import Map from "./screens/Map";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -93,6 +94,12 @@ export default function App() {
               options={{
                 headerBackTitleVisible: false,
                 headerTitle: "Edit Profile",
+              }}
+            />
+            <Stack.Screen name='Map' component={Map}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Map",
               }}
             />
           </>
