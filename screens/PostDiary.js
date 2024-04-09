@@ -1,5 +1,5 @@
 import { StyleSheet, View, Alert, ScrollView } from 'react-native'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomText from '../components/CustomText';
 import PressableButton from '../components/PressableButton';
@@ -10,16 +10,18 @@ import ImageManager from '../components/ImageManager';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { TextInput, Switch, Card, HelperText } from 'react-native-paper';
 import * as Colors from '../components/Colors';
+import LocationManager from '../components/LocationManager';
 
 export default function PostDiary({ navigation, route }) {
     const [imageUri, setImageUri] = useState(null);
     const [diary, setDiary] = useState('');
     const [isPublic, setIsPublic] = useState(true);
     const [taskCompleted, setTaskCompleted] = useState(false);
+    const [locationInfo, setLocationInfo] = useState(null);
     const userId = auth.currentUser.uid;
     const habit = route.params ? route.params : null;
     const habitData = habit.habitObj;
-    const habitId = habitData.id;
+    const habitId = habitData ? habitData.id : null;
     const date = new Date();
 
     const inputTheme = {
@@ -39,6 +41,12 @@ export default function PostDiary({ navigation, route }) {
             setTaskCompleted(false);
         }, [])
     );
+
+    useEffect(() => {
+        if (route.params?.selectedLocation) {
+            setLocationInfo(route.params.selectedLocation);
+        }
+    }, [route.params?.selectedLocation]);
 
     async function getImageData(uri) {
         try {
@@ -61,8 +69,8 @@ export default function PostDiary({ navigation, route }) {
     }
 
     function saveDiary() {
-        if (!diary.trim() || !imageUri) {
-            Alert.alert("Error", "Please add an image and your diary.");
+        if (!diary.trim()) {
+            Alert.alert("Error", "Please add your diary.");
             return;
         }
 
@@ -74,6 +82,7 @@ export default function PostDiary({ navigation, route }) {
             userId,
             habitId,
             date: date,
+            location: locationInfo,
         };
 
         addCheckIn(newEntry)
@@ -125,11 +134,14 @@ export default function PostDiary({ navigation, route }) {
                     <HelperText type="info" style={styles.helperText}>
                         Making your diary public will allow others to view it.
                     </HelperText>
+                    <View style={styles.row}>
+                        <LocationManager onLocationSelect={setLocationInfo} />
+                    </View>
                 </Card.Content>
                 <Card.Actions style={styles.cardActions}>
                     <View style={styles.buttonsContainer}>
                         <PressableButton title="Save" onPress={saveDiary} color={Colors.fernGreen} textColor={Colors.white} />
-                        <PressableButton title="Cancel" onPress={() => navigation.goBack()} color={Colors.white} textColor={Colors.fernGreen} />
+                        <PressableButton title="Cancel" onPress={cancelHandler} color={Colors.white} textColor={Colors.fernGreen} />
                     </View>
                 </Card.Actions>
             </Card>
@@ -153,7 +165,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     card: {
-        margin: 8,
+        margin: 5,
         elevation: 4,
         backgroundColor: 'rgba(232 241 226 / 0.9)'
     },
