@@ -32,6 +32,7 @@ export default function ImageManager({ receiveImageURI, initialImage }) {
             const results = await ImagePicker.launchCameraAsync(
                 {
                     allowsEditing: true,
+                    quality: 0,
                 }
             )
             uri = results.assets[0].uri;
@@ -49,7 +50,7 @@ export default function ImageManager({ receiveImageURI, initialImage }) {
             const result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: true,
-                quality: 1,
+                quality: 0,
             });
             if (!result.canceled) {
                 receiveImageURI(result.assets[0].uri);
