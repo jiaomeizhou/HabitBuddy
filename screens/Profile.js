@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -7,6 +7,9 @@ import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
 import IconButton from '../components/IconButton';
+import { AntDesign } from "@expo/vector-icons";
+import { signOut } from "firebase/auth";
+import PressableButton from '../components/PressableButton';
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -40,6 +43,18 @@ export default function Profile({ navigation }) {
     }
   };
 
+  // log out handler
+  async function onPressLogOut() {
+    try {
+      await signOut(auth);
+      // After successful sign-out, navigate to the login screen
+      navigation.navigate('Login');
+    } catch (error) {
+      console.log("Error signing out: ", error);
+      Alert.alert("Error", "Failed to log out. Please try again.");
+    }
+  }
+
   return (
     <View style={Styles.container}>
       {auth.currentUser && userProfile && userProfile.avatarUrl ? (
@@ -57,6 +72,7 @@ export default function Profile({ navigation }) {
         </View>
       }
       <Stats />
+      <PressableButton title="Log out" onPress={onPressLogOut} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
     </View>
 
   );

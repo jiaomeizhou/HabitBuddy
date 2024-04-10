@@ -20,19 +20,6 @@ export default function TopLeftNavIcon({ navigation }) {
         setShowMenu(false);
     }
 
-    // TODO: there is a bug here, the app will crash if the user logs out
-    // only iOS, not Android
-    async function onPressLogOut() {
-        try {
-            await signOut(auth);
-            // After successful sign-out, navigate to the login screen
-            navigation.navigate('Login');
-        } catch (error) {
-            console.log("Error signing out: ", error);
-            Alert.alert("Error", "Failed to log out. Please try again.");
-        }
-    }
-
     return (
         <View>
             <IconButton onPress={() => setShowMenu(!showMenu)}  >
@@ -50,7 +37,7 @@ export default function TopLeftNavIcon({ navigation }) {
                 {showMenu && (
                     <View style={Styles.menu}>
                         <PressableButton title="Add habit" onPress={onPressAddHabit} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
-                        <PressableButton title="Log out" onPress={onPressLogOut} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                        {/* <PressableButton title="Log out" onPress={onPressLogOut} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} /> */}
                     </View>
                 )}
             </Modal>
