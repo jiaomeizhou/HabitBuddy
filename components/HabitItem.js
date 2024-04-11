@@ -8,7 +8,6 @@ import { auth } from '../firebase-files/firebaseSetup';
 import CustomCheckBox from './CustomCheckBox';
 
 export default function HabitItem({ habitObj, navigation }) {
-    // TODO: when the progress of a habit is 100%, show a message to the user
     const [isChecked, setChecked] = useState(false);
     const [habitCheckIns, setHabitCheckIns] = useState([]);
     const [progress, setProgress] = useState(0);
@@ -89,7 +88,11 @@ export default function HabitItem({ habitObj, navigation }) {
     return (
         <PressableItem onPress={handlePress}>
             <View style={Styles.habitItem}>
-                <Text style={Styles.habitText}>{habitObj.habit}</Text>
+                <Text style={Styles.habitText}>
+                    {habitObj.habit.length > 12 ?
+                        habitObj.habit.replace(/(.{12})/g, "$1\n") :
+                        habitObj.habit}
+                </Text>
                 <ProgressBar progress={progress} label={`${progress}%`} />
                 <CustomCheckBox
                     value={isChecked}
