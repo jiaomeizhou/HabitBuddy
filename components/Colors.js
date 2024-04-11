@@ -8,3 +8,6 @@ export const pink = '#9E7682';
 export const indigoDye = '#0B4F6C';
 export const chestnut = '#A53F2B';
 export const fernGreen = '#5A7247';
+export const ashGrey = '#CCDAD6';
+export const camBlue = '#7D9C8B';
+export const lightGreen = '#E2E9DC';
