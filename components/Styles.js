@@ -306,4 +306,11 @@ export const Styles = StyleSheet.create({
         borderColor: Colors.feldGrau,
         borderRadius: 10,
     },
+    dropDownPicker: {
+        marginVertical: 5,
+        backgroundColor: Colors.white,
+        alignSelf: 'center',
+        borderWidth: 2,
+        borderColor: Colors.feldGrau,
+    },
 })

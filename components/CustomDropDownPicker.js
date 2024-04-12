@@ -6,7 +6,6 @@ import { Styles } from '../components/Styles';
 export default function CustomDropDownPicker({ open, value, listMode, items, setOpen, setValue, setItems, placeholder }) {
   return (
     <DropDownPicker
-      style={Styles.input}
       open={open}
       value={value}
       listMode={listMode}
@@ -15,6 +14,8 @@ export default function CustomDropDownPicker({ open, value, listMode, items, set
       setValue={setValue}
       setItems={setItems}
       placeholder={placeholder}
+      containerStyle={{ width: '85%', alignSelf: 'center'}}
+      style={Styles.dropDownPicker}
     />
   )
 }
