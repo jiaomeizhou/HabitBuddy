@@ -5,12 +5,12 @@ import MapView, { Marker } from "react-native-maps";
 export default function Map({ route, navigation }) {
 
     const [selectedLocation, setSelectedLocation] = useState(null);
-    console.log("route.params: ", route.params);
 
     function confirmHandler() {
         if (selectedLocation) {
             if (route.params?.from === 'LocationManager') {
                 navigation.navigate('PostDiary', {
+                    ...route.params,
                     selectedLocation: selectedLocation,
                 });
             }
