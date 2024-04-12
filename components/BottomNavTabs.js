@@ -24,7 +24,7 @@ export default function BottomNavTabs({ navigation }) {
                 <BottomNavigation.Bar
                     navigationState={state}
                     safeAreaInsets={insets}
-                    style={{ backgroundColor: Colors.lightGreen }}
+                    style={{ backgroundColor: Colors.white }}
                     activeIndicatorStyle={{ backgroundColor: Colors.camBlue }}
                     onTabPress={({ route, preventDefault }) => {
                         const event = navigation.emit({
