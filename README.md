@@ -16,9 +16,16 @@ Our application utilizes Firestore as a NoSQL database and includes the followin
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Allow only authenticated users to read/write/delete their own documents
     match /{document=**} {
-      allow read, write: if request.auth != null;
-      allow create: if request.auth != null;
+      allow read, write, create: if request.auth != null;
+    }
+    match /user {
+    	allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.user;
+    }
+    match /{document=**} {
+      allow read;
     }
   }
 }
@@ -27,8 +34,9 @@ service cloud.firestore {
 ### Firebase indexes
 
 #### If you encounter the following error, please manually add the indexes in Firebase. Copy the link in the error message, paste it to the browser and follow the instructions to add indexes, wait for a few minutes then the error should be fixed.
-<img src="assets/firebase_indexes_error.PNG" alt="drawing" width="200"/>
-<img src="assets/firebase_indexes.PNG" alt="drawing" width="200"/>
+<img src="assets/firebase_indexes_error.PNG" alt="drawing" width="auto"/>
+
+<img src="assets/firebase_indexes.PNG" alt="drawing" width="auto"/>
 
 ## Team Members and Contributions
 
