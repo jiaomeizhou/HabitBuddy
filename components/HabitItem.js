@@ -1,15 +1,13 @@
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PressableItem from './PressableItem'
 import { Styles } from './Styles'
-import Checkbox from 'expo-checkbox';
 import ProgressBar from './ProgressBar';
 import { addCheckIn, updateHabit, deleteCheckIn, subscribeCheckInsByUserIdAndHabitId } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 import CustomCheckBox from './CustomCheckBox';
 
 export default function HabitItem({ habitObj, navigation }) {
-    // TODO: when the progress of a habit is 100%, show a message to the user
     const [isChecked, setChecked] = useState(false);
     const [habitCheckIns, setHabitCheckIns] = useState([]);
     const [progress, setProgress] = useState(0);
@@ -71,11 +69,31 @@ export default function HabitItem({ habitObj, navigation }) {
         navigation.navigate('HabitDetail', { habitObj, progress, habitCheckIns, todayCheckInsData });
     }
 
+    useEffect(() => {
+        if (progress === 100) {
+            Alert.alert("Congratulations!", `You have completed this habit ${habitObj.habit}!`);
+        }
+        async function updateHabitProgress() {
+            if (progress === 100) {
+                await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length, status: 'completed' });
+            } else {
+                await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, progress: progress, checkInCount: habitCheckIns.length });
+            }
+        }
+        // Update habit's progress after check-in change
+        updateHabitProgress();
+        // console.log("update habit progress", habitObj, progress)
+    }, [progress]);
+
     return (
         <PressableItem onPress={handlePress}>
             <View style={Styles.habitItem}>
-                <Text style={Styles.habitText}>{habitObj.habit}</Text>
-                <ProgressBar progress={progress} label={`${progress}%          `} />
+                <Text style={Styles.habitText}>
+                    {habitObj.habit.length > 12 ?
+                        habitObj.habit.replace(/(.{12})/g, "$1\n") :
+                        habitObj.habit}
+                </Text>
+                <ProgressBar progress={progress} label={`${progress}%`} />
                 <CustomCheckBox
                     value={isChecked}
                     onValueChange={handleCheckInChange}

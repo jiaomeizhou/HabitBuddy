@@ -8,16 +8,12 @@ import { auth } from "./firebase-files/firebaseSetup";
 import AddHabitScreen from './screens/AddHabitScreen';
 import EditHabitScreen from './screens/EditHabitScreen';
 import HabitDetail from './screens/HabitDetail';
-import Checkin from './screens/Checkin';
-import { FontAwesome6 } from '@expo/vector-icons';
-import TopLeftNavIcon from './components/TopLeftNavIcon';
-
-
-import Home from './screens/Home';
+import EditProfile from './screens/EditProfile';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import DiaryDetail from './screens/DiaryDetail';
 import PostDiary from './screens/PostDiary';
+import Map from "./screens/Map";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -36,8 +32,16 @@ export default function App() {
   }, []);
 
   const AuthStack = <>
-    <Stack.Screen name="Signup" component={Signup} />
-    <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen name="Signup" component={Signup}
+      options={
+        { headerShown: false }
+      }
+    />
+    <Stack.Screen name="Login" component={Login}
+      options={
+        { headerShown: false }
+      }
+    />
   </>
 
 
@@ -68,6 +72,10 @@ export default function App() {
             <Stack.Screen
               name="HabitDetail"
               component={HabitDetail}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Habit Detail",
+              }}
             />
             <Stack.Screen
               name='PostDiary' component={PostDiary}
@@ -80,6 +88,18 @@ export default function App() {
               options={{
                 headerBackTitleVisible: false,
                 headerTitle: "Diary Detail",
+              }}
+            />
+            <Stack.Screen name='EditProfile' component={EditProfile}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Edit Profile",
+              }}
+            />
+            <Stack.Screen name='Map' component={Map}
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: "Map",
               }}
             />
           </>

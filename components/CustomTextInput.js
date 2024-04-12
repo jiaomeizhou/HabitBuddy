@@ -1,10 +1,11 @@
 import { TextInput, StyleSheet } from 'react-native'
 import React from 'react'
+import { Styles } from '../components/Styles';
 
 export default function CustomTextInput({ style, ...props }) {
     return (
         <TextInput
-            style={[styles.input, style]}
+            style={[Styles.input, style]}
             {...props}
         />
     )

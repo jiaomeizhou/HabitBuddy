@@ -1,28 +1,55 @@
-import { View, FlatList, Text, Image, Pressable, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { database } from '../firebase-files/firebaseSetup';
 import { useNavigation } from '@react-navigation/native';
-import PressableItem from '../components/PressableItem'
-import CustomText from '../components/CustomText';
-import { onSnapshot } from 'firebase/firestore';
+import { Card, Text } from 'react-native-paper';
+import IconButton from '../components/IconButton';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { subscribeHabitsByUserId, fetchPublicCheckIns } from '../firebase-files/firestoreHelper';
+import { auth } from '../firebase-files/firebaseSetup';
 
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
     const navigation = useNavigation();
+    const userId = auth.currentUser.uid;
+    const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
 
     useEffect(() => {
-        const q = query(collection(database, "CheckIns"), where("isPublic", "==", true));
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const fetchedDiaries = [];
-            querySnapshot.forEach((doc) => {
-                fetchedDiaries.push({ id: doc.id, ...doc.data() });
-            });
-            setDiaries(fetchedDiaries);
+        navigation.setOptions({
+            headerBackTitleVisible: false,
+            headerRight: () => (
+                <IconButton onPress={() => setCheckHabitsForNavigation(true)}>
+                    <FontAwesome6 name="add" size={24} color="black" />
+                </IconButton>
+            ),
         });
+    }, [navigation]);
+
+    useEffect(() => {
+        const unsubscribe = fetchPublicCheckIns(setDiaries);
         return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+        if (checkHabitsForNavigation) {
+            const unsubscribe = subscribeHabitsByUserId(userId, (habits) => {
+                if (habits.length > 0) {
+                    const formattedHabits = habits.map(habit => ({
+                        id: habit.id,
+                        label: habit.habit,
+                    }));
+                    navigation.navigate('PostDiary', { fromDiary: true, formattedHabits: formattedHabits });
+                } else {
+                    Alert.alert("No Habits", "You do not have any habits. Please add some habits first.");
+                    navigation.navigate('Home');
+                }
+                setCheckHabitsForNavigation(false);
+            });
+
+            return () => {
+                unsubscribe();
+            };
+        }
+    }, [checkHabitsForNavigation, userId, navigation]);
 
     const handlePressDiary = (diary) => {
         navigation.navigate('DiaryDetail', { diary });
@@ -34,14 +61,15 @@ export default function Diary() {
                 data={diaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <PressableItem onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
-                        {item.imageUri && <Image source={{ uri: item.imageUri }} style={styles.image} />}
-                        <CustomText style={styles.diaryText} numberOfLines={2} >{item.diary}</CustomText>
-                        <CustomText style={styles.dateText}>
-                            {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
-                        </CustomText>
-                    </PressableItem>
-
+                    <Card onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
+                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={styles.image} />}
+                        <Card.Title title={item.diary} />
+                        <Card.Content>
+                            <Text style={styles.dateText}>
+                                {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
+                            </Text>
+                        </Card.Content>
+                    </Card>
                 )}
             />
         </View>
@@ -55,14 +83,14 @@ const styles = StyleSheet.create({
     },
     diaryItem: {
         marginBottom: 15,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        height: 95,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        backgroundColor: 'rgba(247 248 245 / 0.9)'
     },
     image: {
-        width: '100%',
         height: 200,
         borderRadius: 5,
     },
@@ -72,7 +100,6 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     dateText: {
-        marginTop: 5,
         fontSize: 12,
         color: '#666',
     },

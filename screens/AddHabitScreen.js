@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { StyleSheet, View, Alert, Text} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
@@ -10,6 +10,9 @@ import CustomDateTimePicker from '../components/CustomDateTimePicker';
 import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from '../components/Styles';
+import { Switch } from 'react-native-paper';
+import * as Colors from '../components/Colors';
 
 export default function AddHabitScreen({ route }) {
     // TODO: render shortcut name as the default habit name
@@ -21,7 +24,7 @@ export default function AddHabitScreen({ route }) {
     console.log("name", habitName)
     const [habitFrequency, setHabitFrequency] = useState('');
     const [durationWeeks, setDurationWeeks] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [endDate, setEndDate] = useState(null);
     const [isReminderEnabled, setIsReminderEnabled] = useState(false);
     const userId = auth.currentUser.uid;
 
@@ -37,6 +40,7 @@ export default function AddHabitScreen({ route }) {
     ]);
     const [date, setDate] = useState(new Date());
     const [formattedDate, setFormattedDate] = useState('');
+    const [formattedEndDate, setFormattedEndDate] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const habitData = route.params?.habitData || null;
@@ -62,7 +66,7 @@ export default function AddHabitScreen({ route }) {
             setDate(new Date());
             setFormattedDate('');
             setDurationWeeks('');
-            setEndDate('');
+            setEndDate(null);
             setIsReminderEnabled(false);
         }
     }, [habitData, isEditMode]);
@@ -96,11 +100,13 @@ export default function AddHabitScreen({ route }) {
     function calculateEndDate(weeks) {
         const result = new Date(date);
         result.setDate(result.getDate() + weeks * 7);
-        setEndDate(result.toDateString());
+        setEndDate(result);
+        setFormattedEndDate(result.toDateString());
+
     }
 
     function saveHandler() {
-        if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks < 0) {
+        if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks <= 0) {
             Alert.alert('Invalid Input', 'Please check the input fields and try again');
             return;
         }
@@ -147,14 +153,14 @@ export default function AddHabitScreen({ route }) {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <CustomText>{'Type the habit name :'}</CustomText>
+        <View style={Styles.container}>
+            <CustomText>{'Type the habit name:'}</CustomText>
             <CustomTextInput
                 onChangeText={handleHabitNameChange}
                 value={habitName}
             />
 
-            <CustomText>{'Habit Frequency (How often in 1 week) :'}</CustomText>
+            <CustomText>{'Habit Frequency (How often in 1 week):'}</CustomText>
             <CustomDropDownPicker
                 open={open}
                 value={habitFrequency}
@@ -166,7 +172,7 @@ export default function AddHabitScreen({ route }) {
                 placeholder="Select the frequency"
             />
 
-            <CustomText>{'Start Date :'}</CustomText>
+            <CustomText>{'Start Date:'}</CustomText>
             <CustomTextInput
                 value={formattedDate}
                 onPressIn={toggleDatePicker}
@@ -184,27 +190,38 @@ export default function AddHabitScreen({ route }) {
                 />
             )}
 
-            <CustomText>{'Spend how many weeks :'}</CustomText>
+            <CustomText>{'Spend how many weeks:'}</CustomText>
             <CustomTextInput
                 value={durationWeeks}
                 onChangeText={handleDurationChange}
                 keyboardType="numeric"
             />
 
-            <CustomText>{'End Date :'}</CustomText>
-            <CustomText style={styles.input}>{endDate}</CustomText>
-
-            <CustomSwitch
-                label="Reminder : "
-                onValueChange={setIsReminderEnabled}
-                value={isReminderEnabled}
-            />
-
-            <View style={styles.buttonsContainer}>
-                <PressableButton title="Save" onPress={saveHandler} color='#2196F3' />
-                <PressableButton title="Cancel" onPress={cancelHandler} color='#B0ADAD' />
+            <CustomText>{'End Date:'}</CustomText>
+            <CustomText style={Styles.input}>{formattedEndDate}</CustomText>
+            <View style={Styles.reminderContainer}>
+                <Text style={Styles.reminderText}>{'Set a Reminder?'}</Text>
+                <Switch
+                    onValueChange={setIsReminderEnabled}
+                    value={isReminderEnabled}
+                    color={Colors.chestnut}
+                />
             </View>
-        </ScrollView>
+            <PressableButton
+                title="Save"
+                onPress={saveHandler}
+                color={Colors.fernGreen}
+                customStyle={Styles.pressableButton}
+                textColor={Colors.white}
+            />
+            <PressableButton
+                title="Cancel"
+                onPress={cancelHandler}
+                color={Colors.white}
+                customStyle={Styles.pressableButton}
+                textColor={Colors.fernGreen}
+            />
+        </View>
     )
 }
 

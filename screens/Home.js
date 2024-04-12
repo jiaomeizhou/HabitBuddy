@@ -5,28 +5,25 @@ import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
-import { doc, collection, onSnapshot, query, where } from "firebase/firestore";
-import { database } from '../firebase-files/firebaseSetup';
-import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeCheckInsByUserId, subscribeHabitsByUserId } from '../firebase-files/firestoreHelper';
+import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit, updateUserData } from '../firebase-files/firestoreHelper';
+import { Alert } from 'react-native';
+import { IconButton } from 'react-native-paper';
 
 
 export default function Home({ navigation }) {
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Pressable onPress={() => navigation.navigate('AddHabit')}>
-                    <FontAwesome6 name="add" size={24} color="black" />
-                </Pressable>
+                <IconButton onPress={() => navigation.navigate('AddHabit')} icon="plus" />
             ),
-
         });
     }, []);
 
-    // TODO: replace it when we can read data from firebase
     const [habits, setHabits] = useState(null);
     const [checkIns, setCheckIns] = useState(null);
     const [renderWelcome, setRenderWelcome] = useState(false);
+    const [userProgress, setUserProgress] = useState(0);
+    const [dueHabits, setDueHabits] = useState([]);
 
     // get habits and checkin data from firebase
     useEffect(() => {
@@ -40,9 +37,14 @@ export default function Home({ navigation }) {
             setHabits(habitsData);
         });
 
+        const unsubscribeDueHabits = subscribeDueHabitsByUserId(userId, (habitsData) => {
+            setDueHabits(habitsData);
+        });
+
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();
+            unsubscribeDueHabits();
         };
     }, []);
 
@@ -53,8 +55,51 @@ export default function Home({ navigation }) {
         }
     }, [habits]);
 
+    // check if there is any failed habits today, only show once
+    // TODO: test this feature tomorrow
+    useEffect(() => {
+        if (dueHabits && dueHabits.length > 0) {
+            let alertMessage = `You failed ${dueHabits.length} habits today!\n\n`;
+            dueHabits.forEach((habit) => {
+                alertMessage += `Name: ${habit.habit}\nStart Date: ${new Date(habit.startDate.toMillis()).toDateString()}\nProgress: ${habit.progress}%\n\n`;
+            });
+            Alert.alert('Failed Habits', alertMessage, [{ text: 'OK' }]);
+            async function updateFailedHabits() {
+                dueHabits.forEach(async (habitObj) => {
+                    await updateHabit(auth.currentUser.uid, habitObj.id, { ...habitObj, status: 'failed' });
+                });
+            }
+            updateFailedHabits();
+        }
+    }, []);
+
+    // update user progress when habits change
+    useEffect(() => {
+        // get the progress of all habits
+        function updatePetProgress() {
+            if (habits) {
+                const totalHabits = habits.length;
+                let totalProgress = 0;
+                habits.forEach(habit => {
+                    totalProgress += habit.progress;
+                });
+                const currentUserProgress = Math.round(totalProgress / totalHabits);
+                setUserProgress(currentUserProgress);
+            }
+        }
+        updatePetProgress();
+    }, [habits]);
+
+    // update user progress to firebase
+    useEffect(() => {
+        async function updateUserProgress() {
+            await updateUserData(auth.currentUser.uid, { totalProgress: userProgress });
+        }
+        updateUserProgress();
+    }, [userProgress]);
+
     return (
-        <View style={Styles.habitList}>
+        <View style={Styles.container}>
             {renderWelcome ? <Welcome navigation={navigation} /> :
                 <View >
                     <FlatList
@@ -66,7 +111,8 @@ export default function Home({ navigation }) {
                             />
                         }}
                     />
-                    <Pet />
+                    <Pet userProgress={userProgress} />
+
                 </View>
             }
         </View>

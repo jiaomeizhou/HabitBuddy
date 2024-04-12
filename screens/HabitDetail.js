@@ -4,6 +4,8 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
 import { Styles } from '../components/Styles';
 import moment from 'moment';
+import * as Colors from '../components/Colors';
+import PressableButton from '../components/PressableButton';
 
 // Set up the locale configuration for the calendar
 LocaleConfig.locales['en'] = {
@@ -21,10 +23,9 @@ export default function HabitDetail({ route, navigation }) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerBackTitleVisible: false,
       headerRight: () => (
         <Pressable onPress={() => navigation.navigate('EditHabit', { habitObj: habitObj })}>
-          <FontAwesome6 name="edit" size={24} color="black" />
+          <FontAwesome6 name="edit" size={24} color={Colors.feldGrau} style={Styles.iconButton}/>
         </Pressable>
       ),
     });
@@ -65,22 +66,25 @@ export default function HabitDetail({ route, navigation }) {
 
 
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.habitText}>{habitObj.habit}</Text>
+    <View style={Styles.habitDetailContainer}>
+      <Text style={Styles.habitDetailText}>{habitObj.habit}</Text>
       <Calendar
         markedDates={checkedDates.reduce((acc, date) => {
           acc[date] = { selected: true, marked: true, selectedColor: 'green' };
           return acc;
         }, {})}
         renderDay={renderDate}
+        style={Styles.calendar}
       />
-      <Text style={Styles.progressText}>Progress: {progress}%</Text>
-      <Text style={Styles.checkInText}>You have checked in {habitCheckIns.length} times!</Text>
-      <Button
-        title="Check in"
+      <Text style={Styles.habitDetailText}>Progress: {progress}%</Text>
+      <Text style={Styles.statusText}>You have checked in {habitCheckIns.length} times!</Text>
+      <PressableButton
+        title="Check in with a diary entry"
         onPress={handleCheckinButton}
         disabled={checkedInToday}
-        style={Styles.button}
+        color={Colors.fernGreen} 
+        customStyle={Styles.pressableButton} 
+        textColor={Colors.white}
       />
     </View>
   );
