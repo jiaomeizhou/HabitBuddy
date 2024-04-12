@@ -135,20 +135,24 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
-                    <HelperText type="info" style={styles.helperText}>
-                        Choose a habit to associate with this diary.
-                    </HelperText>
-                    {fromDiary && formattedHabits.map(habit => (
-                        <Chip
-                            icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
-                            key={habit.id}
-                            onPress={() => handlePressHabit(habit.id)}
-                            style={styles.chip}
-                            selected={selectedHabitId === habit.id}
-                        >
-                            {habit.label}
-                        </Chip>
-                    ))}
+                    {fromDiary ? (
+                        <>
+                            <HelperText type="info" style={styles.helperText}>
+                                Choose a habit to associate with this diary.
+                            </HelperText>
+                            {formattedHabits.map(habit => (
+                                <Chip
+                                    icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
+                                    key={habit.id}
+                                    onPress={() => handlePressHabit(habit.id)}
+                                    style={styles.chip}
+                                    selected={selectedHabitId === habit.id}
+                                >
+                                    {habit.label}
+                                </Chip>
+                            ))}
+                        </>
+                    ) : null}
 
                     <View style={styles.row}>
                         <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
