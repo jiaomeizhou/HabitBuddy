@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDoc, orderBy, onSnapshot } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addHabit(userId, data) {
@@ -194,5 +194,21 @@ export function fetchUserCheckInTrack(userId, callback) {
             }
         });
         callback(fetchedLocations);
+    });
+}
+
+export function fetchPublicCheckIns(callback) {
+    const q = query(
+        collection(database, "CheckIns"),
+        where("isPublic", "==", true),
+        orderBy("createdAt", "desc")
+    );
+
+    return onSnapshot(q, (querySnapshot) => {
+        const fetchedDiaries = [];
+        querySnapshot.forEach((doc) => {
+            fetchedDiaries.push({ id: doc.id, ...doc.data() });
+        });
+        callback(fetchedDiaries);
     });
 }
