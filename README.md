@@ -195,11 +195,11 @@ _The Home screen showcasing a list of user habits._
 
 _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
 
-<img src="assets/IterationProgress/post_diary_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
 
 _The Diary List Screen displays a comprehensive list of diary entries._
 
-<img src="assets/IterationProgress/diary_list_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
 
 _The Diary Detail Screen displays a detailed information of a diary entries._
 
@@ -207,7 +207,7 @@ _The Diary Detail Screen displays a detailed information of a diary entries._
 
 _The My Track Screen displays the user's all shared locations with their diary content._
 
-<img src="assets/IterationProgress/my_track.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
 
 _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
 
