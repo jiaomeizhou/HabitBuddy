@@ -143,7 +143,7 @@ export const Styles = StyleSheet.create({
 
     },
     label: {
-        width: "80%",
+        width: "85%",
         alignSelf: "center",
         fontWeight: "bold",
         color: Colors.feldGrau,
@@ -286,5 +286,15 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 50,
         backgroundColor: Colors.lightGreen,
+    },
+    reminderContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: 20,
+    },
+    reminderText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.chestnut,
     },
 })
