@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import { mapsApiKey } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function LocationManager({ onLocationSelect }) {
+export default function LocationManager({ onLocationSelect, currentData }) {
     const navigation = useNavigation();
     const route = useRoute();
     const [status, requestPermission] = Location.useForegroundPermissions();
@@ -12,7 +12,6 @@ export default function LocationManager({ onLocationSelect }) {
 
     useEffect(() => {
         if (route.params) {
-            console.log(route.params);
             setLocation(route.params.selectedLocation);
         }
     }, [route.params]);
@@ -51,11 +50,12 @@ export default function LocationManager({ onLocationSelect }) {
     function chooseLocationHandler() {
         navigation.navigate('Map', {
             from: 'LocationManager',
+            ...currentData,
         });
     }
 
     return (
-        <View>
+        <View style={styles.container} >
             <View style={styles.buttonContainer}>
                 <Button title="User my current location" onPress={locateUserHandler} />
                 <Button
@@ -79,6 +79,11 @@ export default function LocationManager({ onLocationSelect }) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         marginTop: 12,
-        width: Dimensions.get("window").width - 10,
+        width: Dimensions.get("window").width - 40,
         height: 200,
         overflow: 'hidden',
     },
