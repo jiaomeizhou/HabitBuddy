@@ -55,8 +55,8 @@ export default function Stats() {
                     <Text style={Styles.statsTextWhite}>{completedHabits.length}</Text>
                 </View>
                 <View style={Styles.statsCardWhite}>
-                    <Text style={Styles.statsLableGreen}>Failed Habits</Text>
-                    <Text style={Styles.statsTextGreen}>{failedHabits.length}</Text>
+                    <Text style={Styles.statsLablePink}>Failed Habits</Text>
+                    <Text style={Styles.statsTextPink}>{failedHabits.length}</Text>
                 </View>
             </View>
         </View>

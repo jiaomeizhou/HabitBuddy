@@ -164,7 +164,7 @@ export const Styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderRadius: 10,
         borderColor: Colors.fernGreen,
-        borderWidth: 2,
+        borderWidth: 1,
         padding: 10,
         margin: 5,
         width: 150,
@@ -204,6 +204,15 @@ export const Styles = StyleSheet.create({
     statsLableGreen: {
         fontSize: 15,
         color: Colors.fernGreen,
+    },
+    statsTextPink: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: Colors.pink,
+    },
+    statsLablePink: {
+        fontSize: 15,
+        color: Colors.pink,
     },
     nameText: {
         fontSize: 24,
