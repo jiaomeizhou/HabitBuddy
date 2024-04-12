@@ -36,12 +36,15 @@ export const Styles = StyleSheet.create({
         marginTop: 60,
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         alignSelf: 'center',
         justifyContent: 'center',
         borderRadius: 100,
         overflow: 'hidden',
+        borderWidth: 2,
+        borderColor: Colors.white,
+        marginTop: 10,
     },
     statusText: {
         fontSize: 16,
@@ -222,10 +225,8 @@ export const Styles = StyleSheet.create({
         color: Colors.feldGrau,
     },
     profileText: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 16,
         alignSelf: 'center',
-        color: Colors.feldGrau,
     },
     habitButtonsContainer: {
         width: '80%',
@@ -279,5 +280,11 @@ export const Styles = StyleSheet.create({
     },
     pressed: {
         opacity: 0.5,
+    },
+    profileCard: {
+        width: '90%',
+        alignSelf: 'center',
+        marginBottom: 50,
+        backgroundColor: Colors.lightGreen,
     },
 })
