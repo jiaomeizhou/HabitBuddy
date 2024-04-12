@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
+        backgroundColor: 'rgba(247 248 245 / 0.9)'
     },
     image: {
         height: 200,
