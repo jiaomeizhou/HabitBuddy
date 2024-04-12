@@ -1,14 +1,13 @@
 import { StyleSheet, View, Alert, ScrollView } from 'react-native'
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomText from '../components/CustomText';
 import PressableButton from '../components/PressableButton';
 import { formatDate } from '../helpers/dateHelper';
 import { auth, storage } from '../firebase-files/firebaseSetup';
-import { useFocusEffect } from '@react-navigation/native';
 import ImageManager from '../components/ImageManager';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { TextInput, Switch, Card, HelperText } from 'react-native-paper';
+import { TextInput, Switch, Card, HelperText, Chip } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
 
@@ -23,6 +22,8 @@ export default function PostDiary({ navigation, route }) {
     const habitData = habit.habitObj;
     const habitId = habitData ? habitData.id : null;
     const date = new Date();
+    const { fromDiary, formattedHabits } = route.params || {};
+    const [selectedHabitId, setSelectedHabitId] = useState(null);
 
     const inputTheme = {
         colors: {
@@ -33,20 +34,28 @@ export default function PostDiary({ navigation, route }) {
         },
     };
 
-    useFocusEffect(
-        useCallback(() => {
-            setImageUri(null);
-            setDiary('');
-            setIsPublic(true);
-            setTaskCompleted(false);
-        }, [])
-    );
-
     useEffect(() => {
         if (route.params?.selectedLocation) {
             setLocationInfo(route.params.selectedLocation);
         }
-    }, [route.params?.selectedLocation]);
+        if (route.params?.diary) {
+            setDiary(route.params.diary);
+            setIsPublic(route.params.isPublic);
+            setTaskCompleted(route.params.taskCompleted);
+            setSelectedHabitId(route.params.selectedHabitId);
+            setImageUri(route.params.imageUri);
+        }
+
+    }, [route.params]);
+
+    function handlePressHabit(habitId) {
+        if (selectedHabitId === habitId) {
+            setSelectedHabitId(null);
+        } else {
+            setSelectedHabitId(habitId);
+        }
+
+    }
 
     async function getImageData(uri) {
         try {
@@ -74,13 +83,21 @@ export default function PostDiary({ navigation, route }) {
             return;
         }
 
+        if (fromDiary) {
+            if (!selectedHabitId) {
+                Alert.alert("Error", "Please select a habit.");
+                return;
+            }
+        }
+
+        const habitIdToUse = habitId ? habitId : selectedHabitId;
         const newEntry = {
             diary,
-            imageUri,
+            imageUri: imageUri || null,
             isPublic,
             taskCompleted,
             userId,
-            habitId,
+            habitId: habitIdToUse,
             date: date,
             location: locationInfo,
         };
@@ -100,7 +117,10 @@ export default function PostDiary({ navigation, route }) {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <ScrollView
+            contentContainerStyle={styles.scrollViewContent}
+            nestedScrollEnabled={true}
+        >
             <Card style={styles.card}>
                 <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={styles.date} />
                 <Card.Content>
@@ -115,6 +135,18 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
+                    {fromDiary && formattedHabits.map(habit => (
+                        <Chip
+                            icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
+                            key={habit.id}
+                            onPress={() => handlePressHabit(habit.id)}
+                            style={styles.chip}
+                            selected={selectedHabitId === habit.id}
+                        >
+                            {habit.label}
+                        </Chip>
+                    ))}
+
                     <View style={styles.row}>
                         <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
                         <Switch
@@ -135,7 +167,18 @@ export default function PostDiary({ navigation, route }) {
                         Making your diary public will allow others to view it.
                     </HelperText>
                     <View style={styles.row}>
-                        <LocationManager onLocationSelect={setLocationInfo} />
+                        <LocationManager
+                            onLocationSelect={setLocationInfo}
+                            currentData={{
+                                habitId,
+                                diary,
+                                isPublic,
+                                taskCompleted,
+                                selectedHabitId,
+                                formattedHabits,
+                                fromDiary,
+                            }}
+                        />
                     </View>
                 </Card.Content>
                 <Card.Actions style={styles.cardActions}>
@@ -200,5 +243,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
+    },
+    chip: {
+        margin: 4,
     },
 })
