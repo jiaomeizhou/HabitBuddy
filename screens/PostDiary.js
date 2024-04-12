@@ -152,16 +152,15 @@ export default function PostDiary({ navigation, route }) {
                                 </Chip>
                             ))}
                         </>
-                    ) : null}
-
-                    <View style={styles.row}>
-                        <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
-                        <Switch
-                            value={taskCompleted}
-                            onValueChange={setTaskCompleted}
-                            color='seagreen'
-                        />
-                    </View>
+                    ) :
+                        <View style={styles.row}>
+                            <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
+                            <Switch
+                                value={taskCompleted}
+                                onValueChange={setTaskCompleted}
+                                color='seagreen'
+                            />
+                        </View>}
                     <View style={styles.row}>
                         <CustomText style={styles.customText}>Public: </CustomText>
                         <Switch
