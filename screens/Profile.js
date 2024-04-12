@@ -6,9 +6,8 @@ import Stats from '../components/Stats';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
-import IconButton from '../components/IconButton';
+import { IconButton } from 'react-native-paper';
 import { signOut } from "firebase/auth";
-import PressableButton from '../components/PressableButton';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 export default function Profile({ navigation }) {
@@ -17,9 +16,7 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton onPress={onPressEdit}>
-          <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} style={Styles.iconButton} />
-        </IconButton>
+        <IconButton onPress={onPressEdit} icon="account-edit" size={28}/>
       ),
     });
   }, [navigation]);
