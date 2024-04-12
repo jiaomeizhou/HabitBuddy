@@ -204,13 +204,23 @@ export default function AddHabitScreen({ route }) {
                 <Switch
                     onValueChange={setIsReminderEnabled}
                     value={isReminderEnabled}
-                    color={Colors.indigoDye}
+                    color={Colors.chestnut}
                 />
             </View>
-            <View style={styles.buttonsContainer}>
-                <PressableButton title="Save" onPress={saveHandler} color='#2196F3' />
-                <PressableButton title="Cancel" onPress={cancelHandler} color='#B0ADAD' />
-            </View>
+            <PressableButton
+                title="Save"
+                onPress={saveHandler}
+                color={Colors.fernGreen}
+                customStyle={Styles.pressableButton}
+                textColor={Colors.white}
+            />
+            <PressableButton
+                title="Cancel"
+                onPress={cancelHandler}
+                color={Colors.white}
+                customStyle={Styles.pressableButton}
+                textColor={Colors.fernGreen}
+            />
         </View>
     )
 }

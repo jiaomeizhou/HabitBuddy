@@ -295,6 +295,6 @@ export const Styles = StyleSheet.create({
     reminderText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: Colors.fernGreen,
+        color: Colors.chestnut,
     },
 })
