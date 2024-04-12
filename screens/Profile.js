@@ -7,7 +7,6 @@ import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
 import IconButton from '../components/IconButton';
-import { AntDesign } from "@expo/vector-icons";
 import { signOut } from "firebase/auth";
 import PressableButton from '../components/PressableButton';
 

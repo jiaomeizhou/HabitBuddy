@@ -160,9 +160,11 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         width: '80%',
     },
-    statsCardPink: {
-        backgroundColor: Colors.battleshipGrey,
+    statsCardWhite: {
+        backgroundColor: Colors.white,
         borderRadius: 10,
+        borderColor: Colors.fernGreen,
+        borderWidth: 2,
         padding: 10,
         margin: 5,
         width: 150,
@@ -185,14 +187,23 @@ export const Styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexWrap: 'wrap',
     },
-    statsText: {
+    statsTextWhite: {
         fontSize: 24,
         fontWeight: 'bold',
         color: Colors.white,
     },
-    statsLable: {
+    statsTextGreen: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    statsLableWhite: {
         fontSize: 15,
         color: Colors.white,
+    },
+    statsLableGreen: {
+        fontSize: 15,
+        color: Colors.fernGreen,
     },
     nameText: {
         fontSize: 24,
