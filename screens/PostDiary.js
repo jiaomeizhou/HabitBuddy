@@ -135,6 +135,9 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
+                    <HelperText type="info" style={styles.helperText}>
+                        Choose a habit to associate with this diary.
+                    </HelperText>
                     {fromDiary && formattedHabits.map(habit => (
                         <Chip
                             icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
@@ -195,6 +198,7 @@ export default function PostDiary({ navigation, route }) {
 const styles = StyleSheet.create({
     customText: {
         color: '#5A7247',
+        width: '100%',
     },
     helperText: {
         fontSize: 13,
