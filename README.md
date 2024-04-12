@@ -24,10 +24,16 @@ service cloud.firestore {
 }
 ```
 
+### Firebase indexes
+
+#### If you encounter the following error, please manually add the indexes in Firebase. Copy the link in the error message, paste it to the browser and follow the instructions to add indexes, wait for a few minutes then the error should be fixed.
+<img src="assets/firebase_indexes_error.PNG" alt="drawing" width="200"/>
+<img src="assets/firebase_indexes.PNG" alt="drawing" width="200"/>
+
 ## Team Members and Contributions
 
-1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Signup, Login
-2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries
+1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Authentication, Camera use
+2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries, Diary detail, Location use
 
 ## Development log
 
@@ -56,6 +62,14 @@ service cloud.firestore {
 2. Update the data, listen to real time update from database
 3. Calculate habit progress and display the progress bar
 4. Display the real time stats on profile screen
+
+##### 04/01/2024 - 04/11/2024
+1. Finish UI for Home, Profile, Login/signin, Habit detail screen.
+2. Finish Authentication.
+3. Implement the main logic of pet status.
+4. Finish camera use and upload an image from gallery.
+5. Fix many bugs.
+
 
 ### Weiyi
 
