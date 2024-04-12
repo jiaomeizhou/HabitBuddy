@@ -297,4 +297,20 @@ export const Styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.chestnut,
     },
+    dateTimePicker: {
+        width: '85%',
+        marginVertical: 5,
+        backgroundColor: Colors.white,
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: Colors.feldGrau,
+        borderRadius: 10,
+    },
+    dropDownPicker: {
+        marginVertical: 5,
+        backgroundColor: Colors.white,
+        alignSelf: 'center',
+        borderWidth: 2,
+        borderColor: Colors.feldGrau,
+    },
 })

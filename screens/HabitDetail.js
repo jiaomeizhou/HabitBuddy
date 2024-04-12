@@ -79,7 +79,7 @@ export default function HabitDetail({ route, navigation }) {
       <Text style={Styles.habitDetailText}>Progress: {progress}%</Text>
       <Text style={Styles.statusText}>You have checked in {habitCheckIns.length} times!</Text>
       <PressableButton
-        title="Check in"
+        title="Check in with a diary entry"
         onPress={handleCheckinButton}
         disabled={checkedInToday}
         color={Colors.fernGreen} 

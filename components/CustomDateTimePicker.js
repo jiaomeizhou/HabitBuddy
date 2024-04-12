@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React from 'react'
+import { Styles } from './Styles';
 
 export default function CustomDateTimePicker({ testID, value, mode, is24Hour, display, onChange }) {
     return (
@@ -11,6 +12,7 @@ export default function CustomDateTimePicker({ testID, value, mode, is24Hour, di
             is24Hour={is24Hour}
             display={display}
             onChange={onChange}
+            style={Styles.dateTimePicker}
         />
     )
 }

@@ -135,26 +135,32 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
-                    {fromDiary && formattedHabits.map(habit => (
-                        <Chip
-                            icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
-                            key={habit.id}
-                            onPress={() => handlePressHabit(habit.id)}
-                            style={styles.chip}
-                            selected={selectedHabitId === habit.id}
-                        >
-                            {habit.label}
-                        </Chip>
-                    ))}
-
-                    <View style={styles.row}>
-                        <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
-                        <Switch
-                            value={taskCompleted}
-                            onValueChange={setTaskCompleted}
-                            color='seagreen'
-                        />
-                    </View>
+                    {fromDiary ? (
+                        <>
+                            <HelperText type="info" style={styles.helperText}>
+                                Choose a habit to associate with this diary.
+                            </HelperText>
+                            {formattedHabits.map(habit => (
+                                <Chip
+                                    icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
+                                    key={habit.id}
+                                    onPress={() => handlePressHabit(habit.id)}
+                                    style={styles.chip}
+                                    selected={selectedHabitId === habit.id}
+                                >
+                                    {habit.label}
+                                </Chip>
+                            ))}
+                        </>
+                    ) :
+                        <View style={styles.row}>
+                            <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
+                            <Switch
+                                value={taskCompleted}
+                                onValueChange={setTaskCompleted}
+                                color='seagreen'
+                            />
+                        </View>}
                     <View style={styles.row}>
                         <CustomText style={styles.customText}>Public: </CustomText>
                         <Switch
@@ -195,6 +201,7 @@ export default function PostDiary({ navigation, route }) {
 const styles = StyleSheet.create({
     customText: {
         color: '#5A7247',
+        width: '100%',
     },
     helperText: {
         fontSize: 13,
