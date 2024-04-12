@@ -1,4 +1,4 @@
-import { View, Text, Image, Button } from 'react-native';
+import { View, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase-files/firebaseSetup';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -6,10 +6,9 @@ import Stats from '../components/Stats';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 import * as Colors from '../components/Colors';
-import IconButton from '../components/IconButton';
-import { AntDesign } from "@expo/vector-icons";
+import { IconButton } from 'react-native-paper';
 import { signOut } from "firebase/auth";
-import PressableButton from '../components/PressableButton';
+import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -17,9 +16,7 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton onPress={onPressEdit}>
-          <FontAwesome5 name="user-edit" size={22} color={Colors.feldGrau} style={Styles.iconButton} />
-        </IconButton>
+        <IconButton onPress={onPressEdit} icon="account-edit" size={28}/>
       ),
     });
   }, [navigation]);
@@ -57,22 +54,25 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={Styles.container}>
-      {auth.currentUser && userProfile && userProfile.avatarUrl ? (
-        <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
-        :
-        (<FontAwesome5 name="user-circle" size={100} color={Colors.silver} />
-        )}
       {auth.currentUser &&
-        <View>
-          <Text style={Styles.nameText}>{auth.currentUser.displayName}</Text>
-          <Text style={Styles.profileText}>{auth.currentUser.email}</Text>
-          <Text style={Styles.profileText}>Pet name: {userProfile?.petName || ''}</Text>
-          <Text style={Styles.profileText}>Pet status: {userProfile?.petStatus || ''}</Text>
-          {/* <Text style={Styles.profileText}>Total Progress: {userProfile?.totalProgress || ''}%</Text> */}
-        </View>
+        <Card style={Styles.profileCard}>
+          {userProfile && userProfile.avatarUrl ? (
+            <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
+            :
+            (<FontAwesome5 name="user-circle" size={150} color={Colors.silver} />
+            )}
+          <Card.Content style={Styles.profileText}>
+            <Text style={Styles.nameText} >{auth.currentUser.displayName}</Text>
+            <Text>{auth.currentUser.email}</Text>
+            <Text>Pet name: {userProfile?.petName || ''}</Text>
+            <Text>Pet status: {userProfile?.petStatus || ''}</Text>
+          </Card.Content>
+          <Card.Actions>
+            <Button onPress={onPressLogOut} icon="logout" mode="elevated" textColor={Colors.chestnut} >Log out</Button>
+          </Card.Actions>
+        </Card>
       }
       <Stats />
-      <PressableButton title="Log out" onPress={onPressLogOut} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
     </View>
 
   );

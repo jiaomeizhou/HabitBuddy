@@ -36,12 +36,15 @@ export const Styles = StyleSheet.create({
         marginTop: 60,
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         alignSelf: 'center',
         justifyContent: 'center',
         borderRadius: 100,
         overflow: 'hidden',
+        borderWidth: 2,
+        borderColor: Colors.white,
+        marginTop: 10,
     },
     statusText: {
         fontSize: 16,
@@ -160,9 +163,11 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         width: '80%',
     },
-    statsCardPink: {
-        backgroundColor: Colors.battleshipGrey,
+    statsCardWhite: {
+        backgroundColor: Colors.white,
         borderRadius: 10,
+        borderColor: Colors.fernGreen,
+        borderWidth: 1,
         padding: 10,
         margin: 5,
         width: 150,
@@ -185,14 +190,32 @@ export const Styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexWrap: 'wrap',
     },
-    statsText: {
+    statsTextWhite: {
         fontSize: 24,
         fontWeight: 'bold',
         color: Colors.white,
     },
-    statsLable: {
+    statsTextGreen: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    statsLableWhite: {
         fontSize: 15,
         color: Colors.white,
+    },
+    statsLableGreen: {
+        fontSize: 15,
+        color: Colors.fernGreen,
+    },
+    statsTextPink: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: Colors.pink,
+    },
+    statsLablePink: {
+        fontSize: 15,
+        color: Colors.pink,
     },
     nameText: {
         fontSize: 24,
@@ -202,10 +225,8 @@ export const Styles = StyleSheet.create({
         color: Colors.feldGrau,
     },
     profileText: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 16,
         alignSelf: 'center',
-        color: Colors.feldGrau,
     },
     habitButtonsContainer: {
         width: '80%',
@@ -259,5 +280,11 @@ export const Styles = StyleSheet.create({
     },
     pressed: {
         opacity: 0.5,
+    },
+    profileCard: {
+        width: '90%',
+        alignSelf: 'center',
+        marginBottom: 50,
+        backgroundColor: Colors.lightGreen,
     },
 })

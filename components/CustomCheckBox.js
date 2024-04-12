@@ -2,12 +2,13 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import Checkbox from 'expo-checkbox';
 import CustomText from './CustomText'
+import * as Colors from './Colors'
 
 export default function CustomCheckBox({ text, value, onValueChange }) {
     return (
         <View style={styles.section}>
             {text && <CustomText style={styles.paragraph}>{text}</CustomText>}
-            <Checkbox style={styles.checkbox} value={value} onValueChange={onValueChange} />
+            <Checkbox style={styles.checkbox} value={value} onValueChange={onValueChange} color={Colors.fernGreen}/>
         </View>
     )
 }

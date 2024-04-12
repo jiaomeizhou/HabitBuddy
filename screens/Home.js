@@ -5,20 +5,16 @@ import HabitItem from '../components/HabitItem';
 import { Styles } from '../components/Styles';
 import Pet from '../components/Pet';
 import { auth } from '../firebase-files/firebaseSetup';
-import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsByUserId, updateHabit, updateUserData } from '../firebase-files/firestoreHelper';
 import { Alert } from 'react-native';
-import * as Colors from '../components/Colors';
-import IconButton from '../components/IconButton';
+import { IconButton } from 'react-native-paper';
 
 
 export default function Home({ navigation }) {
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <IconButton onPress={() => navigation.navigate('AddHabit')} >
-                    <FontAwesome6 name="add" size={24} color={Colors.chestnut} style={Styles.iconButton} />
-                </IconButton>
+                <IconButton onPress={() => navigation.navigate('AddHabit')} icon="plus" />
             ),
         });
     }, []);
@@ -116,7 +112,7 @@ export default function Home({ navigation }) {
                         }}
                     />
                     <Pet userProgress={userProgress} />
-                    
+
                 </View>
             }
         </View>

@@ -40,23 +40,23 @@ export default function Stats() {
     return (
         <View style={Styles.statsContainer}>
             <View style={Styles.statsContainer}>
-                <View style={Styles.statsCardPink}>
-                    <Text style={Styles.statsLable}>Current Habits</Text>
-                    <Text style={Styles.statsText}>{habits.length}</Text>
+                <View style={Styles.statsCardWhite}>
+                    <Text style={Styles.statsLableGreen}>Current Habits</Text>
+                    <Text style={Styles.statsTextGreen}>{habits.length}</Text>
                 </View>
                 <View style={Styles.statsCardGrey}>
-                    <Text style={Styles.statsLable}>Check-ins</Text>
-                    <Text style={Styles.statsText}>{checkIns.length}</Text>
+                    <Text style={Styles.statsLableWhite}>Check-ins</Text>
+                    <Text style={Styles.statsTextWhite}>{checkIns.length}</Text>
                 </View>
             </View>
             <View style={Styles.statsContainer}>
                 <View style={Styles.statsCardGrey}>
-                    <Text style={Styles.statsLable}>Completed Habits</Text>
-                    <Text style={Styles.statsText}>{completedHabits.length}</Text>
+                    <Text style={Styles.statsLableWhite}>Completed Habits</Text>
+                    <Text style={Styles.statsTextWhite}>{completedHabits.length}</Text>
                 </View>
-                <View style={Styles.statsCardPink}>
-                    <Text style={Styles.statsLable}>Failed Habits</Text>
-                    <Text style={Styles.statsText}>{failedHabits.length}</Text>
+                <View style={Styles.statsCardWhite}>
+                    <Text style={Styles.statsLablePink}>Failed Habits</Text>
+                    <Text style={Styles.statsTextPink}>{failedHabits.length}</Text>
                 </View>
             </View>
         </View>
