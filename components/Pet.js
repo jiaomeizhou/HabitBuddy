@@ -5,6 +5,7 @@ import ProgressBar from './ProgressBar';
 import { auth } from '../firebase-files/firebaseSetup';
 import { updateUserData } from '../firebase-files/firestoreHelper';
 import PressableItem from './PressableItem';
+import PetMessage from './PetMessage';
 
 export default function Pet({ userProgress }) {
     // TODO: consider if it's necessary to store the pet in the database
@@ -53,6 +54,7 @@ export default function Pet({ userProgress }) {
 
     return (
         <PressableItem onPress={handlePressPet}>
+            <PetMessage />
             <Image source={getImageSource(petStatus)} style={Styles.image} />
             {/* <Text style={Styles.statusText}>
                 {getPetStatusText(petStatus)}
