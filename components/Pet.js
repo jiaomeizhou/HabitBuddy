@@ -6,6 +6,9 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { updateUserData } from '../firebase-files/firestoreHelper';
 import PressableItem from './PressableItem';
 import PetMessage from './PetMessage';
+import { Chip } from 'react-native-paper';
+import * as Colors from './Colors';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function Pet({ userProgress }) {
     const [showPetMessage, setShowPetMessage] = useState(false);
@@ -46,6 +49,11 @@ export default function Pet({ userProgress }) {
         <PressableItem onPress={handlePressPet}>
             {showPetMessage && <PetMessage />}
             <Image source={getImageSource(petStatus)} style={Styles.image} />
+            <Chip
+                icon={() => (
+                    <Icon name="paw" size={16} color={Colors.chestnut} />
+                )}
+                onPress={handlePressPet} style={Styles.chip} >Pet me!</Chip>
             <ProgressBar progress={userProgress} />
         </PressableItem>
     );

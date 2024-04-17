@@ -313,4 +313,10 @@ export const Styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: Colors.feldGrau,
     },
+    chip: {
+        margin: 4,
+        width: '25%',
+        alignSelf: 'center',
+        backgroundColor: Colors.lightGreen,
+    },
 })

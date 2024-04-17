@@ -18,7 +18,7 @@ export default function PetMessage() {
                     setPetMessage(fact);
                 }
                 else {
-                    throw new Error('Fact not found');
+                    setPetMessage("I don't want to be petted right now.");
                 }
             } catch (error) {
                 console.error(error)
