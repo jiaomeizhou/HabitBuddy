@@ -1,5 +1,5 @@
 import { View, Text, Image, Alert } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styles } from './Styles';
 import ProgressBar from './ProgressBar';
 import { auth } from '../firebase-files/firebaseSetup';
@@ -8,8 +8,7 @@ import PressableItem from './PressableItem';
 import PetMessage from './PetMessage';
 
 export default function Pet({ userProgress }) {
-    // TODO: consider if it's necessary to store the pet in the database
-    // do we need to allow user rename their pet?
+    const [showPetMessage, setShowPetMessage] = useState(false);
     const petStatus = userProgress > 70 ? 'happy' : userProgress > 30 ? 'normal' : 'sad';
 
     // Helper function to get the image source based on pet status
@@ -48,17 +47,20 @@ export default function Pet({ userProgress }) {
         updateUserPetStatus();
     }, [userProgress]);
 
+    // Handle press event on pet, when the user wants to pet the pet,
+    // show a random dog fact (fetch from API) for 5 seconds.
     function handlePressPet() {
+        setShowPetMessage(true);
+        setTimeout(() => {
+            setShowPetMessage(false);
+        }, 5000); // 5 seconds
         Alert.alert('Pet', getPetStatusText(petStatus));
     }
 
     return (
         <PressableItem onPress={handlePressPet}>
-            <PetMessage />
+            {showPetMessage && <PetMessage />}
             <Image source={getImageSource(petStatus)} style={Styles.image} />
-            {/* <Text style={Styles.statusText}>
-                {getPetStatusText(petStatus)}
-            </Text> */}
             <ProgressBar progress={userProgress} />
         </PressableItem>
     );
