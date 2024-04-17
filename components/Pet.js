@@ -1,14 +1,17 @@
-import { View, Text, Image, Alert } from 'react-native';
-import React, { useEffect } from 'react';
+import { View, Text, Image, Alert, TouchableWithoutFeedback } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Styles } from './Styles';
 import ProgressBar from './ProgressBar';
 import { auth } from '../firebase-files/firebaseSetup';
 import { updateUserData } from '../firebase-files/firestoreHelper';
 import PressableItem from './PressableItem';
+import PetMessage from './PetMessage';
+import { Chip } from 'react-native-paper';
+import * as Colors from './Colors';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function Pet({ userProgress }) {
-    // TODO: consider if it's necessary to store the pet in the database
-    // do we need to allow user rename their pet?
+    const [showPetMessage, setShowPetMessage] = useState(false);
     const petStatus = userProgress > 70 ? 'happy' : userProgress > 30 ? 'normal' : 'sad';
 
     // Helper function to get the image source based on pet status
@@ -25,20 +28,6 @@ export default function Pet({ userProgress }) {
         }
     }
 
-    // Helper function to get the status text based on pet status
-    function getPetStatusText(status) {
-        switch (status) {
-            case 'happy':
-                return "Keep it up! I'm so happy!";
-            case 'normal':
-                return 'I needs a little love. Keep checking in!';
-            case 'sad':
-                return "I'm sad. Keep checking in!";
-            default:
-                return '';
-        }
-    }
-
     // update pet status to user profile
     useEffect(() => {
         async function updateUserPetStatus() {
@@ -47,16 +36,24 @@ export default function Pet({ userProgress }) {
         updateUserPetStatus();
     }, [userProgress]);
 
+    // Handle press event on pet, when the user wants to pet the pet,
+    // show a random dog fact (fetch from API) for 5 seconds.
     function handlePressPet() {
-        Alert.alert('Pet', getPetStatusText(petStatus));
+        setShowPetMessage(true);
+        setTimeout(() => {
+            setShowPetMessage(false);
+        }, 5000);
     }
-
+    
     return (
         <PressableItem onPress={handlePressPet}>
+            {showPetMessage && <PetMessage />}
             <Image source={getImageSource(petStatus)} style={Styles.image} />
-            {/* <Text style={Styles.statusText}>
-                {getPetStatusText(petStatus)}
-            </Text> */}
+            <Chip
+                icon={() => (
+                    <Icon name="paw" size={16} color={Colors.chestnut} />
+                )}
+                onPress={handlePressPet} style={Styles.chip} >Pet me!</Chip>
             <ProgressBar progress={userProgress} />
         </PressableItem>
     );

@@ -313,4 +313,20 @@ export const Styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: Colors.feldGrau,
     },
+    chip: {
+        margin: 4,
+        width: '25%',
+        alignSelf: 'center',
+        backgroundColor: Colors.ashGrey,
+    },
+    petMessageDialog: {
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: Colors.ashGrey,
+        marginTop: 10,
+    },
+    defaultImage: {
+        alignSelf: 'center',
+        marginTop: 10,
+    },
 })
