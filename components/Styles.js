@@ -163,6 +163,13 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         width: '80%',
     },
+    forgotPasswordText: {
+        textAlign: 'center',
+        color: Colors.chestnut,
+        textDecorationLine: 'underline',
+        fontSize: 16,
+
+    },
     statsCardWhite: {
         backgroundColor: Colors.white,
         borderRadius: 10,
