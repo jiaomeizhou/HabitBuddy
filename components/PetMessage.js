@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
-import { Card, Dialog, Portal } from 'react-native-paper';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { Card, Dialog, Portal, Button } from 'react-native-paper';
 import { Styles } from './Styles';
 
 export default function PetMessage() {
@@ -34,13 +34,18 @@ export default function PetMessage() {
     const hideDialog = () => setVisible(false); // Function to hide the dialog
 
     return (
-        <Portal>
-            <Dialog visible={visible} onDismiss={hideDialog} style={Styles.petMessageDialog}>
-                <Dialog.Title>Dog fact</Dialog.Title>
-                <Dialog.Content>
-                    <Text>{petMessage}</Text>
-                </Dialog.Content>
-            </Dialog>
-        </Portal>
+        <View>
+            <Portal>
+                <Dialog visible={visible} onDismiss={hideDialog} style={Styles.petMessageDialog}>
+                    <Dialog.Title></Dialog.Title>
+                    <Dialog.Content>
+                        <Text>{petMessage}</Text>
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                        <Button onPress={hideDialog}>ok</Button>
+                    </Dialog.Actions>
+                </Dialog>
+            </Portal>
+        </View>
     );
 }

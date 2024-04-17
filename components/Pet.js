@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert } from 'react-native';
+import { View, Text, Image, Alert, TouchableWithoutFeedback } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Styles } from './Styles';
 import ProgressBar from './ProgressBar';
@@ -42,9 +42,9 @@ export default function Pet({ userProgress }) {
         setShowPetMessage(true);
         setTimeout(() => {
             setShowPetMessage(false);
-        }, 5000); // 5 seconds
+        }, 5000);
     }
-
+    
     return (
         <PressableItem onPress={handlePressPet}>
             {showPetMessage && <PetMessage />}
