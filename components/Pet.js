@@ -25,20 +25,6 @@ export default function Pet({ userProgress }) {
         }
     }
 
-    // Helper function to get the status text based on pet status
-    function getPetStatusText(status) {
-        switch (status) {
-            case 'happy':
-                return "Keep it up! I'm so happy!";
-            case 'normal':
-                return 'I needs a little love. Keep checking in!';
-            case 'sad':
-                return "I'm sad. Keep checking in!";
-            default:
-                return '';
-        }
-    }
-
     // update pet status to user profile
     useEffect(() => {
         async function updateUserPetStatus() {
@@ -54,7 +40,6 @@ export default function Pet({ userProgress }) {
         setTimeout(() => {
             setShowPetMessage(false);
         }, 5000); // 5 seconds
-        Alert.alert('Pet', getPetStatusText(petStatus));
     }
 
     return (
