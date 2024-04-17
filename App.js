@@ -14,6 +14,7 @@ import Login from './screens/Login';
 import DiaryDetail from './screens/DiaryDetail';
 import PostDiary from './screens/PostDiary';
 import Map from "./screens/Map";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -46,66 +47,68 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {userLoggedIn ?
-          <>
-            <Stack.Screen
-              name="BottomNavTabs"
-              component={BottomNavTabs}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen name="AddHabit" component={AddHabitScreen}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Add a Habit",
-              }}
-            />
-            <Stack.Screen name="EditHabit" component={EditHabitScreen}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Edit a Habit",
-              }}
-            />
-            <Stack.Screen
-              name="HabitDetail"
-              component={HabitDetail}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Habit Detail",
-              }}
-            />
-            <Stack.Screen
-              name='PostDiary' component={PostDiary}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Post Diary",
-              }}
-            />
-            <Stack.Screen name='DiaryDetail' component={DiaryDetail}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Diary Detail",
-              }}
-            />
-            <Stack.Screen name='EditProfile' component={EditProfile}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Edit Profile",
-              }}
-            />
-            <Stack.Screen name='Map' component={Map}
-              options={{
-                headerBackTitleVisible: false,
-                headerTitle: "Map",
-              }}
-            />
-          </>
-          : AuthStack}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {userLoggedIn ?
+            <>
+              <Stack.Screen
+                name="BottomNavTabs"
+                component={BottomNavTabs}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen name="AddHabit" component={AddHabitScreen}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Add a Habit",
+                }}
+              />
+              <Stack.Screen name="EditHabit" component={EditHabitScreen}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Edit a Habit",
+                }}
+              />
+              <Stack.Screen
+                name="HabitDetail"
+                component={HabitDetail}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Habit Detail",
+                }}
+              />
+              <Stack.Screen
+                name='PostDiary' component={PostDiary}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Post Diary",
+                }}
+              />
+              <Stack.Screen name='DiaryDetail' component={DiaryDetail}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Diary Detail",
+                }}
+              />
+              <Stack.Screen name='EditProfile' component={EditProfile}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Edit Profile",
+                }}
+              />
+              <Stack.Screen name='Map' component={Map}
+                options={{
+                  headerBackTitleVisible: false,
+                  headerTitle: "Map",
+                }}
+              />
+            </>
+            : AuthStack}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 

@@ -1,8 +1,11 @@
-import { View, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
+import { Card, Dialog, Portal } from 'react-native-paper';
+import { Styles } from './Styles';
 
 export default function PetMessage() {
-    const [petMessage, setPetMessage] = useState("")
+    const [petMessage, setPetMessage] = useState('');
+    const [visible, setVisible] = useState(false); // State for controlling dialog visibility
 
     useEffect(() => {
         async function getPetMessageFromAPI() {
@@ -13,23 +16,31 @@ export default function PetMessage() {
                     throw new Error('Data not found');
                 }
                 const data = await response.json();
-                const fact = data.data[0].attributes.body;
+                const fact = data.data[0]?.attributes?.body;
                 if (fact) {
                     setPetMessage(fact);
-                }
-                else {
+                    setVisible(true); // Show the dialog when there is a pet message
+                } else {
                     setPetMessage("I don't want to be petted right now.");
+                    setVisible(true); // Show the dialog with default message
                 }
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         }
         getPetMessageFromAPI();
     }, []);
 
+    const hideDialog = () => setVisible(false); // Function to hide the dialog
+
     return (
-        <View>
-            <Text>{petMessage}</Text>
-        </View>
-    )
+        <Portal>
+            <Dialog visible={visible} onDismiss={hideDialog} style={Styles.petMessageDialog}>
+                <Dialog.Title>Dog fact</Dialog.Title>
+                <Dialog.Content>
+                    <Text>{petMessage}</Text>
+                </Dialog.Content>
+            </Dialog>
+        </Portal>
+    );
 }

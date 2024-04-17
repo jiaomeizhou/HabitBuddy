@@ -317,6 +317,12 @@ export const Styles = StyleSheet.create({
         margin: 4,
         width: '25%',
         alignSelf: 'center',
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.ashGrey,
+    },
+    petMessageDialog: {
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: Colors.ashGrey,
+        marginTop: 10,
     },
 })
