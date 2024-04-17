@@ -6,6 +6,7 @@ import { addUserToDB } from "../firebase-files/firestoreHelper";
 import { Styles } from "../components/Styles";
 import * as Colors from "../components/Colors";
 import PressableButton from "../components/PressableButton";
+import AppIntro from "../components/AppIntro";
 
 export default function Signup({ navigation }) {
     const [email, setEmail] = useState("");
@@ -44,6 +45,7 @@ export default function Signup({ navigation }) {
 
     return (
         <View style={Styles.container}>
+            <AppIntro />
             <Text style={Styles.label}>Email</Text>
             <TextInput
                 style={Styles.input}
