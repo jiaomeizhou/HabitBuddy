@@ -325,4 +325,8 @@ export const Styles = StyleSheet.create({
         backgroundColor: Colors.ashGrey,
         marginTop: 10,
     },
+    defaultImage: {
+        alignSelf: 'center',
+        marginTop: 10,
+    },
 })

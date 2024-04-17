@@ -59,7 +59,7 @@ export default function Profile({ navigation }) {
           {userProfile && userProfile.avatarUrl ? (
             <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
             :
-            (<FontAwesome5 name="user-circle" size={150} color={Colors.silver} />
+            (<FontAwesome5 name="user-circle" size={150} color={Colors.silver} style={Styles.defaultImage} />
             )}
           <Card.Content style={Styles.profileText}>
             <Text style={Styles.nameText} >{auth.currentUser.displayName}</Text>
