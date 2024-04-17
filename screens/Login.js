@@ -6,6 +6,7 @@ import { Styles } from "../components/Styles";
 import PressableButton from "../components/PressableButton";
 import * as Colors from "../components/Colors";
 import PressableItem from "../components/PressableItem";
+import AppIntro from "../components/AppIntro";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -57,9 +58,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={Styles.container}>
-      <Text style={Styles.nameText}>Welcome to Habit Buddy</Text>
-      <Text style={Styles.profileText}>Build habits with a lovely virtual pet.</Text>
-      <Image source={require('../assets/PetStatus/happy_dog.jpg')} style={Styles.image} />
+      <AppIntro />
       <Text style={Styles.label}>Email</Text>
       <TextInput
         placeholder="Email"
