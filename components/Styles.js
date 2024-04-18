@@ -328,7 +328,7 @@ export const Styles = StyleSheet.create({
     petMessageDialog: {
         width: '90%',
         alignSelf: 'center',
-        backgroundColor: Colors.ashGrey,
+        backgroundColor: Colors.lightGrey,
         marginTop: 10,
     },
     defaultImage: {
