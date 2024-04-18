@@ -81,14 +81,15 @@ export default function Pet({ userProgress }) {
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
-            <View style={Styles.petContainer}>
+            <View >
                 <AnimatedCircularProgress
                     size={200}
                     width={15}
                     fill={userProgress}
                     tintColor={Colors.fernGreen}
                     backgroundColor={Colors.lightGrey}
-                    rotation={0}>
+                    rotation={0}
+                    padding={10}>
                     {
                         (fill) => (
                             <Image source={getImageSource(petStatus)} style={Styles.image} />

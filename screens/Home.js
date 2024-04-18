@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet, FlatList, Pressable } from 'react-native'
+import { View, FlatList, SafeAreaView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Welcome from '../components/Welcome';
 import HabitItem from '../components/HabitItem';
@@ -99,20 +99,23 @@ export default function Home({ navigation }) {
     }, [userProgress]);
 
     return (
-        <View style={Styles.container}>
+        <View style={Styles.homeContainer}>
             {renderWelcome ? <Welcome navigation={navigation} /> :
-                <View >
-                    <FlatList
-                        data={habits}
-                        renderItem={({ item }) => {
-                            return <HabitItem
-                                habitObj={item}
-                                navigation={navigation}
-                            />
-                        }}
-                    />
-                    <Pet userProgress={userProgress} />
-
+                <View style={Styles.homeContainer}>
+                    <View style={Styles.habitListContainer}>
+                        <FlatList
+                            data={habits}
+                            renderItem={({ item }) => {
+                                return <HabitItem
+                                    habitObj={item}
+                                    navigation={navigation}
+                                />
+                            }}
+                        />
+                    </View>
+                    <View style={Styles.petContainer}>
+                        <Pet userProgress={userProgress} />
+                    </View>
                 </View>
             }
         </View>

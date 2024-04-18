@@ -86,21 +86,25 @@ export default function HabitItem({ habitObj, navigation }) {
     }, [progress]);
 
     return (
-        <PressableItem onPress={handlePress}>
+        <PressableItem onPress={handlePress} >
             <View style={Styles.habitItem}>
-                <Text style={Styles.habitText}>
-                    {habitObj.habit.length > 12 ?
-                        habitObj.habit.replace(/(.{12})/g, "$1\n") :
-                        habitObj.habit}
-                </Text>
-                <ProgressBar progress={progress} label={`${progress}%`} />
-                <CustomCheckBox
-                    value={isChecked}
-                    onValueChange={handleCheckInChange}
-                    progress={progress}
-                    habitCheckIns={habitCheckIns}
-                    todayCheckInsData={todayCheckInsData}
-                />
+                <View style={{flex: 5}}>
+                    <Text style={Styles.habitText}>
+                        {habitObj.habit}
+                    </Text>
+                </View>
+                <View style={{flex: 4}}>
+                    <ProgressBar progress={progress} label={`${progress}%`} />
+                </View>
+                <View style={{flex: 1}}>
+                    <CustomCheckBox
+                        value={isChecked}
+                        onValueChange={handleCheckInChange}
+                        progress={progress}
+                        habitCheckIns={habitCheckIns}
+                        todayCheckInsData={todayCheckInsData}
+                    />
+                </View>
             </View>
         </PressableItem>
     )
