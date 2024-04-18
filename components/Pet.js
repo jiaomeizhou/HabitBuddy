@@ -42,7 +42,7 @@ export default function Pet({ userProgress }) {
         setShowPetMessage(true);
         setTimeout(() => {
             setShowPetMessage(false);
-        }, 5000);
+        }, 10000);
     }
     
     return (
