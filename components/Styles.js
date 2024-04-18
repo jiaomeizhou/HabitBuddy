@@ -31,9 +31,8 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
     },
     petContainer: {
-        flex: 1,
         alignItems: 'center',
-        marginTop: 60,
+        margin: 15,
     },
     image: {
         width: 150,
