@@ -21,7 +21,6 @@ export default function AddHabitScreen({ route }) {
 
     const navigation = useNavigation();
     const [habitName, setHabitName] = useState(habitShortcutName || '');
-    console.log("name", habitName)
     const [habitFrequency, setHabitFrequency] = useState('');
     const [durationWeeks, setDurationWeeks] = useState('');
     const [endDate, setEndDate] = useState(null);
@@ -41,8 +40,8 @@ export default function AddHabitScreen({ route }) {
     const [date, setDate] = useState(new Date());
     const [formattedDate, setFormattedDate] = useState('');
     const [formattedEndDate, setFormattedEndDate] = useState('');
+    // endDate vs. formattedEndDate: {"nanoseconds": 23000000, "seconds": 1714357909} Sun Apr 07 2024
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
     const habitData = route.params?.habitData || null;
     const habitId = habitData?.id || null;
     const isEditMode = route.params?.isEditMode || false;
@@ -56,6 +55,7 @@ export default function AddHabitScreen({ route }) {
             setDurationWeeks(habitData.durationWeeks.toString());
             setIsReminderEnabled(habitData.isReminderEnabled);
             setEndDate(habitData.endDate);
+            setFormattedEndDate(habitData.formattedEndDate);
         } else {
             if (habitName) {
                 setHabitName(habitName);
@@ -68,6 +68,7 @@ export default function AddHabitScreen({ route }) {
             setDurationWeeks('');
             setEndDate(null);
             setIsReminderEnabled(false);
+            setFormattedEndDate('');
         }
     }, [habitData, isEditMode]);
 
@@ -102,7 +103,6 @@ export default function AddHabitScreen({ route }) {
         result.setDate(result.getDate() + weeks * 7);
         setEndDate(result);
         setFormattedEndDate(result.toDateString());
-
     }
 
     function saveHandler() {
@@ -121,6 +121,7 @@ export default function AddHabitScreen({ route }) {
             'progress': 0,
             'checkInCount': 0,
             'userId': userId,
+            'formattedEndDate': formattedEndDate || '',
         };
 
         if (habitData && isEditMode) {
@@ -224,24 +225,3 @@ export default function AddHabitScreen({ route }) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-    },
-    input: {
-        width: '100%',
-        padding: 8,
-        marginVertical: 2,
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 5,
-        color: 'black',
-        fontWeight: 'normal',
-    },
-    buttonsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-})

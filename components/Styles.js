@@ -7,9 +7,10 @@ export const Styles = StyleSheet.create({
         opacity: 0.5,
     },
     habitItem: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%',
+        width: '90%',
         borderWidth: 2,
         padding: 10,
         marginTop: 20,
@@ -23,17 +24,16 @@ export const Styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.feldGrau,
         fontWeight: 'bold',
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
     },
     habitListContainer: {
-        flex: 1,
-        width: '80%',
+        flex: 3,
         alignSelf: 'center',
     },
     petContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
-        marginTop: 60,
+        justifyContent: 'flex-start',
     },
     image: {
         width: 150,
@@ -55,7 +55,7 @@ export const Styles = StyleSheet.create({
     progressBarContainer: {
         marginBottom: 5,
         marginTop: 5,
-        width: '30%',
+        width: '90%',
         alignSelf: 'center',
     },
     progressLabel: {
@@ -122,7 +122,12 @@ export const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.white,
         justifyContent: 'center',
-
+        flexDirection: 'column',
+    },
+    homeContainer: {
+        flex: 1,
+        backgroundColor: Colors.white,
+        justifyContent: 'center',
     },
     welcomeContainer: {
         flex: 1,
@@ -162,6 +167,13 @@ export const Styles = StyleSheet.create({
         bottom: 30,
         alignSelf: 'center',
         width: '80%',
+    },
+    forgotPasswordText: {
+        textAlign: 'center',
+        color: Colors.chestnut,
+        textDecorationLine: 'underline',
+        fontSize: 16,
+
     },
     statsCardWhite: {
         backgroundColor: Colors.white,
@@ -322,7 +334,7 @@ export const Styles = StyleSheet.create({
     petMessageDialog: {
         width: '90%',
         alignSelf: 'center',
-        backgroundColor: Colors.ashGrey,
+        backgroundColor: Colors.white,
         marginTop: 10,
     },
     defaultImage: {
