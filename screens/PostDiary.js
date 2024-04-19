@@ -26,6 +26,7 @@ export default function PostDiary({ navigation, route }) {
     const { fromDiary, formattedHabits } = route.params || {};
     const [selectedHabitId, setSelectedHabitId] = useState(null);
     const [showImageButtons, setShowImageButtons] = useState(false);
+    const [showMapButtons, setShowMapButtons] = useState(false);
 
     const inputTheme = {
         colors: {
@@ -126,6 +127,16 @@ export default function PostDiary({ navigation, route }) {
         setShowImageButtons(false);
     }
 
+    // handle map button press
+    function mapButtonHandler() {
+        setShowMapButtons(!showMapButtons);
+    }
+
+    // dismiss map picker
+    function dismissMapPicker(){
+        setShowMapButtons(false);
+    }
+
     return (
         <ScrollView
             contentContainerStyle={styles.scrollViewContent}
@@ -146,7 +157,10 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
+                    <View style={Styles.buttonsContainer}>
                     <IconButton icon='image' size={30} onPress={() => imageButtonHandler()} />
+                    <IconButton icon='map-marker' size={30} onPress={() => mapButtonHandler()} />
+                    </View>
                     <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker}/>
                     {fromDiary ? (
                         <>
@@ -197,6 +211,8 @@ export default function PostDiary({ navigation, route }) {
                                 formattedHabits,
                                 fromDiary,
                             }}
+                            showMapButtons={showMapButtons}
+                            dismissMapPicker={dismissMapPicker}
                         />
                     </View>
                 </Card.Content>
