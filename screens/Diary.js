@@ -4,14 +4,16 @@ import { useNavigation } from '@react-navigation/native';
 import { Card, Text } from 'react-native-paper';
 import IconButton from '../components/IconButton';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeHabitsByUserId, fetchPublicCheckIns } from '../firebase-files/firestoreHelper';
+import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
+    const [myDiaries, setMyDiaries] = useState([]);
     const navigation = useNavigation();
     const userId = auth.currentUser.uid;
     const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
+    console.log('my diaries', myDiaries);
 
     useEffect(() => {
         navigation.setOptions({
@@ -26,7 +28,11 @@ export default function Diary() {
 
     useEffect(() => {
         const unsubscribe = fetchPublicCheckIns(setDiaries);
-        return () => unsubscribe();
+        const unsubscribeMyDiaries = fetchMyDiaries(userId, setMyDiaries);
+        return () => {
+            unsubscribe()
+            unsubscribeMyDiaries();
+        };
     }, []);
 
     useEffect(() => {
