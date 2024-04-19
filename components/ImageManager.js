@@ -71,7 +71,7 @@ export default function ImageManager({ receiveImageURI, initialImage, showImageB
                         <View>
                             <Image source={{ uri: imageURI }} style={Styles.squareImage} />
                             <View style={Styles.diaryButtonsContainer}>
-                                <Button icon='check' onPress={dismissImagePicker}>Ok</Button>
+                                <Button icon='check' onPress={dismissImagePicker} textColor={Colors.chestnut}>Ok</Button>
                             </View>
                         </View>
                     }

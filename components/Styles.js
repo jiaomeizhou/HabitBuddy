@@ -341,6 +341,11 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: Colors.ashGrey,
     },
+    habitsChip: {
+        margin: 4,
+        width: '90%',
+        backgroundColor: Colors.ashGrey,
+    },
     petMessageDialog: {
         width: '90%',
         alignSelf: 'center',

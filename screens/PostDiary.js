@@ -10,6 +10,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { TextInput, Switch, Card, HelperText, Chip, IconButton } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
+import { Styles } from '../components/Styles';
 
 export default function PostDiary({ navigation, route }) {
     const [imageUri, setImageUri] = useState(null);
@@ -133,7 +134,8 @@ export default function PostDiary({ navigation, route }) {
             <Card style={styles.card}>
                 <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={styles.date} />
                 <Card.Content>
-                    {imageUri && <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
+                    {imageUri && 
+                    <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
                     <TextInput
                         label="Share your diary..."
                         value={diary}
@@ -156,7 +158,7 @@ export default function PostDiary({ navigation, route }) {
                                     icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
                                     key={habit.id}
                                     onPress={() => handlePressHabit(habit.id)}
-                                    style={styles.chip}
+                                    style={Styles.habitsChip}
                                     selected={selectedHabitId === habit.id}
                                 >
                                     {habit.label}
@@ -261,8 +263,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-    },
-    chip: {
-        margin: 4,
     },
 })
