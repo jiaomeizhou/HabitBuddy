@@ -62,11 +62,6 @@ export default function ImageManager({ receiveImageURI, initialImage, showImageB
         }
     };
 
-    function cancelImagePicker() {
-        setImageURI(null);
-        dismissImagePicker();
-    }
-
     return (
         <Portal >
             <Dialog visible={showImageButtons} onDismiss={dismissImagePicker} style={Styles.petMessageDialog}>
@@ -77,15 +72,14 @@ export default function ImageManager({ receiveImageURI, initialImage, showImageB
                             <Image source={{ uri: imageURI }} style={Styles.squareImage} />
                             <View style={Styles.diaryButtonsContainer}>
                                 <Button icon='check' onPress={dismissImagePicker}>Ok</Button>
-                                <Button icon='window-close' onPress={cancelImagePicker}>Cancel</Button>
                             </View>
                         </View>
                     }
-                    <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-                    <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-                    {!imageURI &&
-                        <IconButton icon='window-close' size={30} onPress={dismissImagePicker} style={{alignSelf: 'flex-end'}}/>
-                    }
+                    <View>
+                        <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                        <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                        <IconButton icon='window-close' size={30} onPress={dismissImagePicker} style={{ alignSelf: 'flex-end' }} />
+                    </View>
                 </Dialog.Content>
             </Dialog>
         </Portal>
