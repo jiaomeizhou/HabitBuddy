@@ -393,4 +393,58 @@ export const Styles = StyleSheet.create({
         fontSize: 12,
         color: '#666',
     },
+    switchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 8,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    customTextInPostDiary: {
+        color: Colors.fernGreen,
+        width: '100%',
+    },
+    helperText: {
+        fontSize: 13,
+        color: '#5A7247',
+    },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 12,
+        marginTop: 10,
+    },
+    card: {
+        margin: 5,
+        elevation: 4,
+        backgroundColor: Colors.lightGreen,
+    },
+    cardActions: {
+        justifyContent: 'space-around',
+    },
+    postDiaryDate: {
+        fontSize: 18,
+        margin: 10,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#5A7247',
+    },
+    postTextInput: {
+        height: 80,
+        marginVertical: 10,
+        padding: 10,
+    },
+    outlineStyle: {
+        borderWidth: 1,
+        borderColor: '#5A7247',
+        borderRadius: 10,
+    },
+    postDiaryButtonsContainer: {
+        marginVertical: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+    },
 })
