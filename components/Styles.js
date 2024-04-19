@@ -352,4 +352,30 @@ export const Styles = StyleSheet.create({
     inactiveButton: {
         backgroundColor: Colors.silver,
     },
+    diaryContainer: {
+        flex: 1,
+        padding: 10,
+    },
+    diaryItem: {
+        marginBottom: 15,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        backgroundColor: 'rgba(247 248 245 / 0.9)'
+    },
+    diaryImage: {
+        height: 200,
+        borderRadius: 5,
+    },
+    diaryText: {
+        fontWeight: 'normal',
+        fontSize: 13,
+        marginVertical: 5,
+    },
+    dateText: {
+        fontSize: 12,
+        color: '#666',
+    },
 })

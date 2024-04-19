@@ -64,16 +64,16 @@ export default function Diary() {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.diaryContainer}>
             <FlatList
                 data={showAllDiaries ? diaries : myDiaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Card onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
-                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={styles.image} />}
+                    <Card onPress={() => handlePressDiary(item)} style={Styles.diaryItem}>
+                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
                         <Card.Title title={item.diary} />
                         <Card.Content>
-                            <Text style={styles.dateText}>
+                            <Text style={Styles.dateText}>
                                 {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
                             </Text>
                         </Card.Content>
@@ -99,32 +99,3 @@ export default function Diary() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-    },
-    diaryItem: {
-        marginBottom: 15,
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        backgroundColor: 'rgba(247 248 245 / 0.9)'
-    },
-    image: {
-        height: 200,
-        borderRadius: 5,
-    },
-    diaryText: {
-        fontWeight: 'normal',
-        fontSize: 13,
-        marginVertical: 5,
-    },
-    dateText: {
-        fontSize: 12,
-        color: '#666',
-    },
-})
