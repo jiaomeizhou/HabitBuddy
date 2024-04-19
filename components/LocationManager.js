@@ -52,6 +52,7 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
     }
 
     function chooseLocationHandler() {
+        dismissMapPicker();
         navigation.navigate('Map', {
             from: 'LocationManager',
             ...currentData,
