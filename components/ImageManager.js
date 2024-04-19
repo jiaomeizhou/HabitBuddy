@@ -1,12 +1,13 @@
-import { View, Text, Button, Image } from 'react-native'
+import { View, Image } from 'react-native'
 import React from 'react'
 import * as ImagePicker from 'expo-image-picker'
 import PressableButton from './PressableButton'
 import * as Colors from './Colors'
 import { Styles } from './Styles'
+import { Portal, Dialog, IconButton, Button } from 'react-native-paper'
 
 
-export default function ImageManager({ receiveImageURI, initialImage }) {
+export default function ImageManager({ receiveImageURI, initialImage, showImageButtons, dismissImagePicker }) {
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
     const [imageURI, setImageURI] = React.useState(initialImage || null);
 
@@ -61,13 +62,32 @@ export default function ImageManager({ receiveImageURI, initialImage }) {
         }
     };
 
+    function cancelImagePicker() {
+        setImageURI(null);
+        dismissImagePicker();
+    }
+
     return (
-        <View>
-            {imageURI &&
-                <Image source={{ uri: imageURI }} style={Styles.image} />
-            }
-            <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-            <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-        </View>
+        <Portal >
+            <Dialog visible={showImageButtons} onDismiss={dismissImagePicker} style={Styles.petMessageDialog}>
+                <Dialog.Title>Choose a photo</Dialog.Title>
+                <Dialog.Content>
+                    {imageURI &&
+                        <View>
+                            <Image source={{ uri: imageURI }} style={Styles.squareImage} />
+                            <View style={Styles.diaryButtonsContainer}>
+                                <Button icon='check' onPress={dismissImagePicker}>Ok</Button>
+                                <Button icon='window-close' onPress={cancelImagePicker}>Cancel</Button>
+                            </View>
+                        </View>
+                    }
+                    <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                    <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                    {!imageURI &&
+                        <IconButton icon='window-close' size={30} onPress={dismissImagePicker} style={{alignSelf: 'flex-end'}}/>
+                    }
+                </Dialog.Content>
+            </Dialog>
+        </Portal>
     )
 }

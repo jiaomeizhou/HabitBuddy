@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, ScrollView } from 'react-native'
+import { StyleSheet, View, Alert, ScrollView, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomText from '../components/CustomText';
@@ -7,7 +7,7 @@ import { formatDate } from '../helpers/dateHelper';
 import { auth, storage } from '../firebase-files/firebaseSetup';
 import ImageManager from '../components/ImageManager';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { TextInput, Switch, Card, HelperText, Chip } from 'react-native-paper';
+import { TextInput, Switch, Card, HelperText, Chip, IconButton } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
 
@@ -24,6 +24,7 @@ export default function PostDiary({ navigation, route }) {
     const date = new Date();
     const { fromDiary, formattedHabits } = route.params || {};
     const [selectedHabitId, setSelectedHabitId] = useState(null);
+    const [showImageButtons, setShowImageButtons] = useState(false);
 
     const inputTheme = {
         colors: {
@@ -105,7 +106,7 @@ export default function PostDiary({ navigation, route }) {
         addCheckIn(newEntry)
             .then(() => {
                 Alert.alert("Success", "Diary saved successfully!");
-                navigation.navigate('Home');
+                navigation.navigate('Diary');
             })
             .catch((error) => {
                 console.error("Error saving diary: ", error);
@@ -116,6 +117,14 @@ export default function PostDiary({ navigation, route }) {
         navigation.goBack();
     }
 
+    function imageButtonHandler() {
+        setShowImageButtons(!showImageButtons);
+    }
+
+    function dismissImagePicker() {
+        setShowImageButtons(false);
+    }
+
     return (
         <ScrollView
             contentContainerStyle={styles.scrollViewContent}
@@ -124,7 +133,7 @@ export default function PostDiary({ navigation, route }) {
             <Card style={styles.card}>
                 <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={styles.date} />
                 <Card.Content>
-                    <ImageManager receiveImageURI={pickImageHandler} />
+                    {imageUri && <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
                     <TextInput
                         label="Share your diary..."
                         value={diary}
@@ -135,6 +144,8 @@ export default function PostDiary({ navigation, route }) {
                         theme={inputTheme}
                         outlineStyle={styles.outlineStyle}
                     />
+                    <IconButton icon='image' size={30} onPress={() => imageButtonHandler()} />
+                    <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker}/>
                     {fromDiary ? (
                         <>
                             <HelperText type="info" style={styles.helperText}>

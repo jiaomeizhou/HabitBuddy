@@ -46,6 +46,16 @@ export const Styles = StyleSheet.create({
         borderColor: Colors.white,
         marginTop: 10,
     },
+    squareImage: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderWidth: 2,
+        borderColor: Colors.white,
+        marginTop: 10,
+    },
     statusText: {
         fontSize: 16,
         textAlign: 'center',
