@@ -133,9 +133,11 @@ export default function PostDiary({ navigation, route }) {
     }
 
     // dismiss map picker
-    function dismissMapPicker(){
+    function dismissMapPicker() {
         setShowMapButtons(false);
     }
+
+    console.log(locationInfo)
 
     return (
         <ScrollView
@@ -145,8 +147,8 @@ export default function PostDiary({ navigation, route }) {
             <Card style={styles.card}>
                 <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={styles.date} />
                 <Card.Content>
-                    {imageUri && 
-                    <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
+                    {imageUri &&
+                        <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
                     <TextInput
                         label="Share your diary..."
                         value={diary}
@@ -158,10 +160,10 @@ export default function PostDiary({ navigation, route }) {
                         outlineStyle={styles.outlineStyle}
                     />
                     <View style={Styles.buttonsContainer}>
-                    <IconButton icon='image' size={30} onPress={() => imageButtonHandler()} />
-                    <IconButton icon='map-marker' size={30} onPress={() => mapButtonHandler()} />
+                        <IconButton icon='image' size={30} onPress={() => imageButtonHandler()} />
+                        <IconButton icon={locationInfo ? 'map-marker-check' : 'map-marker'} size={30} onPress={() => mapButtonHandler()} />
                     </View>
-                    <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker}/>
+                    <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker} />
                     {fromDiary ? (
                         <>
                             <HelperText type="info" style={styles.helperText}>

@@ -1,9 +1,9 @@
-import { StyleSheet, Image, View, Button, Dimensions } from 'react-native'
+import { StyleSheet, Image, View, Dimensions } from 'react-native'
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { mapsApiKey } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Dialog, Portal, IconButton } from "react-native-paper";
+import { Dialog, Portal, IconButton, Button } from "react-native-paper";
 import { Styles } from "./Styles";
 import PressableButton from "./PressableButton";
 import * as Colors from "./Colors";
@@ -65,12 +65,17 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
                 <Dialog.Title>Choose a location</Dialog.Title>
                 <Dialog.Content>
                     {location && (
-                        <Image
-                            style={Styles.squareImage}
-                            source={{
-                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${mapsApiKey}`,
-                            }}
-                        />
+                        <View>
+                            <Image
+                                style={Styles.squareImage}
+                                source={{
+                                    uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${mapsApiKey}`,
+                                }}
+                            />
+                            <View style={Styles.diaryButtonsContainer}>
+                                <Button icon='check' onPress={dismissMapPicker} textColor={Colors.chestnut}>Ok</Button>
+                            </View>
+                        </View>
                     )}
                     <View >
                         <PressableButton title="Use my current location" onPress={locateUserHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
