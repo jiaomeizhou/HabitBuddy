@@ -1,7 +1,7 @@
 import { View, FlatList, StyleSheet, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Card, Text } from 'react-native-paper';
+import { Card, Text, Button } from 'react-native-paper';
 import IconButton from '../components/IconButton';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
@@ -13,7 +13,7 @@ export default function Diary() {
     const navigation = useNavigation();
     const userId = auth.currentUser.uid;
     const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
-    console.log('my diaries', myDiaries);
+    const [showAllDiaries, setShowAllDiaries] = useState(true);
 
     useEffect(() => {
         navigation.setOptions({
@@ -64,7 +64,7 @@ export default function Diary() {
     return (
         <View style={styles.container}>
             <FlatList
-                data={diaries}
+                data={showAllDiaries ? diaries : myDiaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <Card onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
@@ -78,6 +78,22 @@ export default function Diary() {
                     </Card>
                 )}
             />
+            <View style={styles.buttonContainer}>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(true)}
+                    style={showAllDiaries ? styles.activeButton : styles.inactiveButton}
+                >
+                    All Diaries
+                </Button>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(false)}
+                    style={!showAllDiaries ? styles.activeButton : styles.inactiveButton}
+                >
+                    My Diaries
+                </Button>
+            </View>
         </View>
     );
 }
@@ -108,5 +124,20 @@ const styles = StyleSheet.create({
     dateText: {
         fontSize: 12,
         color: '#666',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: 10,
+    },
+    button: {
+        flex: 1,
+        marginHorizontal: 5,
+    },
+    activeButton: {
+        backgroundColor: '#3498db',
+    },
+    inactiveButton: {
+        backgroundColor: '#ccc',
     },
 })
