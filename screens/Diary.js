@@ -6,6 +6,8 @@ import IconButton from '../components/IconButton';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from '../components/Styles';
+
 
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
@@ -78,18 +80,18 @@ export default function Diary() {
                     </Card>
                 )}
             />
-            <View style={styles.buttonContainer}>
+            <View style={Styles.diaryButtonsContainer}>
                 <Button
                     mode="contained"
                     onPress={() => setShowAllDiaries(true)}
-                    style={showAllDiaries ? styles.activeButton : styles.inactiveButton}
+                    style={showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
                 >
                     All Diaries
                 </Button>
                 <Button
                     mode="contained"
                     onPress={() => setShowAllDiaries(false)}
-                    style={!showAllDiaries ? styles.activeButton : styles.inactiveButton}
+                    style={!showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
                 >
                     My Diaries
                 </Button>
@@ -124,20 +126,5 @@ const styles = StyleSheet.create({
     dateText: {
         fontSize: 12,
         color: '#666',
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginVertical: 10,
-    },
-    button: {
-        flex: 1,
-        marginHorizontal: 5,
-    },
-    activeButton: {
-        backgroundColor: '#3498db',
-    },
-    inactiveButton: {
-        backgroundColor: '#ccc',
     },
 })

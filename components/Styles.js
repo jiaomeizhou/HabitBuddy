@@ -341,4 +341,15 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 10,
     },
+    diaryButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+    },
+    activeButton: {
+        backgroundColor: Colors.fernGreen,
+    },
+    inactiveButton: {
+        backgroundColor: Colors.silver,
+    },
 })
