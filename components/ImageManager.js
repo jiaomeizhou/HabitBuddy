@@ -70,15 +70,12 @@ export default function ImageManager({ receiveImageURI, initialImage, showImageB
                     {imageURI &&
                         <View>
                             <Image source={{ uri: imageURI }} style={Styles.squareImage} />
-                            <View style={Styles.diaryButtonsContainer}>
-                                <Button icon='check' onPress={dismissImagePicker} textColor={Colors.chestnut}>Ok</Button>
-                            </View>
                         </View>
                     }
                     <View>
                         <PressableButton title="Take a Photo" onPress={takeImageHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
                         <PressableButton title="Choose from Gallery" onPress={pickImageFromGallery} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-                        <IconButton icon='window-close' size={30} onPress={dismissImagePicker} style={{ alignSelf: 'flex-end' }} />
+                        {imageURI && <Button icon='check' onPress={dismissImagePicker} textColor={Colors.chestnut} style={{ alignSelf: 'center' }}>Ok</Button>}
                     </View>
                 </Dialog.Content>
             </Dialog>
