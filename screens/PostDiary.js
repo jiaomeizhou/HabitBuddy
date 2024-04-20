@@ -211,6 +211,7 @@ export default function PostDiary({ navigation, route }) {
                             selectedHabitId,
                             formattedHabits,
                             fromDiary,
+                            locationInfo,
                         }}
                         showMapButtons={showMapButtons}
                         dismissMapPicker={dismissMapPicker}
