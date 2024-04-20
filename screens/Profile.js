@@ -9,6 +9,16 @@ import * as Colors from '../components/Colors';
 import { IconButton } from 'react-native-paper';
 import { signOut } from "firebase/auth";
 import { Avatar, Button, Card, Text } from 'react-native-paper';
+import NotificationManager from '../components/NotificationManager';
+import * as Notifications from "expo-notifications";
+
+Notifications.setNotificationHandler({
+  handleNotification: async function (notification) {
+    return {
+      shouldShowAlert: true,
+    };
+  },
+});
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -29,6 +39,17 @@ export default function Profile({ navigation }) {
     }
     getUserProfileData();
   }, [userProfile]);
+
+  useEffect(() => {
+    const sunscription = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log("received listener", notification);
+      }
+    );
+    return () => {
+      sunscription.remove();
+    };
+  }, []);
 
   // fetch updated user profile data from firestore
   const onPressEdit = async () => {
@@ -70,6 +91,7 @@ export default function Profile({ navigation }) {
           <Card.Actions>
             <Button onPress={onPressLogOut} icon="logout" mode="elevated" textColor={Colors.chestnut} >Log out</Button>
           </Card.Actions>
+          <NotificationManager />
         </Card>
       }
       <Stats />
