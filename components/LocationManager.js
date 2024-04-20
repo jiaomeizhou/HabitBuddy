@@ -86,26 +86,3 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
         </Portal>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-    },
-    imageContainer: {
-        marginTop: 12,
-        width: Dimensions.get("window").width - 40,
-        height: 200,
-        overflow: 'hidden',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-    },
-});
