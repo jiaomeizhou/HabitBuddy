@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 
 export default function Map({ route, navigation }) {
-
     const [selectedLocation, setSelectedLocation] = useState(null);
 
     function confirmHandler() {
@@ -21,8 +20,8 @@ export default function Map({ route, navigation }) {
             <MapView
                 style={styles.map}
                 initialRegion={{
-                    latitude: route.params?.initLoc?.latitude || 37.78825,
-                    longitude: route.params?.initLoc?.longitude || -122.4324,
+                    latitude: route.params?.locationInfo?.latitude || 37.78825,
+                    longitude: route.params?.locationInfo?.longitude || -122.4324,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
