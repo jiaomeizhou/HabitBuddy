@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Chip, Dialog, Portal, Button } from 'react-native-paper';
 
+// The Pet component displays the pet image and status.
+// It also shows a dialog with a dog fact when the user pets the pet.
 export default function Pet({ userProgress }) {
     const [showPetMessage, setShowPetMessage] = useState(false);
     const petStatus = userProgress > 70 ? 'happy' : userProgress > 30 ? 'normal' : 'sad';

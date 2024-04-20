@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import { Card, Dialog, Portal, Button } from 'react-native-paper';
-import { Styles } from './Styles';
+import { View, Text } from 'react-native';
 
+// The PetMessage component displays a message from the API about petting a dog.
+// It is used in the Home screen.
 export default function PetMessage() {
     const [petMessage, setPetMessage] = useState('');
  
+    // fetch a random dog fact from the API
     useEffect(() => {
         async function getPetMessageFromAPI() {
             // fetch data from API

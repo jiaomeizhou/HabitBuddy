@@ -6,11 +6,14 @@ import * as Colors from './Colors'
 import { Styles } from './Styles'
 import { Portal, Dialog, IconButton, Button } from 'react-native-paper'
 
-
+// The ImageManager component displays a dialog to take a photo or choose from gallery.
+// It is used in the Profile screen to set the user's profile image.
+// It uses the ImagePicker API from Expo to take a photo or choose from gallery.
 export default function ImageManager({ receiveImageURI, initialImage, showImageButtons, dismissImagePicker }) {
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
     const [imageURI, setImageURI] = React.useState(initialImage || null);
 
+    // verify permission to access camera
     async function verifyPemission() {
         if (status !== 'granted') {
             result = await requestPermission();
@@ -37,8 +40,8 @@ export default function ImageManager({ receiveImageURI, initialImage, showImageB
                 }
             )
             uri = results.assets[0].uri;
-            receiveImageURI(uri);
-            setImageURI(uri);
+            receiveImageURI(uri); // pass the image uri to the parent component
+            setImageURI(uri); // set the image uri to the state
         }
         catch (error) {
             console.log(error)

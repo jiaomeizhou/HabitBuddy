@@ -16,11 +16,13 @@ LocaleConfig.locales['en'] = {
 };
 LocaleConfig.defaultLocale = 'en';
 
+// HabitDetail screen displays the details of a habit.
 export default function HabitDetail({ route, navigation }) {
   const { habitObj, progress, habitCheckIns, todayCheckInsData } = route.params;
   const [checkedInToday, setCheckedInToday] = useState(false);
   const [checkedDates, setCheckedDates] = useState([]);
 
+  // Set the header options for the screen
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (

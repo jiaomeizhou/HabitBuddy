@@ -4,12 +4,15 @@ import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeCompletedH
 import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from './Styles';
 
+// The Stats component in the Profile screen.
+// It displays the user's stats: current habits, check-ins, completed habits, and failed habits.
 export default function Stats() {
     const [checkIns, setCheckIns] = useState([]);
     const [habits, setHabits] = useState([]);
     const [completedHabits, setCompletedHabits] = useState([]);
     const [failedHabits, setFailedHabits] = useState([]);
 
+    // get check-ins, habits, completed habits, and failed habits data from firebase
     useEffect(() => {
         const userId = auth.currentUser.uid;
 
@@ -29,6 +32,7 @@ export default function Stats() {
             setFailedHabits(failedHabitsData);
         });
 
+        // unsubscribe from the listeners when the component is unmounted
         return () => {
             unsubscribeCheckIns();
             unsubscribeHabits();

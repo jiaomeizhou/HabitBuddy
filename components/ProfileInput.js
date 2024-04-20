@@ -10,12 +10,10 @@ import {
 import React, { useState } from "react";
 import { Styles } from "./Styles";
 
+// The ProfileInput component displays a modal with two input fields for user name and pet name.
 export default function ProfileInput({ userInitialName, petInitialName, inputHandler, modalVisible, dismissModal }) {
     const [userName, setUserName] = useState(userInitialName);
     const [petName, setPetName] = useState(petInitialName);
-    console.log("userNameinitial: ", userInitialName, petInitialName);
-    console.log("userName: ", userName, petName);
-
     
     // callback handler for user name input
     function changeUserNameHandler(changedText) {

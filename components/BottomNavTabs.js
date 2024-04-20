@@ -9,8 +9,10 @@ import TrackMap from '../screens/TrackMap';
 import { BottomNavigation } from 'react-native-paper';
 import { CommonActions } from '@react-navigation/native';
 
+// use createBottomTabNavigator to create a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
+// The bottom navigation tabs of the app.
 export default function BottomNavTabs({ navigation }) {
     return (
         <Tab.Navigator

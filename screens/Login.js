@@ -8,6 +8,8 @@ import * as Colors from "../components/Colors";
 import PressableItem from "../components/PressableItem";
 import AppIntro from "../components/AppIntro";
 
+// The Login screen of Habit Buddy app.
+// It allows the user to log in to the app.
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
