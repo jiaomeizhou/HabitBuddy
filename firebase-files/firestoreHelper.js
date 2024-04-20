@@ -212,3 +212,21 @@ export function fetchPublicCheckIns(callback) {
         callback(fetchedDiaries);
     });
 }
+
+// fetch all my diaries
+export function fetchMyDiaries(userId, callback) {
+    const q = query(
+        collection(database, "CheckIns"),
+        where("userId", "==", userId),
+        where("isPublic", "!=", null),
+        orderBy("createdAt", "desc")
+    );
+
+    return onSnapshot(q, (querySnapshot) => {
+        const fetchedMyDiaries = [];
+        querySnapshot.forEach((doc) => {
+            fetchedMyDiaries.push({ id: doc.id, ...doc.data() });
+        });
+        callback(fetchedMyDiaries);
+    });
+}

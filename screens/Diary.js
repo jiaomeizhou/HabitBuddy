@@ -1,17 +1,21 @@
 import { View, FlatList, StyleSheet, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Card, Text } from 'react-native-paper';
+import { Card, Text, Button } from 'react-native-paper';
 import IconButton from '../components/IconButton';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeHabitsByUserId, fetchPublicCheckIns } from '../firebase-files/firestoreHelper';
+import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from '../components/Styles';
+
 
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
+    const [myDiaries, setMyDiaries] = useState([]);
     const navigation = useNavigation();
     const userId = auth.currentUser.uid;
     const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
+    const [showAllDiaries, setShowAllDiaries] = useState(true);
 
     useEffect(() => {
         navigation.setOptions({
@@ -26,7 +30,11 @@ export default function Diary() {
 
     useEffect(() => {
         const unsubscribe = fetchPublicCheckIns(setDiaries);
-        return () => unsubscribe();
+        const unsubscribeMyDiaries = fetchMyDiaries(userId, setMyDiaries);
+        return () => {
+            unsubscribe()
+            unsubscribeMyDiaries();
+        };
     }, []);
 
     useEffect(() => {
@@ -56,51 +64,38 @@ export default function Diary() {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.diaryContainer}>
             <FlatList
-                data={diaries}
+                data={showAllDiaries ? diaries : myDiaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Card onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
-                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={styles.image} />}
+                    <Card onPress={() => handlePressDiary(item)} style={Styles.diaryItem}>
+                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
                         <Card.Title title={item.diary} />
                         <Card.Content>
-                            <Text style={styles.dateText}>
+                            <Text style={Styles.dateText}>
                                 {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
                             </Text>
                         </Card.Content>
                     </Card>
                 )}
             />
+            <View style={Styles.diaryButtonsContainer}>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(true)}
+                    style={showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
+                >
+                    All Diaries
+                </Button>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(false)}
+                    style={!showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
+                >
+                    My Diaries
+                </Button>
+            </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-    },
-    diaryItem: {
-        marginBottom: 15,
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        backgroundColor: 'rgba(247 248 245 / 0.9)'
-    },
-    image: {
-        height: 200,
-        borderRadius: 5,
-    },
-    diaryText: {
-        fontWeight: 'normal',
-        fontSize: 13,
-        marginVertical: 5,
-    },
-    dateText: {
-        fontSize: 12,
-        color: '#666',
-    },
-})

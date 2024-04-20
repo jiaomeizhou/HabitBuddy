@@ -1,10 +1,14 @@
-import { StyleSheet, Image, View, Button, Dimensions } from 'react-native'
+import { StyleSheet, Image, View, Dimensions } from 'react-native'
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { mapsApiKey } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { Dialog, Portal, IconButton, Button } from "react-native-paper";
+import { Styles } from "./Styles";
+import PressableButton from "./PressableButton";
+import * as Colors from "./Colors";
 
-export default function LocationManager({ onLocationSelect, currentData }) {
+export default function LocationManager({ onLocationSelect, currentData, showMapButtons, dismissMapPicker }) {
     const navigation = useNavigation();
     const route = useRoute();
     const [status, requestPermission] = Location.useForegroundPermissions();
@@ -48,6 +52,7 @@ export default function LocationManager({ onLocationSelect, currentData }) {
     }
 
     function chooseLocationHandler() {
+        dismissMapPicker();
         navigation.navigate('Map', {
             from: 'LocationManager',
             ...currentData,
@@ -55,26 +60,31 @@ export default function LocationManager({ onLocationSelect, currentData }) {
     }
 
     return (
-        <View style={styles.container} >
-            <View style={styles.buttonContainer}>
-                <Button title="User my current location" onPress={locateUserHandler} />
-                <Button
-                    title="Let me choose on the map"
-                    onPress={chooseLocationHandler}
-                />
-            </View>
-            {location && (
-                <View style={styles.imageContainer}>
-                    <Image
-                        style={styles.image}
-                        source={{
-                            uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${mapsApiKey}`,
-                        }}
-                    />
-                </View>
-
-            )}
-        </View>
+        <Portal >
+            <Dialog visible={showMapButtons} onDismiss={dismissMapPicker} style={Styles.petMessageDialog}>
+                <Dialog.Title>Choose a location</Dialog.Title>
+                <Dialog.Content>
+                    {location && (
+                        <View>
+                            <Image
+                                style={Styles.squareImage}
+                                source={{
+                                    uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${mapsApiKey}`,
+                                }}
+                            />
+                            <View style={Styles.diaryButtonsContainer}>
+                                <Button icon='check' onPress={dismissMapPicker} textColor={Colors.chestnut}>Ok</Button>
+                            </View>
+                        </View>
+                    )}
+                    <View >
+                        <PressableButton title="Use my current location" onPress={locateUserHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                        <PressableButton title="Let me choose on the map" onPress={chooseLocationHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
+                        <IconButton icon='window-close' size={30} onPress={dismissMapPicker} style={{ alignSelf: 'flex-end' }} />
+                    </View>
+                </Dialog.Content>
+            </Dialog>
+        </Portal>
     );
 }
 

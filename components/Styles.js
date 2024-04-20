@@ -46,6 +46,16 @@ export const Styles = StyleSheet.create({
         borderColor: Colors.white,
         marginTop: 10,
     },
+    squareImage: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderWidth: 2,
+        borderColor: Colors.white,
+        marginTop: 10,
+    },
     statusText: {
         fontSize: 16,
         textAlign: 'center',
@@ -331,6 +341,11 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: Colors.ashGrey,
     },
+    habitsChip: {
+        margin: 4,
+        width: '90%',
+        backgroundColor: Colors.ashGrey,
+    },
     petMessageDialog: {
         width: '90%',
         alignSelf: 'center',
@@ -340,5 +355,96 @@ export const Styles = StyleSheet.create({
     defaultImage: {
         alignSelf: 'center',
         marginTop: 10,
+    },
+    diaryButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+    },
+    activeButton: {
+        backgroundColor: Colors.fernGreen,
+    },
+    inactiveButton: {
+        backgroundColor: Colors.silver,
+    },
+    diaryContainer: {
+        flex: 1,
+        padding: 10,
+    },
+    diaryItem: {
+        marginBottom: 15,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        backgroundColor: 'rgba(247 248 245 / 0.9)'
+    },
+    diaryImage: {
+        height: 200,
+        borderRadius: 5,
+    },
+    diaryText: {
+        fontWeight: 'normal',
+        fontSize: 13,
+        marginVertical: 5,
+    },
+    dateText: {
+        fontSize: 12,
+        color: '#666',
+    },
+    switchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 8,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    customTextInPostDiary: {
+        color: Colors.fernGreen,
+        width: '100%',
+    },
+    helperText: {
+        fontSize: 13,
+        color: '#5A7247',
+    },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 12,
+        marginTop: 10,
+    },
+    card: {
+        margin: 5,
+        elevation: 4,
+        backgroundColor: Colors.lightGreen,
+    },
+    cardActions: {
+        justifyContent: 'space-around',
+    },
+    postDiaryDate: {
+        fontSize: 18,
+        margin: 10,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#5A7247',
+    },
+    postTextInput: {
+        height: 80,
+        marginVertical: 10,
+        padding: 10,
+    },
+    outlineStyle: {
+        borderWidth: 1,
+        borderColor: '#5A7247',
+        borderRadius: 10,
+    },
+    postDiaryButtonsContainer: {
+        marginVertical: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
     },
 })

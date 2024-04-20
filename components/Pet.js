@@ -62,7 +62,7 @@ export default function Pet({ userProgress }) {
     function hidePetMessage() {
         setShowPetMessage(false);
     }
-    console.log(statusText);
+
     return (
         <PressableItem onPress={handlePressPet}>
             <Portal>
