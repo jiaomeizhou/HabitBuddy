@@ -74,7 +74,7 @@ export default function NotificationManager() {
                     labelStyle={styles.buttonLabel}
                     onPress={showDatePicker}
                 >
-                    Set Dialy Reminder
+                    Set Daily Reminder
                 </Button>
                 <DateTimePickerModal
                     isVisible={datePickerVisible}
