@@ -179,7 +179,7 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 <p float="left">
    <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_detail_itr3.PNG" alt="drawing" width="200"/>
 </p>
 
 - _The My Track Screen displays the user's all shared locations with their diary content._
