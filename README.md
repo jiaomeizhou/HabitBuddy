@@ -40,8 +40,8 @@ service cloud.firestore {
 
 ## Team Members and Contributions
 
-1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Authentication, Camera use
-2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries, Diary detail, Location use
+1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Authentication, Camera use, API use.
+2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries, Diary detail, Location use, Notification.
 
 ## Development log
 
@@ -49,35 +49,27 @@ service cloud.firestore {
 
 #### Completed
 
-##### 03/22/2024
+##### Iteration 1 (03/22/2024 - 03/28/2024)
 
 1. Firebase setup
 2. Signup/Login/logout
 3. Home screen v1 and v2: habit list, progress bar, checkin box, pet
-4. Profile screen: display user profile, allow edit
+4. Profile screen: display user profile and user stats, allow edit profile.
 5. Navigation: Bottom tabs, allow navigate from signup/login to home
+6. Database: Listen to real time checkins, habits and user profile data from DB. Write checkin data and delete checkin to db by toggle checkin box.
 
-##### 03/27/2024
-
-1. Read checkin and habits data from DB, allow navigation
-2. Read user profile from database
-3. Allow user checkin by clicking on the checkin box
-4. Allow user write and delete checkin data to database
-
-##### 03/28/2024
-
-1. Fix checkin bug
-2. Update the data, listen to real time update from database
-3. Calculate habit progress and display the progress bar
-4. Display the real time stats on profile screen
-
-##### 04/01/2024 - 04/11/2024
+##### Iteration 2 (04/01/2024 - 04/11/2024)
 1. Finish UI for Home, Profile, Login/signin, Habit detail screen.
 2. Finish Authentication.
 3. Implement the main logic of pet status.
-4. Finish camera use and upload an image from gallery.
+4. Finish camera use and allow upload an image from gallery.
 5. Fix many bugs.
 
+##### Iteration 3 (04/13/2024 - 04/20/2024)
+1. API use: fetch a random dog fact from Dog API (https://dogapi.dog/), display the fact text when the user pet the pet in the Home screen.
+2. Display all my diaries in Diary screen.
+3. UI design: pet, post diary, profile, etc.
+4. Documantation and bug fix.
 
 ### Weiyi
 
@@ -171,9 +163,39 @@ During the 2nd iteration of our project, we focused on enhancing the app by inte
 5. **Bug Fixes**:
    Addressed various bugs reported in the first iteration, including issues with data synchronization, UI glitches, and performance bottlenecks.
 
-### Current State of the Application:
+### Iteration 3
 
-The app is now in a functional state with a clear structure and the ability to manage user data and habits. While the UI is still in development, the core functionalities related to user management, habit tracking, and daily check-ins are operational.
+During the 3rd iteration of our project, we concentrated on enhancing notification features, integrating external API data, and further refining the app's UI/UX design. This iteration aimed at providing users with more contextual information and a smoother overall experience.
+
+1. **Local Notification**:
+   Implemented a Notification Manager component to handle local notification. In the Profile screen, user can set a daily remainder which sends a local notification to themselves and remind the user to check in everyday.
+
+2. **API Integration**:
+   Integrated the Dog API (https://dogapi.dog/) to fetch random dog facts. Displayed these facts when users interacted with the pet feature on the Home screen, adding an element of fun and engagement to the app.
+
+3. **UI/UX Optimization**:
+   Continued to refine and optimize the user interface across various screens such as Home, Profile, Post Diary, etc. Improved the pet interaction feature's visual appeal and responsiveness, enhancing user engagement. For Diary and Post Diary screens, updated UI display and functionality, making it easier for users to manage and view their diary entries.
+
+4. **Bug Fixes**:
+   Fix any remaining bugs, including issues about location use.
+
+
+### Current State of the Application and Future Improvements:
+
+#### Current State of the Application:
+
+We have finished all 3 iterations. Now all the essential features have been finished, like habit tracking, user authentication, diary entries, location services, API integration for fun dog facts, and a user friendly UI.
+
+#### Future Improvements:
+
+1. **Social Features**: Introduce social elements such as habit sharing, community building, and peer support to foster motivation and accountability among users.
+
+2. **Gamification**: Gamify the habit tracking process with challenges, rewards, and leaderboards to make habit formation more engaging and rewarding.
+
+3. **Advanced Notifications**: Implement intelligent notifications based on user habits and preferences to provide reminders, motivational messages, and personalized recommendations.
+
+4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
+
 
 ### Iteration 1:
 
@@ -238,3 +260,5 @@ _The Profile Screen provides users with an overview of their personal informatio
 _The Edit Profile Screen lets users to update to their account details._
 
 <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
+
+### Iteration 3: TODO

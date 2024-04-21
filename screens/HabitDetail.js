@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Pressable } from 'react-native';
-import { FontAwesome6 } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars'; // Import Calendar component
 import { Styles } from '../components/Styles';
 import moment from 'moment';
 import * as Colors from '../components/Colors';
 import PressableButton from '../components/PressableButton';
+import { IconButton } from 'react-native-paper';
 
 // Set up the locale configuration for the calendar
 LocaleConfig.locales['en'] = {
@@ -26,9 +26,7 @@ export default function HabitDetail({ route, navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Pressable onPress={() => navigation.navigate('EditHabit', { habitObj: habitObj })}>
-          <FontAwesome6 name="edit" size={24} color={Colors.feldGrau} style={Styles.iconButton}/>
-        </Pressable>
+        <IconButton onPress={() => navigation.navigate('EditHabit', { habitObj: habitObj })} icon="pencil" />
       ),
     });
   })
@@ -84,8 +82,8 @@ export default function HabitDetail({ route, navigation }) {
         title="Check in with a diary entry"
         onPress={handleCheckinButton}
         disabled={checkedInToday}
-        color={Colors.fernGreen} 
-        customStyle={Styles.pressableButton} 
+        color={Colors.fernGreen}
+        customStyle={Styles.pressableButton}
         textColor={Colors.white}
       />
     </View>
