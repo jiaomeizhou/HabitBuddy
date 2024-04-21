@@ -5,13 +5,15 @@ import PressableButton from "../components/PressableButton";
 import * as Colors from "../components/Colors";
 import { Styles } from "../components/Styles";
 
-// The Map component is used to display a map to the user where they can select a location.
-// When a location is selected and confirmed, it is passed back to the navigation route.
+/**
+ * Provides a map interface for selecting a location.
+ * Users can tap on the map to place a marker and then confirm the selection,
+ * which navigates back with the selected location as parameters.
+ */
 export default function Map({ route, navigation }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
 
-    // Handler for the confirm button
-    // Navigates back to the PostDiary screen with the selected location data
+    // Function to handle confirmation of the selected location
     function confirmHandler() {
         if (selectedLocation) {
             if (route.params?.from === 'LocationManager') {
