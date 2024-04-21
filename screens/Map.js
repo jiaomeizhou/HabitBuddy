@@ -23,8 +23,8 @@ export default function Map({ route, navigation }) {
             <MapView
                 style={{ flex: 4 }}
                 initialRegion={{
-                    latitude: route.params?.locationInfo?.latitude || 37.78825,
-                    longitude: route.params?.locationInfo?.longitude || -122.4324,
+                    latitude: route.params?.locationInfo?.latitude || 49.246292,
+                    longitude: route.params?.locationInfo?.longitude || -123.116226,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
