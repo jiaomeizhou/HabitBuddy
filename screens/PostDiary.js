@@ -222,6 +222,7 @@ export default function PostDiary({ navigation, route }) {
                             selectedHabitId,
                             formattedHabits,
                             fromDiary,
+                            imageUri,
                             locationInfo,
                         }}
                         showMapButtons={showMapButtons}
