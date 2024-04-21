@@ -171,7 +171,7 @@ export default function PostDiary({ navigation, route }) {
                         outlineStyle={Styles.outlineStyle}
                     />
                     <View style={Styles.buttonsContainer}>
-                        <IconButton icon='image' iconColor={locationInfo ? Colors.indigoDye : Colors.feldGrau} size={30} onPress={() => imageButtonHandler()} />
+                        <IconButton icon='image' iconColor={imageUri ? Colors.indigoDye : Colors.feldGrau} size={30} onPress={() => imageButtonHandler()} />
                         <IconButton icon={locationInfo ? 'map-marker-check' : 'map-marker'} iconColor={locationInfo ? Colors.indigoDye : Colors.feldGrau} size={30} onPress={() => mapButtonHandler()} />
                     </View>
                     <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker} />
