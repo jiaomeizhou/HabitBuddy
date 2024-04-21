@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import * as Colors from "./Colors";
 import { Platform } from 'react-native';
 
@@ -371,28 +371,35 @@ export const Styles = StyleSheet.create({
     diaryContainer: {
         flex: 1,
         padding: 10,
+        backgroundColor: Colors.primaryWhite,
     },
     diaryItem: {
         marginBottom: 15,
-        elevation: 2,
-        shadowColor: '#000',
+        shadowColor: Colors.black,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        backgroundColor: 'rgba(247 248 245 / 0.9)'
+        backgroundColor: 'rgba(247 248 245 / 0.9)',
+        marginHorizontal: 10,
+        elevation: 4,
+        borderRadius: 10,
     },
     diaryImage: {
         height: 200,
         borderRadius: 5,
+        width: '100%',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
     diaryText: {
-        fontWeight: 'normal',
-        fontSize: 13,
-        marginVertical: 5,
+        paddingTop: 5,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
     },
     dateText: {
         fontSize: 14,
-        color: '#666',
+        color: Colors.fernGreen,
     },
     switchContainer: {
         flexDirection: 'row',
@@ -408,7 +415,7 @@ export const Styles = StyleSheet.create({
     },
     helperText: {
         fontSize: 13,
-        color: '#5A7247',
+        color: Colors.fernGreen,
     },
     scrollViewContent: {
         flexGrow: 1,
@@ -430,7 +437,7 @@ export const Styles = StyleSheet.create({
         margin: 10,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#5A7247',
+        color: Colors.fernGreen,
     },
     postTextInput: {
         height: 80,
@@ -439,7 +446,7 @@ export const Styles = StyleSheet.create({
     },
     outlineStyle: {
         borderWidth: 1,
-        borderColor: '#5A7247',
+        color: Colors.fernGreen,
         borderRadius: 10,
     },
     postDiaryButtonsContainer: {
@@ -456,13 +463,100 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
     },
     pressableButtonText: {
-        color: 'white',
+        color: Colors.white,
         fontWeight: 'bold',
     },
     buttonPressed: {
         opacity: 0.75,
     },
     andriodPressed: {
-        backgroundColor: 'gray',
+        backgroundColor: Colors.grey,
     },
+    trackMapContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    trackMap: {
+        width: '100%',
+        height: '100%',
+    },
+    diaryDetailContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: 0,
+    },
+    diaryDetailCard: {
+        height: Dimensions.get("window").height,
+        elevation: 5,
+        borderRadius: 10,
+        margin: 0,
+        backgroundColor: 'rgba(243 246 240 / 0.9)'
+    },
+    diaryDetailCardTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailCardSubtitle: {
+        fontSize: 16,
+        color: Colors.mediumGreen,
+    },
+    diaryDetailImage: {
+        width: '100%',
+        height: 280,
+        padding: 10,
+        borderRadius: 10,
+    },
+    diaryDetailTitle: {
+        marginVertical: 18,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailParagraph: {
+        marginVertical: 15,
+        fontSize: 18,
+        lineHeight: 24,
+        color: Colors.fernGreen,
+    },
+    diaryDetailDateText: {
+        fontSize: 14,
+        marginTop: 10,
+        color: Colors.fernGreen,
+    },
+    diaryDetailMap: {
+        marginVertical: 10,
+        height: 200,
+        width: '100%',
+        borderRadius: 10,
+    },
+    notificationCard: {
+        borderRadius: 10,
+        backgroundColor: Colors.heavyGreen,
+    },
+    notificationButton: {
+        marginVertical: 8,
+        backgroundColor: Colors.lightGreen,
+    },
+    notificaitonButtonLabel: {
+        color: Colors.fernGreen,
+    },
+    customCheckBoxSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    customParagraph: {
+        fontSize: 12,
+        padding: 5,
+        fontWeight: 'bold',
+        borderWidth: 2,
+        borderColor: Colors.grey,
+        borderRadius: 5,
+        color: Colors.black,
+    },
+    customCheckBox: {
+        marginLeft: 10,
+    },
+
 })

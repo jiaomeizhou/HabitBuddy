@@ -1,13 +1,19 @@
-import { Button, StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import PressableButton from "../components/PressableButton";
 import * as Colors from "../components/Colors";
 import { Styles } from "../components/Styles";
 
+/**
+ * Provides a map interface for selecting a location.
+ * Users can tap on the map to place a marker and then confirm the selection,
+ * which navigates back with the selected location as parameters.
+ */
 export default function Map({ route, navigation }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
 
+    // Function to handle confirmation of the selected location
     function confirmHandler() {
         if (selectedLocation) {
             if (route.params?.from === 'LocationManager') {
@@ -52,6 +58,4 @@ export default function Map({ route, navigation }) {
         </View>
     );
 }
-const styles = StyleSheet.create({
-    map: { flex: 1 },
-});
+

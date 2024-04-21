@@ -8,7 +8,10 @@ import { Styles } from '../components/Styles';
 import PressableItem from '../components/PressableItem'
 import { IconButton } from 'react-native-paper';
 
-
+/**
+ * Displays a list of all diaries or just the user's private diaries.
+ * Allows navigation to diary detail view and supports filtering between all and private diaries.
+ */
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
     const [myDiaries, setMyDiaries] = useState([]);
@@ -17,6 +20,7 @@ export default function Diary() {
     const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
     const [showAllDiaries, setShowAllDiaries] = useState(true);
 
+    // Set navigation options dynamically
     useEffect(() => {
         navigation.setOptions({
             headerBackTitleVisible: false,
@@ -26,6 +30,7 @@ export default function Diary() {
         });
     }, [navigation]);
 
+    // Fetch diaries when component mounts and on dependency change
     useEffect(() => {
         const unsubscribe = fetchPublicCheckIns(setDiaries);
         const unsubscribeMyDiaries = fetchMyDiaries(userId, setMyDiaries);
@@ -35,6 +40,7 @@ export default function Diary() {
         };
     }, []);
 
+    // Handle navigation to add new diary based on available habits
     useEffect(() => {
         if (checkHabitsForNavigation) {
             const unsubscribe = subscribeHabitsByUserId(userId, (habits) => {
@@ -57,6 +63,7 @@ export default function Diary() {
         }
     }, [checkHabitsForNavigation, userId, navigation]);
 
+    // Function to handle press on a diary item
     const handlePressDiary = (diary) => {
         navigation.navigate('DiaryDetail', { diary });
     };
@@ -70,7 +77,7 @@ export default function Diary() {
                     <PressableItem onPress={() => handlePressDiary(item)}>
                         <Card style={Styles.diaryItem}>
                             {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
-                            <Card.Title title={item.diary} />
+                            <Card.Title title={item.diary} titleStyle={Styles.diaryText} />
                             <Card.Content>
                                 <Text style={Styles.dateText}>
                                     {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
