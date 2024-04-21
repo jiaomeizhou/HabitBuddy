@@ -224,34 +224,36 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 <p float="left">
    <img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
 </p>
 <p float="left">
+   <img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
 </p>
 <p float="left">
+   <img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
 </p>
 <p float="left">
+   <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
 </p>
 <p float="left">
+   <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
 </p>
 <p float="left">
+   <img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
    <img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
 </p>
-<img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
 
 ### Current State of the Application and Future Improvements:
 
