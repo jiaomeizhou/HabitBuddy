@@ -1,10 +1,11 @@
-import { View, FlatList, StyleSheet, Alert } from 'react-native'
+import { View, FlatList, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Card, Text, Button } from 'react-native-paper';
 import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from '../components/Styles';
+import PressableItem from '../components/PressableItem'
 import { IconButton } from 'react-native-paper';
 
 
@@ -66,15 +67,17 @@ export default function Diary() {
                 data={showAllDiaries ? diaries : myDiaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Card onPress={() => handlePressDiary(item)} style={Styles.diaryItem}>
-                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
-                        <Card.Title title={item.diary} />
-                        <Card.Content>
-                            <Text style={Styles.dateText}>
-                                {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
-                            </Text>
-                        </Card.Content>
-                    </Card>
+                    <PressableItem onPress={() => handlePressDiary(item)}>
+                        <Card style={Styles.diaryItem}>
+                            {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
+                            <Card.Title title={item.diary} />
+                            <Card.Content>
+                                <Text style={Styles.dateText}>
+                                    {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
+                                </Text>
+                            </Card.Content>
+                        </Card>
+                    </PressableItem>
                 )}
             />
             <View style={Styles.diaryButtonsContainer}>

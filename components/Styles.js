@@ -391,7 +391,7 @@ export const Styles = StyleSheet.create({
         marginVertical: 5,
     },
     dateText: {
-        fontSize: 12,
+        fontSize: 14,
         color: '#666',
     },
     switchContainer: {
