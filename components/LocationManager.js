@@ -1,13 +1,15 @@
-import { StyleSheet, Image, View, Dimensions, Text } from 'react-native'
+import { Image, View, Text } from 'react-native'
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { mapsApiKey } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Dialog, Portal, IconButton, Button } from "react-native-paper";
+import { Dialog, Portal, Button } from "react-native-paper";
 import { Styles } from "./Styles";
 import PressableButton from "./PressableButton";
 import * as Colors from "./Colors";
 
+// This component handles location-related functionalities such as fetching current location,
+// allowing user to pick a location from the map, and displaying current or selected location.
 export default function LocationManager({ onLocationSelect, currentData, showMapButtons, dismissMapPicker }) {
     const navigation = useNavigation();
     const route = useRoute();
@@ -19,7 +21,8 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
             setLocation(route.params.selectedLocation);
         }
     }, [route.params]);
-
+    
+    // Function to verify if the app has the necessary location permissions from the user.
     async function verifyPermission() {
         if (status.granted) {
             return true;
@@ -32,6 +35,7 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
         }
     }
 
+    // Function to get the current location of the user.
     async function locateUserHandler() {
         try {
             const havePermission = await verifyPermission();
@@ -51,6 +55,7 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
         }
     }
 
+    // Function to handle choosing a location on the map.
     function chooseLocationHandler() {
         dismissMapPicker();
         navigation.navigate('Map', {
