@@ -245,4 +245,21 @@ _The Edit Profile Screen lets users to update to their account details._
 
 <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
 
-### Iteration 3: TODO
+### Iteration 3:
+<img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
+
