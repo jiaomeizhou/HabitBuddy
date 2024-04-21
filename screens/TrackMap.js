@@ -5,7 +5,11 @@ import { auth } from '../firebase-files/firebaseSetup';
 import { fetchUserCheckInTrack } from '../firebase-files/firestoreHelper';
 import { Styles } from '../components/Styles';
 
-// The TrackMap component is used to display a map with markers for user check-in locations.
+/**
+ * Displays a map with markers indicating locations where the user has checked in.
+ * Uses Firebase to fetch user-specific check-in data and displays each location as a marker on the map.
+ * Initial map region is centered around a default location but will update based on the user's check-in data.
+ */
 export default function TrackMap() {
     const [locations, setLocations] = useState([]);
     const userId = auth.currentUser.uid;
