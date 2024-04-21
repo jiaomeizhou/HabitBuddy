@@ -12,7 +12,10 @@ import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
 import { Styles } from '../components/Styles';
 
-// Defines a component for posting diaries, which includes adding a check-in with optional image and location.
+/**
+ * PostDiary component allows users to post new diary entries with optional images and location tags.
+ * Entries can be marked as public or private, and associated with specific habits if linked from a diary management context.
+ */
 export default function PostDiary({ navigation, route }) {
     const [imageUri, setImageUri] = useState(null);
     const [diary, setDiary] = useState('');
@@ -35,10 +38,11 @@ export default function PostDiary({ navigation, route }) {
             text: 'seagreen',
             primary: 'seagreen',
             underlineColor: 'transparent',
-            background: '#FBFBFB',
+            background: Colors.lightWhite,
         },
     };
 
+    // Load initial data from route parameters if editing an existing entry
     useEffect(() => {
         if (route.params?.selectedLocation) {
             setLocationInfo(route.params.selectedLocation);
@@ -194,7 +198,7 @@ export default function PostDiary({ navigation, route }) {
                             <Switch
                                 value={taskCompleted}
                                 onValueChange={setTaskCompleted}
-                                color='seagreen'
+                                color={Colors.seagreen}
                             />
                         </View>}
                     <HelperText type="info" style={Styles.helperText}>
@@ -205,7 +209,7 @@ export default function PostDiary({ navigation, route }) {
                         <Switch
                             value={isPublic}
                             onValueChange={setIsPublic}
-                            color='seagreen'
+                            color={Colors.seagreen}
                         />
                     </View>
                     <LocationManager
