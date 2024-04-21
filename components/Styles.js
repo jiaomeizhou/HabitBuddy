@@ -371,28 +371,35 @@ export const Styles = StyleSheet.create({
     diaryContainer: {
         flex: 1,
         padding: 10,
+        backgroundColor: Colors.primaryWhite,
     },
     diaryItem: {
         marginBottom: 15,
-        elevation: 2,
-        shadowColor: '#000',
+        shadowColor: Colors.black,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        backgroundColor: 'rgba(247 248 245 / 0.9)'
+        backgroundColor: 'rgba(247 248 245 / 0.9)',
+        marginHorizontal: 10,
+        elevation: 4,
+        borderRadius: 10,
     },
     diaryImage: {
         height: 200,
         borderRadius: 5,
+        width: '100%',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
     diaryText: {
-        fontWeight: 'normal',
-        fontSize: 13,
-        marginVertical: 5,
+        paddingTop: 5,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
     },
     dateText: {
         fontSize: 14,
-        color: '#666',
+        color: Colors.fernGreen,
     },
     switchContainer: {
         flexDirection: 'row',
@@ -456,14 +463,14 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
     },
     pressableButtonText: {
-        color: 'white',
+        color: Colors.white,
         fontWeight: 'bold',
     },
     buttonPressed: {
         opacity: 0.75,
     },
     andriodPressed: {
-        backgroundColor: 'gray',
+        backgroundColor: Colors.grey,
     },
     trackMapContainer: {
         flex: 1,
@@ -497,19 +504,19 @@ export const Styles = StyleSheet.create({
     },
     diaryDetailImage: {
         width: '100%',
-        height: 200,
+        height: 280,
+        padding: 10,
         borderRadius: 10,
     },
     diaryDetailTitle: {
-        marginTop: 10,
-        marginBottom: 10,
-        fontSize: 18,
+        marginVertical: 18,
+        fontSize: 25,
         fontWeight: 'bold',
         color: Colors.fernGreen,
     },
     diaryDetailParagraph: {
-        marginBottom: 10,
-        fontSize: 16,
+        marginVertical: 15,
+        fontSize: 18,
         lineHeight: 24,
         color: Colors.fernGreen,
     },
@@ -519,15 +526,37 @@ export const Styles = StyleSheet.create({
         color: Colors.fernGreen,
     },
     diaryDetailMap: {
+        marginVertical: 10,
         height: 200,
         width: '100%',
-        marginTop: 10,
+        borderRadius: 10,
     },
-    diaryDetailUserInfo: {
-        fontSize: 16,
+    notificationCard: {
+        borderRadius: 10,
+        backgroundColor: Colors.heavyGreen,
+    },
+    notificationButton: {
+        marginVertical: 8,
+        backgroundColor: Colors.lightGreen,
+    },
+    notificaitonButtonLabel: {
+        color: Colors.fernGreen,
+    },
+    customCheckBoxSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    customParagraph: {
+        fontSize: 12,
+        padding: 5,
         fontWeight: 'bold',
-        color: '#333',
-        marginTop: 10,
+        borderWidth: 2,
+        borderColor: Colors.grey,
+        borderRadius: 5,
+        color: Colors.black,
+    },
+    customCheckBox: {
+        marginLeft: 10,
     },
 
 })
