@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-// The PetMessage component displays a message from the API about petting a dog.
+// The PetMessage component displays a dog fact from the API when petting the pet.
 // It is used in the Home screen.
 export default function PetMessage() {
     const [petMessage, setPetMessage] = useState('');
@@ -32,7 +32,7 @@ export default function PetMessage() {
 
     return (
         <View>
-            <Text>{petMessage}</Text>
+            <Text style={{fontWeight: 'bold'}}>{petMessage}</Text>
         </View>
     );
 }

@@ -35,9 +35,9 @@ export default function Pet({ userProgress }) {
     function getPetStatusText(status) {
         switch (status) {
             case 'happy':
-                return "Keep it up! I'm so happy!";
+                return "You are doing great! I'm so happy!";
             case 'normal':
-                return 'I needs a little love. Keep checking in!';
+                return 'Keep it up! I believe in you.';
             case 'sad':
                 return "I'm sad. Keep checking in!";
             default:

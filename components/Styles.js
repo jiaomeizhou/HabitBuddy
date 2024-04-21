@@ -194,7 +194,7 @@ export const Styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         width: 150,
-        minHeight: 100,
+        minHeight: 80,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -204,7 +204,7 @@ export const Styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         width: 150,
-        minHeight: 100,
+        minHeight: 80,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -306,8 +306,8 @@ export const Styles = StyleSheet.create({
     },
     profileCard: {
         width: '90%',
+        margin: 10,
         alignSelf: 'center',
-        marginBottom: 50,
         backgroundColor: Colors.lightGreen,
     },
     reminderContainer: {

@@ -6,6 +6,7 @@ import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '..
 import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from '../components/Styles';
 import PressableItem from '../components/PressableItem'
+import { IconButton } from 'react-native-paper';
 
 
 export default function Diary() {
@@ -20,9 +21,7 @@ export default function Diary() {
         navigation.setOptions({
             headerBackTitleVisible: false,
             headerRight: () => (
-                <IconButton onPress={() => setCheckHabitsForNavigation(true)}>
-                    <FontAwesome6 name="add" size={24} color="black" />
-                </IconButton>
+                <IconButton onPress={() => setCheckHabitsForNavigation(true)} icon="plus" />
             ),
         });
     }, [navigation]);
