@@ -1,4 +1,4 @@
-import { View, Alert } from 'react-native'
+import { View, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
@@ -157,11 +157,15 @@ export default function AddHabitScreen({ route }) {
 
     return (
         <View style={Styles.container}>
-            <CustomText>{'Type the habit name:'}</CustomText>
-            <CustomTextInput
-                onChangeText={handleHabitNameChange}
-                value={habitName}
-            />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                    <CustomText>{'Type the habit name:'}</CustomText>
+                    <CustomTextInput
+                        onChangeText={handleHabitNameChange}
+                        value={habitName}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
             <CustomText>{'Habit Frequency (How often in 1 week):'}</CustomText>
             <CustomDropDownPicker
@@ -192,13 +196,16 @@ export default function AddHabitScreen({ route }) {
                     onChange={dateHandler}
                 />
             )}
-
-            <CustomText>{'Spend how many weeks:'}</CustomText>
-            <CustomTextInput
-                value={durationWeeks}
-                onChangeText={handleDurationChange}
-                keyboardType="numeric"
-            />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                    <CustomText>{'Spend how many weeks:'}</CustomText>
+                    <CustomTextInput
+                        value={durationWeeks}
+                        onChangeText={handleDurationChange}
+                        keyboardType="numeric"
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
             <CustomText>{'End Date:'}</CustomText>
             <CustomText style={Styles.input}>{formattedEndDate}</CustomText>
