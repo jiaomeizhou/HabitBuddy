@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, ScrollView, Image } from 'react-native'
+import { View, Alert, ScrollView, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomText from '../components/CustomText';
@@ -12,6 +12,7 @@ import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
 import { Styles } from '../components/Styles';
 
+// Defines a component for posting diaries, which includes adding a check-in with optional image and location.
 export default function PostDiary({ navigation, route }) {
     const [imageUri, setImageUri] = useState(null);
     const [diary, setDiary] = useState('');
@@ -28,6 +29,7 @@ export default function PostDiary({ navigation, route }) {
     const [showImageButtons, setShowImageButtons] = useState(false);
     const [showMapButtons, setShowMapButtons] = useState(false);
 
+    // Custom theme for TextInput components.
     const inputTheme = {
         colors: {
             text: 'seagreen',
@@ -51,6 +53,7 @@ export default function PostDiary({ navigation, route }) {
 
     }, [route.params]);
 
+    // Handler for habit chip press.
     function handlePressHabit(habitId) {
         if (selectedHabitId === habitId) {
             setSelectedHabitId(null);
@@ -60,6 +63,7 @@ export default function PostDiary({ navigation, route }) {
 
     }
 
+    // Function to fetch image data from URI and upload it to Firebase Storage.
     async function getImageData(uri) {
         try {
             const response = await fetch(uri);
@@ -73,6 +77,7 @@ export default function PostDiary({ navigation, route }) {
         }
     }
 
+    // Handler for image picker.
     async function pickImageHandler(uri) {
         const uploadedImageUrl = await getImageData(uri);
         if (uploadedImageUrl) {
@@ -80,6 +85,7 @@ export default function PostDiary({ navigation, route }) {
         }
     }
 
+    // Save the diary entry to the database.
     function saveDiary() {
         if (!diary.trim()) {
             Alert.alert("Error", "Please add your diary.");
@@ -115,14 +121,17 @@ export default function PostDiary({ navigation, route }) {
             });
     }
 
+    // Handler to cancel the operation and go back.
     function cancelHandler() {
         navigation.goBack();
     }
 
+    // Toggle the visibility of image management buttons.
     function imageButtonHandler() {
         setShowImageButtons(!showImageButtons);
     }
 
+    // Dismiss the image picker UI.
     function dismissImagePicker() {
         setShowImageButtons(false);
     }
@@ -136,8 +145,6 @@ export default function PostDiary({ navigation, route }) {
     function dismissMapPicker() {
         setShowMapButtons(false);
     }
-
-    console.log(locationInfo)
 
     return (
         <ScrollView

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import * as Colors from "./Colors";
 import { Platform } from 'react-native';
 
@@ -408,7 +408,7 @@ export const Styles = StyleSheet.create({
     },
     helperText: {
         fontSize: 13,
-        color: '#5A7247',
+        color: Colors.fernGreen,
     },
     scrollViewContent: {
         flexGrow: 1,
@@ -430,7 +430,7 @@ export const Styles = StyleSheet.create({
         margin: 10,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#5A7247',
+        color: Colors.fernGreen,
     },
     postTextInput: {
         height: 80,
@@ -439,7 +439,7 @@ export const Styles = StyleSheet.create({
     },
     outlineStyle: {
         borderWidth: 1,
-        borderColor: '#5A7247',
+        color: Colors.fernGreen,
         borderRadius: 10,
     },
     postDiaryButtonsContainer: {
@@ -465,4 +465,69 @@ export const Styles = StyleSheet.create({
     andriodPressed: {
         backgroundColor: 'gray',
     },
+    trackMapContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    trackMap: {
+        width: '100%',
+        height: '100%',
+    },
+    diaryDetailContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: 0,
+    },
+    diaryDetailCard: {
+        height: Dimensions.get("window").height,
+        elevation: 5,
+        borderRadius: 10,
+        margin: 0,
+        backgroundColor: 'rgba(243 246 240 / 0.9)'
+    },
+    diaryDetailCardTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailCardSubtitle: {
+        fontSize: 16,
+        color: Colors.mediumGreen,
+    },
+    diaryDetailImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 10,
+    },
+    diaryDetailTitle: {
+        marginTop: 10,
+        marginBottom: 10,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailParagraph: {
+        marginBottom: 10,
+        fontSize: 16,
+        lineHeight: 24,
+        color: Colors.fernGreen,
+    },
+    diaryDetailDateText: {
+        fontSize: 14,
+        marginTop: 10,
+        color: Colors.fernGreen,
+    },
+    diaryDetailMap: {
+        height: 200,
+        width: '100%',
+        marginTop: 10,
+    },
+    diaryDetailUserInfo: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#333',
+        marginTop: 10,
+    },
+
 })

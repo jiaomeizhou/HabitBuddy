@@ -8,7 +8,7 @@ import { Styles } from '../components/Styles';
 import PressableItem from '../components/PressableItem'
 import { IconButton } from 'react-native-paper';
 
-
+// Diary screen component that displays either all diaries or private diaries.
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
     const [myDiaries, setMyDiaries] = useState([]);

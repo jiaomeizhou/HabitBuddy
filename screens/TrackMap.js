@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import { auth } from '../firebase-files/firebaseSetup';
 import { fetchUserCheckInTrack } from '../firebase-files/firestoreHelper';
+import { Styles } from '../components/Styles';
 
-
+// The TrackMap component is used to display a map with markers for user check-in locations.
 export default function TrackMap() {
     const [locations, setLocations] = useState([]);
     const userId = auth.currentUser.uid;
@@ -15,9 +16,9 @@ export default function TrackMap() {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.trackMapContainer}>
             <MapView
-                style={styles.map}
+                style={Styles.trackMap}
                 initialRegion={{
                     latitude: 49.246292,
                     longitude: -123.116226,
@@ -36,15 +37,3 @@ export default function TrackMap() {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-})

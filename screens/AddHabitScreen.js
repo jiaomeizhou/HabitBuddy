@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, Text } from 'react-native'
+import { View, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
@@ -7,18 +7,15 @@ import CustomText from '../components/CustomText';
 import CustomTextInput from '../components/CustomTextInput';
 import CustomDropDownPicker from '../components/CustomDropDownPicker';
 import CustomDateTimePicker from '../components/CustomDateTimePicker';
-import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
 import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from '../components/Styles';
-import { Switch } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 
+// Screen to add a new habit or edit an existing habit.
 export default function AddHabitScreen({ route }) {
-    // TODO: render shortcut name as the default habit name
-    // which is the habit name passed from the Welcome screen
+    // Default values and state hooks for habit details.
     const { habitShortcutName } = route.params || {};
-
     const navigation = useNavigation();
     const [habitName, setHabitName] = useState(habitShortcutName || '');
     const [habitFrequency, setHabitFrequency] = useState('');
@@ -27,6 +24,7 @@ export default function AddHabitScreen({ route }) {
     const [isReminderEnabled, setIsReminderEnabled] = useState(false);
     const userId = auth.currentUser.uid;
 
+    // State hooks for frequency dropdown and date picker.
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState([
         { label: '1', value: 1 },
@@ -40,12 +38,12 @@ export default function AddHabitScreen({ route }) {
     const [date, setDate] = useState(new Date());
     const [formattedDate, setFormattedDate] = useState('');
     const [formattedEndDate, setFormattedEndDate] = useState('');
-    // endDate vs. formattedEndDate: {"nanoseconds": 23000000, "seconds": 1714357909} Sun Apr 07 2024
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const habitData = route.params?.habitData || null;
     const habitId = habitData?.id || null;
     const isEditMode = route.params?.isEditMode || false;
 
+    // Load existing habit details if in edit mode.
     useEffect(() => {
         if (habitData) {
             setHabitName(habitData.habit);
@@ -72,7 +70,7 @@ export default function AddHabitScreen({ route }) {
         }
     }, [habitData, isEditMode]);
 
-
+    // Handlers for input changes and button actions.
     function handleHabitNameChange(text) {
         setHabitName(text);
     }
@@ -101,13 +99,14 @@ export default function AddHabitScreen({ route }) {
         calculateEndDate(parseInt(value));
     }
 
+    // Calculate end date based on the start date and duration in weeks.
     function calculateEndDate(weeks, startDate = date) {
         const result = new Date(startDate);
         result.setDate(result.getDate() + weeks * 7);
         setEndDate(result);
         setFormattedEndDate(result.toDateString());
     }
-
+    // Save or update the habit.
     function saveHandler() {
         if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks <= 0) {
             Alert.alert('Invalid Input', 'Please check the input fields and try again');
@@ -203,14 +202,6 @@ export default function AddHabitScreen({ route }) {
 
             <CustomText>{'End Date:'}</CustomText>
             <CustomText style={Styles.input}>{formattedEndDate}</CustomText>
-            {/* <View style={Styles.reminderContainer}>
-                <Text style={Styles.reminderText}>{'Set a Reminder?'}</Text>
-                <Switch
-                    onValueChange={setIsReminderEnabled}
-                    value={isReminderEnabled}
-                    color={Colors.chestnut}
-                />
-            </View> */}
             <PressableButton
                 title="Save"
                 onPress={saveHandler}

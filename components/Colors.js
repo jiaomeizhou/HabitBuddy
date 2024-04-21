@@ -14,3 +14,4 @@ export const lightGreen = '#E2E9DC';
 export const rose = '#885053';
 export const lightGrey = '#D3D3D3';
 export const grey = 'grey';
+export const mediumGreen = '#6B8754'

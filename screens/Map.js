@@ -1,13 +1,17 @@
-import { Button, StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import PressableButton from "../components/PressableButton";
 import * as Colors from "../components/Colors";
 import { Styles } from "../components/Styles";
 
+// The Map component is used to display a map to the user where they can select a location.
+// When a location is selected and confirmed, it is passed back to the navigation route.
 export default function Map({ route, navigation }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
 
+    // Handler for the confirm button
+    // Navigates back to the PostDiary screen with the selected location data
     function confirmHandler() {
         if (selectedLocation) {
             if (route.params?.from === 'LocationManager') {
@@ -52,6 +56,4 @@ export default function Map({ route, navigation }) {
         </View>
     );
 }
-const styles = StyleSheet.create({
-    map: { flex: 1 },
-});
+
