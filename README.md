@@ -34,6 +34,7 @@ service cloud.firestore {
 ### Firebase indexes
 
 #### If you encounter the following error, please manually add the indexes in Firebase. Copy the link in the error message, paste it to the browser and follow the instructions to add indexes, wait for a few minutes then the error should be fixed.
+
 <img src="assets/firebase_indexes_error.PNG" alt="drawing" width="auto"/>
 
 <img src="assets/firebase_indexes.PNG" alt="drawing" width="auto"/>
@@ -59,6 +60,7 @@ service cloud.firestore {
 6. Database: Listen to real time checkins, habits and user profile data from DB. Write checkin data and delete checkin to db by toggle checkin box.
 
 ##### Iteration 2 (04/01/2024 - 04/11/2024)
+
 1. Finish UI for Home, Profile, Login/signin, Habit detail screen.
 2. Finish Authentication.
 3. Implement the main logic of pet status.
@@ -66,6 +68,7 @@ service cloud.firestore {
 5. Fix many bugs.
 
 ##### Iteration 3 (04/13/2024 - 04/20/2024)
+
 1. API use: fetch a random dog fact from Dog API (https://dogapi.dog/), display the fact text when the user pet the pet in the Home screen.
 2. Display all my diaries in Diary screen.
 3. UI design: pet, post diary, profile, etc.
@@ -75,52 +78,35 @@ service cloud.firestore {
 
 #### Completed
 
-##### 03/24/2024
+##### Iteration 1 (03/24/2024 - 03/28/2024)
 
-1. Add addHabitScreen and editHabitScreen
-2. Create CRUD operations of habit related logic
-3. Add new custom component (IconButton).
-4. Add helpers file to convert time format.
+1. Add addHabitScreen and editHabitScreen.
+2. Create CRUD operations of habit related logic.
+3. Add helpers file to convert time format.
+4. Create custom component (IconButton, PressableButton, CustomTextInput, CustomText, CustomSwitch, CustomDropDownPicker, CustomDateTimePicker,CustomCheckBox)
+5. Update addHabitScreen to use the custom components.
+6. Add postDiary screen.
+8. Add diary screen.
+9. Add diaryDetail screen. 
+10. Update addHabit and editHabit screen to use the data from the database.
+11. Fix conflict code and bugs.
 
-##### 03/25/2024
-
-1. Create custom component (PressableButton, CustomTextInput, CustomText, CustomSwitch, CustomDropDownPicker, CustomDateTimePicker)
-2. Update addHabitScreen to use the custom components.
-
-##### 03/27/2024
-
-1. Add postDiary screen.
-2. Add custom component (CustomCheckBox)
-3. Add diary screen.
-4. Fix conflict code.
-
-##### 03/28/2024
-
-1. Add diaryDetail screen.
-2. Fix postDiary screen bug to refresh the component.
-3. Update custom component to support more functionality.
-4. Update addHabit and editHabit screen to use the data from the database.
-5. Fix addHaibt and editHabit screen bugs.
-6. Fix profile screen rendering error.
-
-##### 04/07/2024
+##### Iteration 2 (04/07/2024 - 04/11/2024)
 
 1. Update DiaryDetail component to fix Image missing bug.
 2. Update PostDiary componenet to use the Imagemanager component and upload and fetch Img link from firebase storage.
+3. Add Map component to locate user location or let user choose location from the map.
+4. Add LocationManager component to handle the location functionality.
+5. Add TrackMap component to show multiple check in locations of a user.
+6. Update LocationManager component to fix bug and improve UI layout
+7. Update Diary component to add a add button to let user to add a check in record easily.
+8. Update PostDiary component to add a function of link a habit to a check in record.
+9. Update Diary and PostDiary componenets' UI display.
 
-##### 04/09/2024
-
-1. Add Map component to locate user location or let user choose location from the map.
-2. Add LocationManager component to handle the location functionality.
-3. Add TrackMap component to show multiple check in locations of a user.
-
-##### 04/11/2024
-
-1. Update LocationManager component to fix bug and improve UI layout
-2. Update Diary component to add a add button to let user to add a check in record easily.
-3. Update PostDiary component to add a function of link a habit to a check in record.
-4. Update Diary and PostDiary componenets' UI display.
-
+##### Iteration 3 (04/18/2024 - 04/20/2024)
+1. Add local notification and search and finish the UI of datetime picker component on IOS and Andriod platforms.
+2. Optimize UI display for Diary, DiaryDetail.
+3. Add documantations and fix code conflicts and bugs.
 ## App Progress and Screenshots
 
 ### Iteration 1:
@@ -179,7 +165,6 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 4. **Bug Fixes**:
    Fix any remaining bugs, including issues about location use.
 
-
 ### Current State of the Application and Future Improvements:
 
 #### Current State of the Application:
@@ -195,7 +180,6 @@ We have finished all 3 iterations. Now all the essential features have been fini
 3. **Advanced Notifications**: Implement intelligent notifications based on user habits and preferences to provide reminders, motivational messages, and personalized recommendations.
 
 4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
-
 
 ### Iteration 1:
 
