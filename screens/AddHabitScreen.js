@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, Text} from 'react-native'
+import { StyleSheet, View, Alert, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
@@ -82,6 +82,9 @@ export default function AddHabitScreen({ route }) {
         setDatePickerVisibility(false);
         setDate(currentDate);
         setFormattedDate(currentDate.toDateString());
+        if (durationWeeks) {
+            calculateEndDate(parseInt(durationWeeks), currentDate);
+        }
     }
 
     function toggleDatePicker() {
@@ -95,11 +98,11 @@ export default function AddHabitScreen({ route }) {
 
     function handleDurationChange(value) {
         setDurationWeeks(value);
-        calculateEndDate(value);
+        calculateEndDate(parseInt(value));
     }
 
-    function calculateEndDate(weeks) {
-        const result = new Date(date);
+    function calculateEndDate(weeks, startDate = date) {
+        const result = new Date(startDate);
         result.setDate(result.getDate() + weeks * 7);
         setEndDate(result);
         setFormattedEndDate(result.toDateString());
