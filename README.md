@@ -2,7 +2,7 @@
 
 Habit Buddy is a mobile application designed to help users track and maintain their habits. It allows users to create, monitor, and reflect on their daily habits and routines.
 
-## Data Model
+## Data Model 
 
 Our application utilizes Firestore as a NoSQL database and includes the following collections:
 
@@ -44,13 +44,9 @@ service cloud.firestore {
 1. Jiaomei Zhou (Jamie): Home, Profile, Habit detail, Authentication, Camera use, API use.
 2. Weiyi Gao: Add habit, Edit habit, Post diary, All diaries, Diary detail, Location use, Notification.
 
-## Development log
-
 ### Jamie
 
-#### Completed
-
-##### Iteration 1 (03/22/2024 - 03/28/2024)
+#### Iteration 1 (03/22/2024 - 03/28/2024)
 
 1. Firebase setup
 2. Signup/Login/logout
@@ -59,7 +55,7 @@ service cloud.firestore {
 5. Navigation: Bottom tabs, allow navigate from signup/login to home
 6. Database: Listen to real time checkins, habits and user profile data from DB. Write checkin data and delete checkin to db by toggle checkin box.
 
-##### Iteration 2 (04/01/2024 - 04/11/2024)
+#### Iteration 2 (04/01/2024 - 04/11/2024)
 
 1. Finish UI for Home, Profile, Login/signin, Habit detail screen.
 2. Finish Authentication.
@@ -67,7 +63,7 @@ service cloud.firestore {
 4. Finish camera use and allow upload an image from gallery.
 5. Fix many bugs.
 
-##### Iteration 3 (04/13/2024 - 04/20/2024)
+#### Iteration 3 (04/13/2024 - 04/20/2024)
 
 1. API use: fetch a random dog fact from Dog API (https://dogapi.dog/), display the fact text when the user pet the pet in the Home screen.
 2. Display all my diaries in Diary screen.
@@ -76,9 +72,7 @@ service cloud.firestore {
 
 ### Weiyi
 
-#### Completed
-
-##### Iteration 1 (03/24/2024 - 03/28/2024)
+#### Iteration 1 (03/24/2024 - 03/28/2024)
 
 1. Add addHabitScreen and editHabitScreen.
 2. Create CRUD operations of habit related logic.
@@ -91,7 +85,7 @@ service cloud.firestore {
 10. Update addHabit and editHabit screen to use the data from the database.
 11. Fix conflict code and bugs.
 
-##### Iteration 2 (04/07/2024 - 04/11/2024)
+#### Iteration 2 (04/07/2024 - 04/11/2024)
 
 1. Update DiaryDetail component to fix Image missing bug.
 2. Update PostDiary componenet to use the Imagemanager component and upload and fetch Img link from firebase storage.
@@ -103,10 +97,11 @@ service cloud.firestore {
 8. Update PostDiary component to add a function of link a habit to a check in record.
 9. Update Diary and PostDiary componenets' UI display.
 
-##### Iteration 3 (04/18/2024 - 04/20/2024)
+#### Iteration 3 (04/18/2024 - 04/20/2024)
 1. Add local notification and search and finish the UI of datetime picker component on IOS and Andriod platforms.
 2. Optimize UI display for Diary, DiaryDetail.
 3. Add documantations and fix code conflicts and bugs.
+
 ## App Progress and Screenshots
 
 ### Iteration 1:
@@ -130,6 +125,24 @@ During the 1st iteration of our project, we focused on laying the groundwork for
    - **Habits Collection**: Fully implemented CRUD operations, enabling users to manage their habits directly from the app.
    - **CheckIns Collection**: Implemented create update and read operations, allowing users to log daily activities and view them in a diary format.
 
+6. **Screenshots**:
+
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Habit Detail Screen providing detailed information about a specific user habit._
+- _The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
+
+<img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
+
 ### Iteration 2:
 
 During the 2nd iteration of our project, we focused on enhancing the app by integrating some functionalities such as authentication, camera usage, location services, UI optimizations, and bug fixes. This iteration aimed at enriching the user experience and laying a robust foundation for future features.
@@ -148,6 +161,25 @@ During the 2nd iteration of our project, we focused on enhancing the app by inte
    Improved the navigation flow within the app, making it easier for users to switch between different features and screens.
 5. **Bug Fixes**:
    Addressed various bugs reported in the first iteration, including issues with data synchronization, UI glitches, and performance bottlenecks.
+6. **Screenshots**:
+
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Diary Detail Screen displays a detailed information of a diary entries._
+- _The My Track Screen displays the user's all shared locations with their diary content._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
+- _The Edit Profile Screen lets users to update to their account details._
+
+<img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
 
 ### Iteration 3
 
@@ -165,6 +197,40 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 4. **Bug Fixes**:
    Fix any remaining bugs, including issues about location use.
 
+5. **Screenshots**:
+
+- _The Signup screen allows the user create a new account with email and password._
+- _The Login screen allows the user log in the app, the forgot password button allows the user reset the password._
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits and a pet image. When the user pet the pet, a message show up with current pet status and a random dog fact fecthed from Dog API._
+- The Habit Detail screen can be navigated by pressing on the habit entry in Home screen. It displays a calendar which highlights the checkin dates, the progress and checkin times of the habit. There is a button can navigate to Post Diary screen.
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits, it allows the user takes/uploads photos and choose a location and post a public or private diary. If the user navigates to this screen from a Habit Detail screen, it also allow the user checkin the previous habit._
+- _The Diary Screen displays a comprehensive list of diary entries, there are two modes: All public diaries and My diaries._
+- _The Diary Detail Screen displays a detailed information of a diary entries: diary content, user info, pet status, checkin status, photo, location map, and date._
+- _The My Track Screen displays the user's all shared locations with their diary content._
+- _The Profile Screen provides users with an overview of their personal information and stats board. The user can set a daily notification to receive a local notification._
+- _The Edit Profile Screen lets users to update to their avatar, name, pet name._
+
+<img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
+
 ### Current State of the Application and Future Improvements:
 
 #### Current State of the Application:
@@ -181,68 +247,5 @@ We have finished all 3 iterations. Now all the essential features have been fini
 
 4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
 
-### Iteration 1:
 
-_The Home welcome screen displaying default habits that users can adopt into their daily routine._
 
-<img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
-
-_The Home screen showcasing a list of user habits._
-
-<img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
-
-_The Habit Detail Screen providing detailed information about a specific user habit._
-
-<img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
-
-_The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
-
-<img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
-
-_The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-
-<img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
-
-_The Diary List Screen displays a comprehensive list of diary entries._
-
-<img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
-
-_The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-
-<img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
-
-### Iteration 2:
-
-_The Home welcome screen displaying default habits that users can adopt into their daily routine._
-
-<img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
-
-_The Home screen showcasing a list of user habits._
-
-<img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
-
-_The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-
-<img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
-
-_The Diary List Screen displays a comprehensive list of diary entries._
-
-<img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
-
-_The Diary Detail Screen displays a detailed information of a diary entries._
-
-<img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
-
-_The My Track Screen displays the user's all shared locations with their diary content._
-
-<img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
-
-_The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-
-<img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
-
-_The Edit Profile Screen lets users to update to their account details._
-
-<img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
-
-### Iteration 3: TODO

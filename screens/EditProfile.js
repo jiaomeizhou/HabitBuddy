@@ -8,6 +8,7 @@ import { Styles } from '../components/Styles';
 import PressableButton from '../components/PressableButton';
 import * as Colors from '../components/Colors';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { Button } from 'react-native-paper';
 
 // The EditProfile screen of Habit Buddy app.
 // It allows the user to edit their profile.
@@ -17,6 +18,7 @@ export default function EditProfileScreen({ navigation, route }) {
     const [userName, setUserName] = useState(userData.userName || '');
     const [petName, setPetName] = useState(userData.petName || '');
     const [avatarUrl, setAvatarUrl] = useState(userData.avatarUrl || '');
+    const [showImageButtons, setShowImageButtons] = useState(false);
 
     // Function to upload image to Firebase Storage
     async function getImageData(uri) {
@@ -65,9 +67,20 @@ export default function EditProfileScreen({ navigation, route }) {
         }
     };
 
+    // Toggle the visibility of image management buttons.
+    function imageButtonHandler() {
+        setShowImageButtons(!showImageButtons);
+    }
+
+    // Dismiss the image picker UI.
+    function dismissImagePicker() {
+        setShowImageButtons(false);
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ImageManager receiveImageURI={handleAvatarUpload} initialImage={avatarUrl} />
+            <Button mode="elevated" icon='account-box' iconColor={avatarUrl ? Colors.indigoDye : Colors.feldGrau} onPress={() => imageButtonHandler()} >Update Avatar</Button>
+            <ImageManager receiveImageURI={handleAvatarUpload} initialImage={avatarUrl} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker} />
             <TextInput
                 placeholder="Username"
                 value={userName}
