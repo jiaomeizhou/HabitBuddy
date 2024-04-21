@@ -32,7 +32,7 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton onPress={onPressEdit} icon="account-edit" size={28}/>
+        <IconButton onPress={onPressEdit} icon="account-edit" size={28} />
       ),
     });
   }, [navigation]);
