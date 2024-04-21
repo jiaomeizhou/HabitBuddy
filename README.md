@@ -104,92 +104,21 @@ service cloud.firestore {
 
 ## App Progress and Screenshots
 
-### Iteration 1:
+### Current State of the Application and Future Improvements:
 
-During the 1st iteration of our project, we focused on laying the groundwork for the Habit Buddy Mobile App, including the initial setup of our development environment, establishing the app's overall structure, and beginning the implementation of core functionalities.
+#### Current State of the Application:
 
-1. **React Native Components**: Created foundational components to represent the main functionalities we plan to build. This includes components for user habits, diaries, and the navigation structure.
+We have finished all 3 iterations. Now all the essential features have been finished, like habit tracking, user authentication, diary entries, location services, API integration for fun dog facts, and a user friendly UI.
 
-2. **Navigation**: Implemented the basic navigation structure using React Navigation. This includes navigation between screens such as Home, Diary, Add Habit, and Profile.
+#### Future Improvements:
 
-3. **CRUD Operations**: Established the basis for CRUD operations with Firestore. This allows for the creation, reading, updating, and deletion of data across our app's features.
+1. **Social Features**: Introduce social elements such as habit sharing, community building, and peer support to foster motivation and accountability among users.
 
-4. **Data Model Design**:
+2. **Gamification**: Gamify the habit tracking process with challenges, rewards, and leaderboards to make habit formation more engaging and rewarding.
 
-   - **Users**: Handles basic user data, including user profiles. Users can update their names and other profile details.
-   - **Habits**: Allows users to create, edit, and delete custom habits. The Home screen fetches and displays all habits associated with the user.
-   - **CheckIns**: Enables users to add daily check-in records related to each habit, including mood logs and completion status. The Diary screen showcases all public check-in records from users.
+3. **Advanced Notifications**: Implement intelligent notifications based on user habits and preferences to provide reminders, motivational messages, and personalized recommendations.
 
-5. **CRUD Operations Detail**:
-   - **Users Collection**: Implemented read and update operations for user profiles.
-   - **Habits Collection**: Fully implemented CRUD operations, enabling users to manage their habits directly from the app.
-   - **CheckIns Collection**: Implemented create update and read operations, allowing users to log daily activities and view them in a diary format.
-
-6. **Screenshots**:
-
-- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
-- _The Home screen showcasing a list of user habits._
-- _The Habit Detail Screen providing detailed information about a specific user habit._
-- _The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
-- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-- _The Diary List Screen displays a comprehensive list of diary entries._
-- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-
-<p float="left">
-   <img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
-</p>
-<p float="left">
-   <img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
-</p>
-<img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
-
-### Iteration 2:
-
-During the 2nd iteration of our project, we focused on enhancing the app by integrating some functionalities such as authentication, camera usage, location services, UI optimizations, and bug fixes. This iteration aimed at enriching the user experience and laying a robust foundation for future features.
-
-1. **Authentication**:
-   Improved a secure login and signup functionality using Firebase Authentication.
-   Implemented password reset functionality to aid users who forget their login credentials.
-2. **Camera Use**:
-   Integrated camera functionality to allow users to add pictures to their diary entries directly from their device's camera.
-   Users can also upload images from their gallery to personalize their diary entries further.
-3. **Location Use**:
-   Integrated geolocation services to enable users to add location data to their habits and diary entries.
-   This feature allows the app to automatically capture the user's current location during a check-in or allow users to manually select a location on a map.
-4. **UI Enhancements**:
-   Overhauled the user interface to make it more visually appealing and user-friendly.
-   Improved the navigation flow within the app, making it easier for users to switch between different features and screens.
-5. **Bug Fixes**:
-   Addressed various bugs reported in the first iteration, including issues with data synchronization, UI glitches, and performance bottlenecks.
-6. **Screenshots**:
-
-- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
-- _The Home screen showcasing a list of user habits._
-- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-- _The Diary List Screen displays a comprehensive list of diary entries._
-- _The Diary Detail Screen displays a detailed information of a diary entries._
-- _The My Track Screen displays the user's all shared locations with their diary content._
-- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-- _The Edit Profile Screen lets users to update to their account details._
-
-<p float="left">
-   <img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
-</p>
-<p float="left">
-   <img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
-</p>
-<p float="left">
-   <img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
-</p>
+4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
 
 ### Iteration 3
 
@@ -269,21 +198,91 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
    <img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
 </p>
 
-### Current State of the Application and Future Improvements:
 
-#### Current State of the Application:
+### Iteration 2:
 
-We have finished all 3 iterations. Now all the essential features have been finished, like habit tracking, user authentication, diary entries, location services, API integration for fun dog facts, and a user friendly UI.
+During the 2nd iteration of our project, we focused on enhancing the app by integrating some functionalities such as authentication, camera usage, location services, UI optimizations, and bug fixes. This iteration aimed at enriching the user experience and laying a robust foundation for future features.
 
-#### Future Improvements:
+1. **Authentication**:
+   Improved a secure login and signup functionality using Firebase Authentication.
+   Implemented password reset functionality to aid users who forget their login credentials.
+2. **Camera Use**:
+   Integrated camera functionality to allow users to add pictures to their diary entries directly from their device's camera.
+   Users can also upload images from their gallery to personalize their diary entries further.
+3. **Location Use**:
+   Integrated geolocation services to enable users to add location data to their habits and diary entries.
+   This feature allows the app to automatically capture the user's current location during a check-in or allow users to manually select a location on a map.
+4. **UI Enhancements**:
+   Overhauled the user interface to make it more visually appealing and user-friendly.
+   Improved the navigation flow within the app, making it easier for users to switch between different features and screens.
+5. **Bug Fixes**:
+   Addressed various bugs reported in the first iteration, including issues with data synchronization, UI glitches, and performance bottlenecks.
+6. **Screenshots**:
 
-1. **Social Features**: Introduce social elements such as habit sharing, community building, and peer support to foster motivation and accountability among users.
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Diary Detail Screen displays a detailed information of a diary entries._
+- _The My Track Screen displays the user's all shared locations with their diary content._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
+- _The Edit Profile Screen lets users to update to their account details._
 
-2. **Gamification**: Gamify the habit tracking process with challenges, rewards, and leaderboards to make habit formation more engaging and rewarding.
+<p float="left">
+   <img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
+</p>
 
-3. **Advanced Notifications**: Implement intelligent notifications based on user habits and preferences to provide reminders, motivational messages, and personalized recommendations.
+### Iteration 1:
 
-4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
+During the 1st iteration of our project, we focused on laying the groundwork for the Habit Buddy Mobile App, including the initial setup of our development environment, establishing the app's overall structure, and beginning the implementation of core functionalities.
 
+1. **React Native Components**: Created foundational components to represent the main functionalities we plan to build. This includes components for user habits, diaries, and the navigation structure.
 
+2. **Navigation**: Implemented the basic navigation structure using React Navigation. This includes navigation between screens such as Home, Diary, Add Habit, and Profile.
+
+3. **CRUD Operations**: Established the basis for CRUD operations with Firestore. This allows for the creation, reading, updating, and deletion of data across our app's features.
+
+4. **Data Model Design**:
+
+   - **Users**: Handles basic user data, including user profiles. Users can update their names and other profile details.
+   - **Habits**: Allows users to create, edit, and delete custom habits. The Home screen fetches and displays all habits associated with the user.
+   - **CheckIns**: Enables users to add daily check-in records related to each habit, including mood logs and completion status. The Diary screen showcases all public check-in records from users.
+
+5. **CRUD Operations Detail**:
+   - **Users Collection**: Implemented read and update operations for user profiles.
+   - **Habits Collection**: Fully implemented CRUD operations, enabling users to manage their habits directly from the app.
+   - **CheckIns Collection**: Implemented create update and read operations, allowing users to log daily activities and view them in a diary format.
+
+6. **Screenshots**:
+
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Habit Detail Screen providing detailed information about a specific user habit._
+- _The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
+
+<p float="left">
+   <img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
+</p>
+<img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
 
