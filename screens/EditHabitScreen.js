@@ -5,15 +5,18 @@ import IconButton from '../components/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import { deleteHabit } from '../firebase-files/firestoreHelper';
 
-// EditHabitScreen component allows users to edit their existing habits.
-// It utilizes the AddHabitScreen component structure for editing.
+/**
+ * EditHabitScreen allows users to edit an existing habit.
+ * It uses AddHabitScreen component for editing functionalities with pre-filled data.
+ */
 export default function EditHabitScreen({ navigation, route }) {
     // Extract habit object from navigation route parameters.
     const habit = route.params ? route.params : null;
     const habitData = habit.habitObj;
     const habitId = habitData.id;
     const userId = habitData.userId;
-
+    
+    // Set up navigation options with a custom header title and a delete button.
     useEffect(() => {
         navigation.setOptions({
             headerBackTitleVisible: false,
@@ -26,6 +29,7 @@ export default function EditHabitScreen({ navigation, route }) {
         });
     }, [navigation, deleteActivityHandler]);
 
+    // Handler for deleting a habit
     function deleteActivityHandler() {
         Alert.alert(
             "Delete",
