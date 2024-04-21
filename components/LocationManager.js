@@ -63,7 +63,6 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
             ...currentData,
         });
     }
-    console.log('location manager: ', currentData);
     return (
         <Portal >
             <Dialog visible={showMapButtons} onDismiss={dismissMapPicker} style={Styles.petMessageDialog}>
