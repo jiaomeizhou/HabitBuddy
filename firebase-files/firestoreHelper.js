@@ -8,7 +8,6 @@ export async function addHabit(userId, data) {
             ...data,
             createdAt: serverTimestamp()
         });
-        console.log("Habit added successfully", data);
     } catch (error) {
         console.error("Error adding habit: ", error);
     }
