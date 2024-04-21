@@ -37,11 +37,11 @@ export default function DiaryDetail({ route }) {
                 )}
                 <Card.Content>
                     <Title style={styles.title}>
-                        {diary.taskCompleted ? 'Check In Status: Completed' : 'Check In Status: Pending'}
+                        {diary.diary}
                     </Title>
                     <Divider />
                     <Paragraph style={styles.paragraph}>
-                        {diary.diary}
+                        {diary.taskCompleted ? 'Check In Status: Completed' : 'Check In Status: Pending'}
                     </Paragraph>
                     <Caption style={styles.dateText}>
                         Date: {new Date(diary.createdAt.seconds * 1000).toLocaleDateString()}
@@ -61,7 +61,7 @@ export default function DiaryDetail({ route }) {
                         >
                             <Marker
                                 coordinate={{ latitude: diary.location.latitude, longitude: diary.location.longitude }}
-                                title={"Location"}
+                                title={"Content"}
                                 description={diary.diary}
                             />
                         </MapView>
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 200,
+        height: 280,
+        padding: 10,
         borderRadius: 10,
     },
     title: {
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
         color: '#5A7247',
     },
     paragraph: {
-        marginBottom: 10,
+        marginTop: 16,
         fontSize: 16,
         lineHeight: 24,
         color: '#5A7247',
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: '100%',
         marginTop: 10,
+        borderRadius: 10,
     },
     userInfo: {
         fontSize: 16,
