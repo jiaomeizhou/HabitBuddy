@@ -3,6 +3,8 @@ import React from 'react'
 import * as Colors from './Colors';
 import { Styles } from './Styles';
 
+// This component creates a customizable Pressable button.
+// It allows for custom colors, text, styles, and handling of press events.
 export default function PressableButton({ title, onPress, color, disabled = false, customStyle, textColor }) {
     return (
         <Pressable
