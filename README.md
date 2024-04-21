@@ -182,70 +182,59 @@ We have finished all 3 iterations. Now all the essential features have been fini
 4. **Accessibility and Localization**: Ensure accessibility features and support for multiple languages and cultural preferences to make the app inclusive and accessible to a wider audience.
 
 ### Iteration 1:
-
-_The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Habit Detail Screen providing detailed information about a specific user habit._
+- _The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
 
 <img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
-
-_The Home screen showcasing a list of user habits._
-
 <img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
-
-_The Habit Detail Screen providing detailed information about a specific user habit._
-
 <img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
-
-_The Add Habit Screen allows users to create new habits, customizing details such as habit name, frequency, and reminders._
-
 <img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
-
-_The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-
 <img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
-
-_The Diary List Screen displays a comprehensive list of diary entries._
-
 <img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
-
-_The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-
 <img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
 
 ### Iteration 2:
 
-_The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits._
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
+- _The Diary List Screen displays a comprehensive list of diary entries._
+- _The Diary Detail Screen displays a detailed information of a diary entries._
+- _The My Track Screen displays the user's all shared locations with their diary content._
+- _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
+- _The Edit Profile Screen lets users to update to their account details._
 
 <img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
-
-_The Home screen showcasing a list of user habits._
-
 <img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
-
-_The Post Diary Screen enables users to record their daily activities and reflections related to their habits._
-
 <img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
-
-_The Diary List Screen displays a comprehensive list of diary entries._
-
 <img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
-
-_The Diary Detail Screen displays a detailed information of a diary entries._
-
 <img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
-
-_The My Track Screen displays the user's all shared locations with their diary content._
-
 <img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
-
-_The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
-
 <img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
-
-_The Edit Profile Screen lets users to update to their account details._
-
 <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
 
 ### Iteration 3:
+
+- _The Signup screen allows the user create a new account with email and password._
+- _The Login screen allows the user log in the app, the forgot password button allows the user reset the password._
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits and a pet image. When the user pet the pet, a message show up with current pet status and a random dog fact fecthed from Dog API._
+- The Habit Detail screen can be navigated by pressing on the habit entry in Home screen. It displays a calendar which highlights the checkin dates, the progress and checkin times of the habit. There is a button can navigate to Post Diary screen.
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits, it allows the user takes/uploads photos and choose a location and post a public or private diary. If the user navigates to this screen from a Habit Detail screen, it also allow the user checkin the previous habit._
+- _The Diary Screen displays a comprehensive list of diary entries, there are two modes: All public diaries and My diaries._
+- _The Diary Detail Screen displays a detailed information of a diary entries: diary content, user info, pet status, checkin status, photo, location map, and date._
+- _The My Track Screen displays the user's all shared locations with their diary content._
+- _The Profile Screen provides users with an overview of their personal information and stats board. The user can set a daily notification to receive a local notification._
+- _The Edit Profile Screen lets users to update to their avatar, name, pet name._
+
+<img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
@@ -253,13 +242,13 @@ _The Edit Profile Screen lets users to update to their account details._
 <img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
 <img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
+<img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
 
