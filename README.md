@@ -211,44 +211,58 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 
 - _The Signup screen allows the user create a new account with email and password._
 - _The Login screen allows the user log in the app, the forgot password button allows the user reset the password._
-- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
-- _The Home screen showcasing a list of user habits and a pet image. When the user pet the pet, a message show up with current pet status and a random dog fact fecthed from Dog API._
-- The Habit Detail screen can be navigated by pressing on the habit entry in Home screen. It displays a calendar which highlights the checkin dates, the progress and checkin times of the habit. There is a button can navigate to Post Diary screen.
-- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits, it allows the user takes/uploads photos and choose a location and post a public or private diary. If the user navigates to this screen from a Habit Detail screen, it also allow the user checkin the previous habit._
-- _The Diary Screen displays a comprehensive list of diary entries, there are two modes: All public diaries and My diaries._
-- _The Diary Detail Screen displays a detailed information of a diary entries: diary content, user info, pet status, checkin status, photo, location map, and date._
-- _The My Track Screen displays the user's all shared locations with their diary content._
-- _The Profile Screen provides users with an overview of their personal information and stats board. The user can set a daily notification to receive a local notification._
-- _The Edit Profile Screen lets users to update to their avatar, name, pet name._
 
 <p float="left">
    <img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
 </p>
+
+- _The Home welcome screen displaying default habits that users can adopt into their daily routine._
+- _The Home screen showcasing a list of user habits and a pet image. When the user pet the pet, a message show up with current pet status and a random dog fact fecthed from Dog API._
+
 <p float="left">
    <img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
 </p>
+
+- The Add a Habit screen allows users to add a new habit.
+- The Habit Detail screen can be navigated by pressing on the habit entry in Home screen. It displays a calendar which highlights the checkin dates, the progress and checkin times of the habit. There is a button can navigate to Post Diary screen.
+- The Edit Habit screen allows users to edit an existing habit.
+
 <p float="left">
    <img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
 </p>
-<p float="left">
-   <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
-</p>
+
+- _The Post Diary Screen enables users to record their daily activities and reflections related to their habits, it allows the user takes/uploads photos and choose a location and post a public or private diary. If the user navigates to this screen from a Habit Detail screen, it also allow the user checkin the previous habit._
+
 <p float="left">
    <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
 </p>
+
+- _The Diary Screen displays a comprehensive list of diary entries, there are two modes: All public diaries and My diaries._
+- _The Diary Detail Screen displays a detailed information of a diary entries: diary content, user info, pet status, checkin status, photo, location map, and date._
+
+<p float="left">
+   <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
+</p>
+
+- _The My Track Screen displays the user's all shared locations with their diary content._
+
 <p float="left">
    <img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
 </p>
+
+- _The Profile Screen provides users with an overview of their personal information and stats board. The user can set a daily notification to receive a local notification._
+- _The Edit Profile Screen lets users to update to their avatar, name, pet name._
+
 <p float="left">
    <img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
