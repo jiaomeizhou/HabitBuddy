@@ -169,7 +169,7 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 
 <p float="left">
    <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
-   <img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Post_diary_camera.PNG" alt="drawing" width="200"/>
    <img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
 </p>
 
