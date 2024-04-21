@@ -12,6 +12,11 @@ import { Avatar, Button, Card, Text } from 'react-native-paper';
 import NotificationManager from '../components/NotificationManager';
 import * as Notifications from "expo-notifications";
 
+
+// The Profile screen of Habit Buddy app.
+// It displays the user's profile information and a stats board.
+
+// handle notification
 Notifications.setNotificationHandler({
   handleNotification: async function (notification) {
     return {
@@ -23,6 +28,7 @@ Notifications.setNotificationHandler({
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
 
+  // set the header right button to edit profile
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -31,6 +37,7 @@ export default function Profile({ navigation }) {
     });
   }, [navigation]);
 
+  // fetch user profile data from firestore
   useEffect(() => {
     async function getUserProfileData() {
       if (!auth.currentUser) return;
@@ -40,6 +47,7 @@ export default function Profile({ navigation }) {
     getUserProfileData();
   }, [userProfile]);
 
+  // handle notification
   useEffect(() => {
     const sunscription = Notifications.addNotificationReceivedListener(
       (notification) => {

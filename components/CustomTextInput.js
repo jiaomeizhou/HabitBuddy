@@ -2,6 +2,7 @@ import { TextInput, StyleSheet } from 'react-native'
 import React from 'react'
 import { Styles } from '../components/Styles';
 
+// The CustomTextInput component is a wrapper around the TextInput component.
 export default function CustomTextInput({ style, ...props }) {
     return (
         <TextInput
@@ -10,15 +11,3 @@ export default function CustomTextInput({ style, ...props }) {
         />
     )
 }
-
-const styles = StyleSheet.create({
-    input: {
-        width: '100%',
-        padding: 8,
-        marginVertical: 2,
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 5,
-        color: 'black',
-    },
-})

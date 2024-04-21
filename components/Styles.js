@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 import * as Colors from "./Colors";
 import { Platform } from 'react-native';
 
+// Styles constants for the app.
 export const Styles = StyleSheet.create({
     pressedView: {
         opacity: 0.5,
@@ -446,5 +447,22 @@ export const Styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
+    },
+    pressableButtons: {
+        width: '40%',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    pressableButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    buttonPressed: {
+        opacity: 0.75,
+    },
+    andriodPressed: {
+        backgroundColor: 'gray',
     },
 })

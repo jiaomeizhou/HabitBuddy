@@ -1,6 +1,9 @@
-import { Button, StyleSheet } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
+import PressableButton from "../components/PressableButton";
+import * as Colors from "../components/Colors";
+import { Styles } from "../components/Styles";
 
 export default function Map({ route, navigation }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
@@ -16,9 +19,9 @@ export default function Map({ route, navigation }) {
         }
     }
     return (
-        <>
+        <View style={{ flex: 1 }}>
             <MapView
-                style={styles.map}
+                style={{ flex: 4 }}
                 initialRegion={{
                     latitude: route.params?.locationInfo?.latitude || 37.78825,
                     longitude: route.params?.locationInfo?.longitude || -122.4324,
@@ -36,12 +39,17 @@ export default function Map({ route, navigation }) {
                     <Marker coordinate={selectedLocation} />
                 )}
             </MapView>
-            <Button
-                disabled={!selectedLocation}
-                title="Confirm Selected Location"
-                onPress={confirmHandler}
-            />
-        </>
+            <View style={{ flex: 1 }}>
+                <PressableButton
+                    disabled={!selectedLocation}
+                    title="Confirm Selected Location"
+                    onPress={confirmHandler}
+                    color={Colors.fernGreen}
+                    customStyle={Styles.pressableButton}
+                    textColor={Colors.white}
+                />
+            </View>
+        </View>
     );
 }
 const styles = StyleSheet.create({

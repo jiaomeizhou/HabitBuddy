@@ -9,12 +9,16 @@ import PressableButton from '../components/PressableButton';
 import * as Colors from '../components/Colors';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+// The EditProfile screen of Habit Buddy app.
+// It allows the user to edit their profile.
 export default function EditProfileScreen({ navigation, route }) {
+    // Get user profile data from the route params
     const userData = route.params.userProfile ?? {};
     const [userName, setUserName] = useState(userData.userName || '');
     const [petName, setPetName] = useState(userData.petName || '');
     const [avatarUrl, setAvatarUrl] = useState(userData.avatarUrl || '');
 
+    // Function to upload image to Firebase Storage
     async function getImageData(uri) {
         try {
             const response = await fetch(uri);
@@ -30,6 +34,7 @@ export default function EditProfileScreen({ navigation, route }) {
         }
     }
 
+    // Function to handle avatar upload
     async function handleAvatarUpload(uri) {
         try {
             const uploadedImageUrl = await getImageData(uri);

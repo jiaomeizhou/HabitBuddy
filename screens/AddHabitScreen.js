@@ -200,14 +200,14 @@ export default function AddHabitScreen({ route }) {
 
             <CustomText>{'End Date:'}</CustomText>
             <CustomText style={Styles.input}>{formattedEndDate}</CustomText>
-            <View style={Styles.reminderContainer}>
+            {/* <View style={Styles.reminderContainer}>
                 <Text style={Styles.reminderText}>{'Set a Reminder?'}</Text>
                 <Switch
                     onValueChange={setIsReminderEnabled}
                     value={isReminderEnabled}
                     color={Colors.chestnut}
                 />
-            </View>
+            </View> */}
             <PressableButton
                 title="Save"
                 onPress={saveHandler}

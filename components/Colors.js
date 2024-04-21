@@ -13,3 +13,4 @@ export const camBlue = '#7D9C8B';
 export const lightGreen = '#E2E9DC';
 export const rose = '#885053';
 export const lightGrey = '#D3D3D3';
+export const grey = 'grey';

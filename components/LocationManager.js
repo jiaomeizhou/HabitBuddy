@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, Dimensions } from 'react-native'
+import { StyleSheet, Image, View, Dimensions, Text } from 'react-native'
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { mapsApiKey } from "@env";
@@ -62,7 +62,9 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
     return (
         <Portal >
             <Dialog visible={showMapButtons} onDismiss={dismissMapPicker} style={Styles.petMessageDialog}>
-                <Dialog.Title>Choose a location</Dialog.Title>
+                <Dialog.Title>
+                    <Text>Choose a location</Text>
+                </Dialog.Title>
                 <Dialog.Content>
                     {location && (
                         <View>
@@ -72,41 +74,15 @@ export default function LocationManager({ onLocationSelect, currentData, showMap
                                     uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${mapsApiKey}`,
                                 }}
                             />
-                            <View style={Styles.diaryButtonsContainer}>
-                                <Button icon='check' onPress={dismissMapPicker} textColor={Colors.chestnut}>Ok</Button>
-                            </View>
                         </View>
                     )}
                     <View >
                         <PressableButton title="Use my current location" onPress={locateUserHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
                         <PressableButton title="Let me choose on the map" onPress={chooseLocationHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
-                        <IconButton icon='window-close' size={30} onPress={dismissMapPicker} style={{ alignSelf: 'flex-end' }} />
+                        {location && <Button icon='check' onPress={dismissMapPicker} textColor={Colors.chestnut} style={{ alignSelf: 'center' }}>Ok</Button>}
                     </View>
                 </Dialog.Content>
             </Dialog>
         </Portal>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-    },
-    imageContainer: {
-        marginTop: 12,
-        width: Dimensions.get("window").width - 40,
-        height: 200,
-        overflow: 'hidden',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-    },
-});

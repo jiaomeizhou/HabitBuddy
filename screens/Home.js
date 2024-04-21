@@ -9,7 +9,8 @@ import { subscribeCheckInsByUserId, subscribeHabitsByUserId, subscribeDueHabitsB
 import { Alert } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-
+// The Home screen of Habit Buddy app.
+// It displays the list of habits and the pet.
 export default function Home({ navigation }) {
     useEffect(() => {
         navigation.setOptions({
@@ -56,7 +57,6 @@ export default function Home({ navigation }) {
     }, [habits]);
 
     // check if there is any failed habits today, only show once
-    // TODO: test this feature tomorrow
     useEffect(() => {
         if (dueHabits && dueHabits.length > 0) {
             let alertMessage = `You failed ${dueHabits.length} habits today!\n\n`;
