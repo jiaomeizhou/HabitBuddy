@@ -135,12 +135,16 @@ During the 1st iteration of our project, we focused on laying the groundwork for
 - _The Diary List Screen displays a comprehensive list of diary entries._
 - _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
 
-<img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
+<p float="left">
+   <img src="assets/IterationProgress/Home.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Home2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/HabitDetail.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/AddHabit.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/PostDiary.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/DiaryList.png" alt="drawing" width="200"/>
+</p>
 <img src="assets/IterationProgress/Profile.png" alt="drawing" width="200"/>
 
 ### Iteration 2:
@@ -172,14 +176,20 @@ During the 2nd iteration of our project, we focused on enhancing the app by inte
 - _The Profile Screen provides users with an overview of their personal information and settings, allowing for customization and updates to their account details._
 - _The Edit Profile Screen lets users to update to their account details._
 
-<img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
+<p float="left">
+   <img src="assets/IterationProgress/Home_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Home_v2_Iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Post_diary_iteration2.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Diary_list_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_detail_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/My_track.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Profile_iteration2.png" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Edit_profile_iteration2.png" alt="drawing" width="200"/>
+</p>
 
 ### Iteration 3
 
@@ -211,24 +221,36 @@ During the 3rd iteration of our project, we concentrated on enhancing notificati
 - _The Profile Screen provides users with an overview of their personal information and stats board. The user can set a daily notification to receive a local notification._
 - _The Edit Profile Screen lets users to update to their avatar, name, pet name._
 
-<img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
-<img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
+<p float="left">
+   <img src="assets/IterationProgress/Signup_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Login_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Home_welcome_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Home_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Pet_Message_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Add_Habit_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Habit_Detail_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Edit_Habit_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_public_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Diary_my_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Diary_Detail_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Post_Diary_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Post_Diary_camera.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Post_Diary_location.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Choose_location_map_itr3.PNG" alt="drawing" width="200"/>
+</p>
+<p float="left">
+   <img src="assets/IterationProgress/Track_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Profile_itr3.PNG" alt="drawing" width="200"/>
+   <img src="assets/IterationProgress/Profile_notification.PNG" alt="drawing" width="200"/>
+</p>
 <img src="assets/IterationProgress/Edit_Profile_itr3.PNG" alt="drawing" width="200"/>
 
 ### Current State of the Application and Future Improvements:
