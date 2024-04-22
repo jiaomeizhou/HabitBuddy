@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, Text} from 'react-native'
+import { View, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { addHabit, updateHabit } from '../firebase-files/firestoreHelper';
 import { convertTimestampToDate } from '../helpers/dateHelper';
@@ -7,27 +7,24 @@ import CustomText from '../components/CustomText';
 import CustomTextInput from '../components/CustomTextInput';
 import CustomDropDownPicker from '../components/CustomDropDownPicker';
 import CustomDateTimePicker from '../components/CustomDateTimePicker';
-import CustomSwitch from '../components/CustomSwitch';
 import PressableButton from '../components/PressableButton';
 import { auth } from '../firebase-files/firebaseSetup';
 import { Styles } from '../components/Styles';
-import { Switch } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 
+// Screen to add a new habit or edit an existing habit.
 export default function AddHabitScreen({ route }) {
-    // TODO: render shortcut name as the default habit name
-    // which is the habit name passed from the Welcome screen
+    // Default values and state hooks for habit details.
     const { habitShortcutName } = route.params || {};
-
     const navigation = useNavigation();
     const [habitName, setHabitName] = useState(habitShortcutName || '');
-    console.log("name", habitName)
     const [habitFrequency, setHabitFrequency] = useState('');
     const [durationWeeks, setDurationWeeks] = useState('');
     const [endDate, setEndDate] = useState(null);
     const [isReminderEnabled, setIsReminderEnabled] = useState(false);
     const userId = auth.currentUser.uid;
 
+    // State hooks for frequency dropdown and date picker.
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState([
         { label: '1', value: 1 },
@@ -42,11 +39,11 @@ export default function AddHabitScreen({ route }) {
     const [formattedDate, setFormattedDate] = useState('');
     const [formattedEndDate, setFormattedEndDate] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
     const habitData = route.params?.habitData || null;
     const habitId = habitData?.id || null;
     const isEditMode = route.params?.isEditMode || false;
 
+    // Load existing habit details if in edit mode.
     useEffect(() => {
         if (habitData) {
             setHabitName(habitData.habit);
@@ -56,6 +53,7 @@ export default function AddHabitScreen({ route }) {
             setDurationWeeks(habitData.durationWeeks.toString());
             setIsReminderEnabled(habitData.isReminderEnabled);
             setEndDate(habitData.endDate);
+            setFormattedEndDate(habitData.formattedEndDate);
         } else {
             if (habitName) {
                 setHabitName(habitName);
@@ -68,10 +66,11 @@ export default function AddHabitScreen({ route }) {
             setDurationWeeks('');
             setEndDate(null);
             setIsReminderEnabled(false);
+            setFormattedEndDate('');
         }
     }, [habitData, isEditMode]);
 
-
+    // Handlers for input changes and button actions.
     function handleHabitNameChange(text) {
         setHabitName(text);
     }
@@ -81,6 +80,9 @@ export default function AddHabitScreen({ route }) {
         setDatePickerVisibility(false);
         setDate(currentDate);
         setFormattedDate(currentDate.toDateString());
+        if (durationWeeks) {
+            calculateEndDate(parseInt(durationWeeks), currentDate);
+        }
     }
 
     function toggleDatePicker() {
@@ -94,17 +96,17 @@ export default function AddHabitScreen({ route }) {
 
     function handleDurationChange(value) {
         setDurationWeeks(value);
-        calculateEndDate(value);
+        calculateEndDate(parseInt(value));
     }
 
-    function calculateEndDate(weeks) {
-        const result = new Date(date);
+    // Calculate end date based on the start date and duration in weeks.
+    function calculateEndDate(weeks, startDate = date) {
+        const result = new Date(startDate);
         result.setDate(result.getDate() + weeks * 7);
         setEndDate(result);
         setFormattedEndDate(result.toDateString());
-
     }
-
+    // Save or update the habit.
     function saveHandler() {
         if (!habitName || !habitFrequency || !date || !formattedDate || !durationWeeks || isNaN(durationWeeks) || !Number.isInteger(Number(durationWeeks)) || durationWeeks <= 0) {
             Alert.alert('Invalid Input', 'Please check the input fields and try again');
@@ -121,6 +123,7 @@ export default function AddHabitScreen({ route }) {
             'progress': 0,
             'checkInCount': 0,
             'userId': userId,
+            'formattedEndDate': formattedEndDate || '',
         };
 
         if (habitData && isEditMode) {
@@ -154,11 +157,15 @@ export default function AddHabitScreen({ route }) {
 
     return (
         <View style={Styles.container}>
-            <CustomText>{'Type the habit name:'}</CustomText>
-            <CustomTextInput
-                onChangeText={handleHabitNameChange}
-                value={habitName}
-            />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                    <CustomText>{'Type the habit name:'}</CustomText>
+                    <CustomTextInput
+                        onChangeText={handleHabitNameChange}
+                        value={habitName}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
             <CustomText>{'Habit Frequency (How often in 1 week):'}</CustomText>
             <CustomDropDownPicker
@@ -189,24 +196,19 @@ export default function AddHabitScreen({ route }) {
                     onChange={dateHandler}
                 />
             )}
-
-            <CustomText>{'Spend how many weeks:'}</CustomText>
-            <CustomTextInput
-                value={durationWeeks}
-                onChangeText={handleDurationChange}
-                keyboardType="numeric"
-            />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                    <CustomText>{'Spend how many weeks:'}</CustomText>
+                    <CustomTextInput
+                        value={durationWeeks}
+                        onChangeText={handleDurationChange}
+                        keyboardType="numeric"
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
             <CustomText>{'End Date:'}</CustomText>
             <CustomText style={Styles.input}>{formattedEndDate}</CustomText>
-            <View style={Styles.reminderContainer}>
-                <Text style={Styles.reminderText}>{'Set a Reminder?'}</Text>
-                <Switch
-                    onValueChange={setIsReminderEnabled}
-                    value={isReminderEnabled}
-                    color={Colors.chestnut}
-                />
-            </View>
             <PressableButton
                 title="Save"
                 onPress={saveHandler}
@@ -224,24 +226,3 @@ export default function AddHabitScreen({ route }) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-    },
-    input: {
-        width: '100%',
-        padding: 8,
-        marginVertical: 2,
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 5,
-        color: 'black',
-        fontWeight: 'normal',
-    },
-    buttonsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-})

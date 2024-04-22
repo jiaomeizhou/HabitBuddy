@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import { View, TextInput, Text, Alert, Image, Button} from "react-native";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase-files/firebaseSetup";
 import { Styles } from "../components/Styles";
 import PressableButton from "../components/PressableButton";
 import * as Colors from "../components/Colors";
+import PressableItem from "../components/PressableItem";
+import AppIntro from "../components/AppIntro";
 
+// The Login screen of Habit Buddy app.
+// It allows the user to log in to the app.
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,6 +60,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={Styles.container}>
+      <AppIntro />
       <Text style={Styles.label}>Email</Text>
       <TextInput
         placeholder="Email"
@@ -80,7 +85,9 @@ export default function Login({ navigation }) {
       <PressableButton title="Log in" onPress={loginHandler} color={Colors.fernGreen} customStyle={Styles.pressableButton} textColor={Colors.white} />
       <PressableButton title="New User? Create An Account" onPress={signupHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.fernGreen} />
       <View style={Styles.forgotPasswordButton}>
-        <PressableButton title="Forgot Password?" onPress={forgotPasswordHandler} color={Colors.white} customStyle={Styles.pressableButton} textColor={Colors.pink} />
+        <PressableItem onPress={forgotPasswordHandler} >
+          <Text style={Styles.forgotPasswordText}>Forgot Password?</Text>
+        </PressableItem>
       </View>
     </View>
   );

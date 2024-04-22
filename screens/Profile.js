@@ -9,18 +9,35 @@ import * as Colors from '../components/Colors';
 import { IconButton } from 'react-native-paper';
 import { signOut } from "firebase/auth";
 import { Avatar, Button, Card, Text } from 'react-native-paper';
+import NotificationManager from '../components/NotificationManager';
+import * as Notifications from "expo-notifications";
+
+
+// The Profile screen of Habit Buddy app.
+// It displays the user's profile information and a stats board.
+
+// handle notification
+Notifications.setNotificationHandler({
+  handleNotification: async function (notification) {
+    return {
+      shouldShowAlert: true,
+    };
+  },
+});
 
 export default function Profile({ navigation }) {
   const [userProfile, setUserProfile] = useState(null);
 
+  // set the header right button to edit profile
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton onPress={onPressEdit} icon="account-edit" size={28}/>
+        <IconButton onPress={onPressEdit} icon="account-edit" size={28} />
       ),
     });
   }, [navigation]);
 
+  // fetch user profile data from firestore
   useEffect(() => {
     async function getUserProfileData() {
       if (!auth.currentUser) return;
@@ -29,6 +46,18 @@ export default function Profile({ navigation }) {
     }
     getUserProfileData();
   }, [userProfile]);
+
+  // handle notification
+  useEffect(() => {
+    const sunscription = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log("received listener", notification);
+      }
+    );
+    return () => {
+      sunscription.remove();
+    };
+  }, []);
 
   // fetch updated user profile data from firestore
   const onPressEdit = async () => {
@@ -59,7 +88,7 @@ export default function Profile({ navigation }) {
           {userProfile && userProfile.avatarUrl ? (
             <Image source={{ uri: userProfile.avatarUrl }} style={Styles.image} />)
             :
-            (<FontAwesome5 name="user-circle" size={150} color={Colors.silver} />
+            (<FontAwesome5 name="user-circle" size={150} color={Colors.silver} style={Styles.defaultImage} />
             )}
           <Card.Content style={Styles.profileText}>
             <Text style={Styles.nameText} >{auth.currentUser.displayName}</Text>
@@ -70,6 +99,7 @@ export default function Profile({ navigation }) {
           <Card.Actions>
             <Button onPress={onPressLogOut} icon="logout" mode="elevated" textColor={Colors.chestnut} >Log out</Button>
           </Card.Actions>
+          <NotificationManager />
         </Card>
       }
       <Stats />

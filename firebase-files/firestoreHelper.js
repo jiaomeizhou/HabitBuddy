@@ -1,18 +1,19 @@
 import { collection, addDoc, doc, deleteDoc, setDoc, serverTimestamp, query, where, getDoc, orderBy, onSnapshot } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
+// Add a new habit to the database
 export async function addHabit(userId, data) {
     try {
         await addDoc(collection(database, `Users/${userId}/Habits`), {
             ...data,
             createdAt: serverTimestamp()
         });
-        console.log("Habit added successfully", data);
     } catch (error) {
         console.error("Error adding habit: ", error);
     }
 }
 
+// Delete a habit from the database
 export async function deleteHabit(userId, habitId) {
     try {
         await deleteDoc(doc(database, `Users/${userId}/Habits/${habitId}`));
@@ -21,6 +22,7 @@ export async function deleteHabit(userId, habitId) {
     }
 }
 
+// Update a habit in the database
 export async function updateHabit(userId, habitId, data) {
     try {
         await setDoc(doc(database, `Users/${userId}/Habits/${habitId}`), data, { merge: true });
@@ -29,6 +31,7 @@ export async function updateHabit(userId, habitId, data) {
     }
 }
 
+// Add a new check-in to the database
 export async function addCheckIn(data) {
     try {
         await addDoc(collection(database, "CheckIns"), {
@@ -40,6 +43,7 @@ export async function addCheckIn(data) {
     }
 }
 
+// Get user profile from the database
 export async function getUserProfileFromDB(uid) {
     try {
         const docRef = doc(database, `Users/${uid}`);
@@ -54,6 +58,7 @@ export async function getUserProfileFromDB(uid) {
     }
 }
 
+// delete check-in from the database
 export async function deleteCheckIn(checkInId) {
     try {
         await deleteDoc(doc(database, `CheckIns/${checkInId}`));
@@ -63,6 +68,7 @@ export async function deleteCheckIn(checkInId) {
     }
 }
 
+// subscribe check-ins by userId
 export function subscribeCheckInsByUserId(userId, callback) {
     const q = query(collection(database, "CheckIns"), where("userId", "==", userId), where('taskCompleted', '==', true));
     return onSnapshot(q, (snapshot) => {
@@ -105,7 +111,7 @@ export function subscribeCheckInsByUserIdAndHabitId(userId, habitId, callback) {
     });
 }
 
-// add user
+// add user to database
 export async function addUserToDB(userId, data) {
     try {
         await setDoc(doc(database, `Users/${userId}`), data);
@@ -175,6 +181,7 @@ export async function updateUserData(userId, data) {
     }
 }
 
+// fetch user check-in data used in track screen
 export function fetchUserCheckInTrack(userId, callback) {
     const q = query(collection(database, "CheckIns"),
         where("userId", "==", userId),
@@ -197,6 +204,7 @@ export function fetchUserCheckInTrack(userId, callback) {
     });
 }
 
+// fetch public check-ins
 export function fetchPublicCheckIns(callback) {
     const q = query(
         collection(database, "CheckIns"),
@@ -210,5 +218,23 @@ export function fetchPublicCheckIns(callback) {
             fetchedDiaries.push({ id: doc.id, ...doc.data() });
         });
         callback(fetchedDiaries);
+    });
+}
+
+// fetch all my diaries
+export function fetchMyDiaries(userId, callback) {
+    const q = query(
+        collection(database, "CheckIns"),
+        where("userId", "==", userId),
+        where("isPublic", "!=", null),
+        orderBy("createdAt", "desc")
+    );
+
+    return onSnapshot(q, (querySnapshot) => {
+        const fetchedMyDiaries = [];
+        querySnapshot.forEach((doc) => {
+            fetchedMyDiaries.push({ id: doc.id, ...doc.data() });
+        });
+        callback(fetchedMyDiaries);
     });
 }

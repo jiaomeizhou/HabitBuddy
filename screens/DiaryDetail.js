@@ -1,55 +1,57 @@
-import { StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Card, Paragraph, Caption, Avatar, Divider, Title, useTheme } from 'react-native-paper';
+import { Card, Paragraph, Caption, Avatar, Divider, Title } from 'react-native-paper';
 import MapView, { Marker } from 'react-native-maps';
 import { getUserProfileFromDB } from '../firebase-files/firestoreHelper';
+import { Styles } from '../components/Styles';
 
 
-
+/**
+ * Displays detailed information about a diary entry selected from a list.
+ * Features include user profile display with an avatar, diary content, status of the diary task,
+ * and a map showing the diary's location if available. 
+ */
 export default function DiaryDetail({ route }) {
     const { diary } = route.params;
-    const { colors } = useTheme();
-    console.log("diary", diary)
-
     const [userProfile, setUserProfile] = useState(null);
 
+    // Fetch user profile from the database when component mounts or diary's userId changes.
     useEffect(() => {
         if (diary.userId) {
             getUserProfileFromDB(diary.userId).then(setUserProfile);
         }
     }, [diary.userId]);
-    console.log("userProfile", userProfile)
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Card style={styles.card}>
+        <ScrollView contentContainerStyle={Styles.diaryDetailContainer}>
+            <Card style={Styles.diaryDetailCard}>
                 <Card.Title
                     title={`${userProfile ? userProfile.userName : 'Loading...'} - ${userProfile ? userProfile.petName : ''}`}
                     subtitle={`Pet status: ${userProfile ? userProfile.petStatus : ''}`}
                     left={(props) => userProfile && userProfile.avatarUrl ?
                         <Avatar.Image {...props} source={{ uri: userProfile.avatarUrl }} size={40} /> :
                         <Avatar.Icon {...props} icon="account" />}
-                    titleStyle={styles.cardTitle}
-                    subtitleStyle={styles.cardSubtitle}
+                    titleStyle={Styles.diaryDetailCardTitle}
+                    subtitleStyle={Styles.diaryDetailCardSubtitle}
                 />
                 {diary.imageUri && (
-                    <Card.Cover source={{ uri: diary.imageUri }} style={styles.image} resizeMode="cover" />
+                    <Card.Cover source={{ uri: diary.imageUri }} style={Styles.diaryDetailImage} resizeMode="cover" />
                 )}
                 <Card.Content>
-                    <Title style={styles.title}>
-                        {diary.taskCompleted ? 'Check In Status: Completed' : 'Check In Status: Pending'}
+                    <Title style={Styles.diaryDetailTitle}>
+                        {diary.diary}
                     </Title>
                     <Divider />
-                    <Paragraph style={styles.paragraph}>
-                        {diary.diary}
+                    <Paragraph style={Styles.diaryDetailParagraph}>
+                        {diary.taskCompleted ? 'Check In Status: Completed' : 'Check In Status: Pending'}
                     </Paragraph>
-                    <Caption style={styles.dateText}>
+                    <Caption style={Styles.diaryDetailDateText}>
                         Date: {new Date(diary.createdAt.seconds * 1000).toLocaleDateString()}
                     </Caption>
 
                     {diary.location && (
                         <MapView
-                            style={styles.map}
+                            style={Styles.diaryDetailMap}
                             initialRegion={{
                                 latitude: diary.location.latitude,
                                 longitude: diary.location.longitude,
@@ -61,7 +63,7 @@ export default function DiaryDetail({ route }) {
                         >
                             <Marker
                                 coordinate={{ latitude: diary.location.latitude, longitude: diary.location.longitude }}
-                                title={"Location"}
+                                title={"Content:"}
                                 description={diary.diary}
                             />
                         </MapView>
@@ -71,61 +73,3 @@ export default function DiaryDetail({ route }) {
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        padding: 0,
-    },
-    card: {
-        height: Dimensions.get("window").height,
-        elevation: 5,
-        borderRadius: 10,
-        margin: 0,
-        backgroundColor: 'rgba(243 246 240 / 0.9)'
-    },
-    cardTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#5A7247',
-    },
-    cardSubtitle: {
-        fontSize: 16,
-        color: '#6B8754',
-    },
-    image: {
-        width: '100%',
-        height: 200,
-        borderRadius: 10,
-    },
-    title: {
-        marginTop: 10,
-        marginBottom: 10,
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#5A7247',
-    },
-    paragraph: {
-        marginBottom: 10,
-        fontSize: 16,
-        lineHeight: 24,
-        color: '#5A7247',
-    },
-    dateText: {
-        fontSize: 14,
-        marginTop: 10,
-        color: '#5A7247',
-    },
-    map: {
-        height: 200,
-        width: '100%',
-        marginTop: 10,
-    },
-    userInfo: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#333',
-        marginTop: 10,
-    },
-})

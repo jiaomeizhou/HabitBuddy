@@ -1,15 +1,17 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import * as Colors from "./Colors";
 import { Platform } from 'react-native';
 
+// Styles constants for the app.
 export const Styles = StyleSheet.create({
     pressedView: {
         opacity: 0.5,
     },
     habitItem: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%',
+        width: '90%',
         borderWidth: 2,
         padding: 10,
         marginTop: 20,
@@ -23,17 +25,16 @@ export const Styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.feldGrau,
         fontWeight: 'bold',
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
     },
     habitListContainer: {
-        flex: 1,
-        width: '80%',
+        flex: 3,
         alignSelf: 'center',
     },
     petContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
-        marginTop: 60,
+        justifyContent: 'flex-start',
     },
     image: {
         width: 150,
@@ -41,6 +42,16 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         borderRadius: 100,
+        overflow: 'hidden',
+        borderWidth: 2,
+        borderColor: Colors.white,
+        marginTop: 10,
+    },
+    squareImage: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
         borderWidth: 2,
         borderColor: Colors.white,
@@ -55,7 +66,7 @@ export const Styles = StyleSheet.create({
     progressBarContainer: {
         marginBottom: 5,
         marginTop: 5,
-        width: '30%',
+        width: '90%',
         alignSelf: 'center',
     },
     progressLabel: {
@@ -122,7 +133,12 @@ export const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.white,
         justifyContent: 'center',
-
+        flexDirection: 'column',
+    },
+    homeContainer: {
+        flex: 1,
+        backgroundColor: Colors.white,
+        justifyContent: 'center',
     },
     welcomeContainer: {
         flex: 1,
@@ -163,6 +179,13 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         width: '80%',
     },
+    forgotPasswordText: {
+        textAlign: 'center',
+        color: Colors.chestnut,
+        textDecorationLine: 'underline',
+        fontSize: 16,
+
+    },
     statsCardWhite: {
         backgroundColor: Colors.white,
         borderRadius: 10,
@@ -171,7 +194,7 @@ export const Styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         width: 150,
-        minHeight: 100,
+        minHeight: 80,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -181,7 +204,7 @@ export const Styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         width: 150,
-        minHeight: 100,
+        minHeight: 80,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -283,8 +306,8 @@ export const Styles = StyleSheet.create({
     },
     profileCard: {
         width: '90%',
+        margin: 10,
         alignSelf: 'center',
-        marginBottom: 50,
         backgroundColor: Colors.lightGreen,
     },
     reminderContainer: {
@@ -313,4 +336,227 @@ export const Styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: Colors.feldGrau,
     },
+    chip: {
+        margin: 4,
+        width: '25%',
+        alignSelf: 'center',
+        backgroundColor: Colors.ashGrey,
+    },
+    habitsChip: {
+        margin: 4,
+        width: '90%',
+        backgroundColor: Colors.ashGrey,
+    },
+    petMessageDialog: {
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: Colors.white,
+        marginTop: 10,
+    },
+    defaultImage: {
+        alignSelf: 'center',
+        marginTop: 10,
+    },
+    diaryButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+    },
+    activeButton: {
+        backgroundColor: Colors.fernGreen,
+    },
+    inactiveButton: {
+        backgroundColor: Colors.silver,
+    },
+    diaryContainer: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: Colors.primaryWhite,
+    },
+    diaryItem: {
+        marginBottom: 15,
+        shadowColor: Colors.black,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        backgroundColor: 'rgba(247 248 245 / 0.9)',
+        marginHorizontal: 10,
+        elevation: 4,
+        borderRadius: 10,
+    },
+    diaryImage: {
+        height: 200,
+        borderRadius: 5,
+        width: '100%',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    diaryText: {
+        paddingTop: 5,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    dateText: {
+        fontSize: 14,
+        color: Colors.fernGreen,
+    },
+    switchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 8,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    customTextInPostDiary: {
+        color: Colors.fernGreen,
+        width: '100%',
+    },
+    helperText: {
+        fontSize: 13,
+        color: Colors.fernGreen,
+    },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 12,
+        marginTop: 10,
+    },
+    card: {
+        margin: 5,
+        elevation: 4,
+        backgroundColor: Colors.lightGreen,
+    },
+    cardActions: {
+        justifyContent: 'space-around',
+    },
+    postDiaryDate: {
+        fontSize: 18,
+        margin: 10,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: Colors.fernGreen,
+    },
+    postTextInput: {
+        height: 80,
+        marginVertical: 10,
+        padding: 10,
+    },
+    outlineStyle: {
+        borderWidth: 1,
+        color: Colors.fernGreen,
+        borderRadius: 10,
+    },
+    postDiaryButtonsContainer: {
+        marginVertical: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+    },
+    pressableButtons: {
+        width: '40%',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    pressableButtonText: {
+        color: Colors.white,
+        fontWeight: 'bold',
+    },
+    buttonPressed: {
+        opacity: 0.75,
+    },
+    andriodPressed: {
+        backgroundColor: Colors.grey,
+    },
+    trackMapContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    trackMap: {
+        width: '100%',
+        height: '100%',
+    },
+    diaryDetailContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: 0,
+    },
+    diaryDetailCard: {
+        height: Dimensions.get("window").height,
+        elevation: 5,
+        borderRadius: 10,
+        margin: 0,
+        backgroundColor: 'rgba(243 246 240 / 0.9)'
+    },
+    diaryDetailCardTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailCardSubtitle: {
+        fontSize: 16,
+        color: Colors.mediumGreen,
+    },
+    diaryDetailImage: {
+        width: '100%',
+        height: 280,
+        padding: 10,
+        borderRadius: 10,
+    },
+    diaryDetailTitle: {
+        marginVertical: 18,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: Colors.fernGreen,
+    },
+    diaryDetailParagraph: {
+        marginVertical: 15,
+        fontSize: 18,
+        lineHeight: 24,
+        color: Colors.fernGreen,
+    },
+    diaryDetailDateText: {
+        fontSize: 14,
+        marginTop: 10,
+        color: Colors.fernGreen,
+    },
+    diaryDetailMap: {
+        marginVertical: 10,
+        height: 200,
+        width: '100%',
+        borderRadius: 10,
+    },
+    notificationCard: {
+        borderRadius: 10,
+        backgroundColor: Colors.heavyGreen,
+    },
+    notificationButton: {
+        marginVertical: 8,
+        backgroundColor: Colors.lightGreen,
+    },
+    notificaitonButtonLabel: {
+        color: Colors.fernGreen,
+    },
+    customCheckBoxSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    customParagraph: {
+        fontSize: 12,
+        padding: 5,
+        fontWeight: 'bold',
+        borderWidth: 2,
+        borderColor: Colors.grey,
+        borderRadius: 5,
+        color: Colors.black,
+    },
+    customCheckBox: {
+        marginLeft: 10,
+    },
+
 })

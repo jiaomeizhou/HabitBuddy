@@ -6,15 +6,21 @@ import { addUserToDB } from "../firebase-files/firestoreHelper";
 import { Styles } from "../components/Styles";
 import * as Colors from "../components/Colors";
 import PressableButton from "../components/PressableButton";
+import AppIntro from "../components/AppIntro";
 
+// The Signup screen of Habit Buddy app.
+// It allows the user to sign up for the app.
 export default function Signup({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    // navigate to the login screen
     const loginHandler = () => {
         navigation.replace("Login");
     };
+
+    // sign up the user, add user to db, and send email verification
     const signupHandler = async () => {
         if (!email || !password || !confirmPassword) {
             Alert.alert("Please fill in all the fields");
@@ -31,6 +37,7 @@ export default function Signup({ navigation }) {
         }
         catch (error) {
             console.log("error", error);
+            // alert user about the error
             if (error.code === "auth/email-already-in-use") {
                 Alert.alert("Error", "Email already in use");
             }
@@ -44,6 +51,7 @@ export default function Signup({ navigation }) {
 
     return (
         <View style={Styles.container}>
+            <AppIntro />
             <Text style={Styles.label}>Email</Text>
             <TextInput
                 style={Styles.input}

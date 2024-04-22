@@ -1,34 +1,46 @@
-import { View, FlatList, StyleSheet, Alert } from 'react-native'
+import { View, FlatList, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Card, Text } from 'react-native-paper';
-import IconButton from '../components/IconButton';
-import { FontAwesome6 } from '@expo/vector-icons';
-import { subscribeHabitsByUserId, fetchPublicCheckIns } from '../firebase-files/firestoreHelper';
+import { Card, Text, Button } from 'react-native-paper';
+import { subscribeHabitsByUserId, fetchPublicCheckIns, fetchMyDiaries } from '../firebase-files/firestoreHelper';
 import { auth } from '../firebase-files/firebaseSetup';
+import { Styles } from '../components/Styles';
+import PressableItem from '../components/PressableItem'
+import { IconButton } from 'react-native-paper';
 
+/**
+ * Displays a list of all diaries or just the user's private diaries.
+ * Allows navigation to diary detail view and supports filtering between all and private diaries.
+ */
 export default function Diary() {
     const [diaries, setDiaries] = useState([]);
+    const [myDiaries, setMyDiaries] = useState([]);
     const navigation = useNavigation();
     const userId = auth.currentUser.uid;
     const [checkHabitsForNavigation, setCheckHabitsForNavigation] = useState(false);
+    const [showAllDiaries, setShowAllDiaries] = useState(true);
 
+    // Set navigation options dynamically
     useEffect(() => {
         navigation.setOptions({
             headerBackTitleVisible: false,
             headerRight: () => (
-                <IconButton onPress={() => setCheckHabitsForNavigation(true)}>
-                    <FontAwesome6 name="add" size={24} color="black" />
-                </IconButton>
+                <IconButton onPress={() => setCheckHabitsForNavigation(true)} icon="plus" />
             ),
         });
     }, [navigation]);
 
+    // Fetch diaries when component mounts and on dependency change
     useEffect(() => {
         const unsubscribe = fetchPublicCheckIns(setDiaries);
-        return () => unsubscribe();
+        const unsubscribeMyDiaries = fetchMyDiaries(userId, setMyDiaries);
+        return () => {
+            unsubscribe()
+            unsubscribeMyDiaries();
+        };
     }, []);
 
+    // Handle navigation to add new diary based on available habits
     useEffect(() => {
         if (checkHabitsForNavigation) {
             const unsubscribe = subscribeHabitsByUserId(userId, (habits) => {
@@ -51,56 +63,46 @@ export default function Diary() {
         }
     }, [checkHabitsForNavigation, userId, navigation]);
 
+    // Function to handle press on a diary item
     const handlePressDiary = (diary) => {
         navigation.navigate('DiaryDetail', { diary });
     };
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.diaryContainer}>
             <FlatList
-                data={diaries}
+                data={showAllDiaries ? diaries : myDiaries}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Card onPress={() => handlePressDiary(item)} style={styles.diaryItem}>
-                        {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={styles.image} />}
-                        <Card.Title title={item.diary} />
-                        <Card.Content>
-                            <Text style={styles.dateText}>
-                                {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
-                            </Text>
-                        </Card.Content>
-                    </Card>
+                    <PressableItem onPress={() => handlePressDiary(item)}>
+                        <Card style={Styles.diaryItem}>
+                            {item.imageUri && <Card.Cover source={{ uri: item.imageUri }} style={Styles.diaryImage} />}
+                            <Card.Title title={item.diary} titleStyle={Styles.diaryText} />
+                            <Card.Content>
+                                <Text style={Styles.dateText}>
+                                    {item.createdAt ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'No date'}
+                                </Text>
+                            </Card.Content>
+                        </Card>
+                    </PressableItem>
                 )}
             />
+            <View style={Styles.diaryButtonsContainer}>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(true)}
+                    style={showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
+                >
+                    All Diaries
+                </Button>
+                <Button
+                    mode="contained"
+                    onPress={() => setShowAllDiaries(false)}
+                    style={!showAllDiaries ? Styles.activeButton : Styles.inactiveButton}
+                >
+                    My Diaries
+                </Button>
+            </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-    },
-    diaryItem: {
-        marginBottom: 15,
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        backgroundColor: 'rgba(247 248 245 / 0.9)'
-    },
-    image: {
-        height: 200,
-        borderRadius: 5,
-    },
-    diaryText: {
-        fontWeight: 'normal',
-        fontSize: 13,
-        marginVertical: 5,
-    },
-    dateText: {
-        fontSize: 12,
-        color: '#666',
-    },
-})

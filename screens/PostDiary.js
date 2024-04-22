@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, ScrollView } from 'react-native'
+import { View, Alert, ScrollView, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { addCheckIn } from '../firebase-files/firestoreHelper';
 import CustomText from '../components/CustomText';
@@ -7,10 +7,15 @@ import { formatDate } from '../helpers/dateHelper';
 import { auth, storage } from '../firebase-files/firebaseSetup';
 import ImageManager from '../components/ImageManager';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { TextInput, Switch, Card, HelperText, Chip } from 'react-native-paper';
+import { TextInput, Switch, Card, HelperText, Chip, IconButton } from 'react-native-paper';
 import * as Colors from '../components/Colors';
 import LocationManager from '../components/LocationManager';
+import { Styles } from '../components/Styles';
 
+/**
+ * PostDiary component allows users to post new diary entries with optional images and location tags.
+ * Entries can be marked as public or private, and associated with specific habits if linked from a diary management context.
+ */
 export default function PostDiary({ navigation, route }) {
     const [imageUri, setImageUri] = useState(null);
     const [diary, setDiary] = useState('');
@@ -24,16 +29,20 @@ export default function PostDiary({ navigation, route }) {
     const date = new Date();
     const { fromDiary, formattedHabits } = route.params || {};
     const [selectedHabitId, setSelectedHabitId] = useState(null);
+    const [showImageButtons, setShowImageButtons] = useState(false);
+    const [showMapButtons, setShowMapButtons] = useState(false);
 
+    // Custom theme for TextInput components.
     const inputTheme = {
         colors: {
             text: 'seagreen',
             primary: 'seagreen',
             underlineColor: 'transparent',
-            background: '#FBFBFB',
+            background: Colors.lightWhite,
         },
     };
 
+    // Load initial data from route parameters if editing an existing entry
     useEffect(() => {
         if (route.params?.selectedLocation) {
             setLocationInfo(route.params.selectedLocation);
@@ -48,6 +57,7 @@ export default function PostDiary({ navigation, route }) {
 
     }, [route.params]);
 
+    // Handler for habit chip press.
     function handlePressHabit(habitId) {
         if (selectedHabitId === habitId) {
             setSelectedHabitId(null);
@@ -57,6 +67,7 @@ export default function PostDiary({ navigation, route }) {
 
     }
 
+    // Function to fetch image data from URI and upload it to Firebase Storage.
     async function getImageData(uri) {
         try {
             const response = await fetch(uri);
@@ -70,6 +81,7 @@ export default function PostDiary({ navigation, route }) {
         }
     }
 
+    // Handler for image picker.
     async function pickImageHandler(uri) {
         const uploadedImageUrl = await getImageData(uri);
         if (uploadedImageUrl) {
@@ -77,6 +89,7 @@ export default function PostDiary({ navigation, route }) {
         }
     }
 
+    // Save the diary entry to the database.
     function saveDiary() {
         if (!diary.trim()) {
             Alert.alert("Error", "Please add your diary.");
@@ -105,39 +118,66 @@ export default function PostDiary({ navigation, route }) {
         addCheckIn(newEntry)
             .then(() => {
                 Alert.alert("Success", "Diary saved successfully!");
-                navigation.navigate('Home');
+                navigation.navigate('Diary');
             })
             .catch((error) => {
                 console.error("Error saving diary: ", error);
             });
     }
 
+    // Handler to cancel the operation and go back.
     function cancelHandler() {
         navigation.goBack();
     }
 
+    // Toggle the visibility of image management buttons.
+    function imageButtonHandler() {
+        setShowImageButtons(!showImageButtons);
+    }
+
+    // Dismiss the image picker UI.
+    function dismissImagePicker() {
+        setShowImageButtons(false);
+    }
+
+    // handle map button press
+    function mapButtonHandler() {
+        setShowMapButtons(!showMapButtons);
+    }
+
+    // dismiss map picker
+    function dismissMapPicker() {
+        setShowMapButtons(false);
+    }
+
     return (
         <ScrollView
-            contentContainerStyle={styles.scrollViewContent}
+            contentContainerStyle={Styles.scrollViewContent}
             nestedScrollEnabled={true}
         >
-            <Card style={styles.card}>
-                <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={styles.date} />
+            <Card style={Styles.card}>
+                <Card.Title title={formatDate(date)} titleNumberOfLines={2} titleStyle={Styles.postDiaryDate} />
                 <Card.Content>
-                    <ImageManager receiveImageURI={pickImageHandler} />
+                    {imageUri &&
+                        <Image source={{ uri: imageUri }} style={{ width: 50, height: 50 }} />}
                     <TextInput
                         label="Share your diary..."
                         value={diary}
                         onChangeText={setDiary}
-                        style={styles.textInput}
+                        style={Styles.postTextInput}
                         multiline
                         mode="outlined"
                         theme={inputTheme}
-                        outlineStyle={styles.outlineStyle}
+                        outlineStyle={Styles.outlineStyle}
                     />
+                    <View style={Styles.buttonsContainer}>
+                        <IconButton icon='image' iconColor={imageUri ? Colors.indigoDye : Colors.feldGrau} size={30} onPress={() => imageButtonHandler()} />
+                        <IconButton icon={locationInfo ? 'map-marker-check' : 'map-marker'} iconColor={locationInfo ? Colors.indigoDye : Colors.feldGrau} size={30} onPress={() => mapButtonHandler()} />
+                    </View>
+                    <ImageManager receiveImageURI={pickImageHandler} showImageButtons={showImageButtons} dismissImagePicker={dismissImagePicker} />
                     {fromDiary ? (
                         <>
-                            <HelperText type="info" style={styles.helperText}>
+                            <HelperText type="info" style={Styles.helperText}>
                                 Choose a habit to associate with this diary.
                             </HelperText>
                             {formattedHabits.map(habit => (
@@ -145,7 +185,7 @@ export default function PostDiary({ navigation, route }) {
                                     icon={selectedHabitId === habit.id ? "heart" : "heart-outline"}
                                     key={habit.id}
                                     onPress={() => handlePressHabit(habit.id)}
-                                    style={styles.chip}
+                                    style={Styles.habitsChip}
                                     selected={selectedHabitId === habit.id}
                                 >
                                     {habit.label}
@@ -153,42 +193,44 @@ export default function PostDiary({ navigation, route }) {
                             ))}
                         </>
                     ) :
-                        <View style={styles.row}>
-                            <CustomText style={styles.customText}>Today's Task Completed ? </CustomText>
+                        <View style={Styles.switchContainer}>
+                            <CustomText style={Styles.customTextInPostDiary}>Today's Task Completed ? </CustomText>
                             <Switch
                                 value={taskCompleted}
                                 onValueChange={setTaskCompleted}
-                                color='seagreen'
+                                color={Colors.seagreen}
                             />
                         </View>}
-                    <View style={styles.row}>
-                        <CustomText style={styles.customText}>Public: </CustomText>
+                    <HelperText type="info" style={Styles.helperText}>
+                        Making your diary public will allow others to view it.
+                    </HelperText>
+                    <View style={Styles.switchContainer}>
+                        <CustomText style={Styles.customTextInPostDiary}>Public: </CustomText>
                         <Switch
                             value={isPublic}
                             onValueChange={setIsPublic}
-                            color='seagreen'
+                            color={Colors.seagreen}
                         />
                     </View>
-                    <HelperText type="info" style={styles.helperText}>
-                        Making your diary public will allow others to view it.
-                    </HelperText>
-                    <View style={styles.row}>
-                        <LocationManager
-                            onLocationSelect={setLocationInfo}
-                            currentData={{
-                                habitId,
-                                diary,
-                                isPublic,
-                                taskCompleted,
-                                selectedHabitId,
-                                formattedHabits,
-                                fromDiary,
-                            }}
-                        />
-                    </View>
+                    <LocationManager
+                        onLocationSelect={setLocationInfo}
+                        currentData={{
+                            habitId,
+                            diary,
+                            isPublic,
+                            taskCompleted,
+                            selectedHabitId,
+                            formattedHabits,
+                            fromDiary,
+                            imageUri,
+                            locationInfo,
+                        }}
+                        showMapButtons={showMapButtons}
+                        dismissMapPicker={dismissMapPicker}
+                    />
                 </Card.Content>
-                <Card.Actions style={styles.cardActions}>
-                    <View style={styles.buttonsContainer}>
+                <Card.Actions style={Styles.cardActions}>
+                    <View style={Styles.postDiaryButtonsContainer}>
                         <PressableButton title="Save" onPress={saveDiary} color={Colors.fernGreen} textColor={Colors.white} />
                         <PressableButton title="Cancel" onPress={cancelHandler} color={Colors.white} textColor={Colors.fernGreen} />
                     </View>
@@ -197,61 +239,3 @@ export default function PostDiary({ navigation, route }) {
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    customText: {
-        color: '#5A7247',
-        width: '100%',
-    },
-    helperText: {
-        fontSize: 13,
-        color: '#5A7247',
-    },
-    scrollViewContent: {
-        flexGrow: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        padding: 12,
-        marginTop: 10,
-    },
-    card: {
-        margin: 5,
-        elevation: 4,
-        backgroundColor: 'rgba(232 241 226 / 0.9)'
-    },
-    cardActions: {
-        justifyContent: 'space-around',
-    },
-    row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingVertical: 8,
-    },
-    date: {
-        fontSize: 18,
-        margin: 10,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#5A7247',
-    },
-    textInput: {
-        height: 80,
-        marginVertical: 10,
-        padding: 10,
-    },
-    outlineStyle: {
-        borderWidth: 1,
-        borderColor: '#5A7247',
-        borderRadius: 10,
-    },
-    buttonsContainer: {
-        marginVertical: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '100%',
-    },
-    chip: {
-        margin: 4,
-    },
-})

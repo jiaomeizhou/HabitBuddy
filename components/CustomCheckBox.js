@@ -1,34 +1,16 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import Checkbox from 'expo-checkbox';
 import CustomText from './CustomText'
 import * as Colors from './Colors'
+import { Styles } from './Styles'
 
+// Defines a reusable custom checkbox component with an optional text label.
 export default function CustomCheckBox({ text, value, onValueChange }) {
     return (
-        <View style={styles.section}>
-            {text && <CustomText style={styles.paragraph}>{text}</CustomText>}
-            <Checkbox style={styles.checkbox} value={value} onValueChange={onValueChange} color={Colors.fernGreen}/>
+        <View style={Styles.customCheckBoxSection}>
+            {text && <CustomText style={Styles.customParagraph}>{text}</CustomText>}
+            <Checkbox style={Styles.customCheckBox} value={value} onValueChange={onValueChange} color={Colors.fernGreen} />
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    section: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    paragraph: {
-        fontSize: 12,
-        padding: 5,
-        fontWeight: 'bold',
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 5,
-        color: 'black',
-
-    },
-    checkbox: {
-        marginLeft: 10,
-    },
-})

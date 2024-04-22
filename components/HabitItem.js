@@ -7,12 +7,15 @@ import { addCheckIn, updateHabit, deleteCheckIn, subscribeCheckInsByUserIdAndHab
 import { auth } from '../firebase-files/firebaseSetup';
 import CustomCheckBox from './CustomCheckBox';
 
+// The HabitItem component displays a habit item with a progress bar and a check-in box.
+// It is used in the Home screen to show the list of habits.
 export default function HabitItem({ habitObj, navigation }) {
     const [isChecked, setChecked] = useState(false);
     const [habitCheckIns, setHabitCheckIns] = useState([]);
     const [progress, setProgress] = useState(0);
     const [todayCheckInsData, setTodayCheckInsData] = useState([]);
 
+    // calculate progress based on check-ins
     function calculateProgress() {
         setProgress(Math.round(habitCheckIns.length / (habitObj.frequency * habitObj.durationWeeks) * 100));
     }
@@ -65,10 +68,12 @@ export default function HabitItem({ habitObj, navigation }) {
         }
     }
 
+    // handle press event to navigate to HabitDetail screen
     function handlePress() {
         navigation.navigate('HabitDetail', { habitObj, progress, habitCheckIns, todayCheckInsData });
     }
 
+    // update habit progress when check-in changes
     useEffect(() => {
         if (progress === 100) {
             Alert.alert("Congratulations!", `You have completed this habit ${habitObj.habit}!`);
@@ -86,21 +91,25 @@ export default function HabitItem({ habitObj, navigation }) {
     }, [progress]);
 
     return (
-        <PressableItem onPress={handlePress}>
+        <PressableItem onPress={handlePress} >
             <View style={Styles.habitItem}>
-                <Text style={Styles.habitText}>
-                    {habitObj.habit.length > 12 ?
-                        habitObj.habit.replace(/(.{12})/g, "$1\n") :
-                        habitObj.habit}
-                </Text>
-                <ProgressBar progress={progress} label={`${progress}%`} />
-                <CustomCheckBox
-                    value={isChecked}
-                    onValueChange={handleCheckInChange}
-                    progress={progress}
-                    habitCheckIns={habitCheckIns}
-                    todayCheckInsData={todayCheckInsData}
-                />
+                <View style={{flex: 5}}>
+                    <Text style={Styles.habitText}>
+                        {habitObj.habit}
+                    </Text>
+                </View>
+                <View style={{flex: 4}}>
+                    <ProgressBar progress={progress} label={`${progress}%`} />
+                </View>
+                <View style={{flex: 1}}>
+                    <CustomCheckBox
+                        value={isChecked}
+                        onValueChange={handleCheckInChange}
+                        progress={progress}
+                        habitCheckIns={habitCheckIns}
+                        todayCheckInsData={todayCheckInsData}
+                    />
+                </View>
             </View>
         </PressableItem>
     )

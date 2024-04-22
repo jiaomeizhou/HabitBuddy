@@ -4,9 +4,12 @@ import * as Colors from './Colors';
 import { Styles } from './Styles';
 import PressableButton from './PressableButton';
 
+// The Welcome component for the new user without any habits.
+// It allows the user to select a shortcut habit to get started.
 export default function Welcome({ navigation }) {
     const [selectedCategory, setSelectedCategory] = useState("health");
 
+    // The list of habits by category
     const habitsByCategory = {
         health: ['Exercise', 'Eat Breakfast', 'Drink Water in the morning'],
         study: ['Read', 'Practice', 'Research'],
@@ -15,6 +18,7 @@ export default function Welcome({ navigation }) {
         work: ['Plan', 'Organize', 'Prioritize'],
     };
 
+    // Render the habit buttons based on the selected category
     const renderHabitButtons = () => {
         let habits = [];
         if (selectedCategory) {
@@ -24,6 +28,7 @@ export default function Welcome({ navigation }) {
             habits = habitsByCategory.health;
         }
 
+        // Render the habit buttons
         return habits.map((habit, index) => (
             <PressableButton
                 key={index}

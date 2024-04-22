@@ -23,8 +23,11 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const database = getFirestore(app);
+
+// Initialize Firebase Storage
 export const storage = getStorage(app);
 
+// Initialize Firebase Auth
 export const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
